@@ -1,0 +1,1 @@
+There was an attempt to make a set of scripts that could automatically get instagram user data and generate a knowledge graph based on followers and followees. It doesnt work properly yet, but I cant test it anymore because instagram IP banned me for submitting too many requests. I still have a solid dataset though and will make and upload the query notebook sometime soon.
