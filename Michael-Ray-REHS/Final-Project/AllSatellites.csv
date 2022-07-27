@@ -1,0 +1,1686 @@
+Name,Orbit Type,Orbit Height (km),Repeat Cycle (days),Launched in,Out of service since,Organisation
+"
+
+                            ADEOS
+                        
+",Sun Synchronous,797,41,1996,1997,JAXA - Japan
+"
+
+                            ADEOS-II
+                        
+",Sun Synchronous,803,4,2002,2003,JAXA - Japan
+"
+
+                            Aeolus
+                        
+",Sun Synchronous,320,7,2018, ,ESA
+"
+
+                            ALMAZ-1
+                        
+",Non Sun Synchronous,370, ,1991,1992,NPO - Mashinostroyeniya
+"
+
+                            ALOS
+                        
+",Sun Synchronous,702,46,2006,2011,JAXA - Japan
+"
+
+                            ALOS-2
+                        
+",Sun Synchronous,628,14,2014, ,JAXA - Japan
+"
+
+                            ALOS-3
+                        
+",Sun Synchronous,669,35,2022, ,JAXA - Japan
+"
+
+                            ALOS-4
+                        
+",Sun Synchronous,628,14,2022, ,JAXA - Japan
+"
+
+                            AlSat-1
+                        
+",Sun Synchronous,686,4,2002,2010,ASAL - Algeria
+"
+
+                            AlSat-1B
+                        
+",Sun Synchronous,680,7,2016, ,ASAL - Algeria
+"
+
+                            AlSat-2A
+                        
+",Sun Synchronous,686, ,2010, ,ASAL - Algeria
+"
+
+                            AlSat-2B
+                        
+",Sun Synchronous,670, ,2016, ,ASAL - Algeria
+"
+
+                            Aqua
+                        
+",Sun Synchronous,705, ,2002, ,NASA - USA
+"
+
+                            ASNARO-1
+                        
+",Sun Synchronous,504, ,2014, ,J-spacesystems - Japan
+"
+
+                            ASNARO-2
+                        
+",Sun Synchronous,504, ,2018, ,J-spacesystems - Japan
+"
+
+                            AURA
+                        
+",Sun Synchronous,705,16,2004, ,NASA - USA
+"
+
+                            BEIJING-1
+                        
+",Sun Synchronous,686, ,2005,2013,NRSCC - China
+"
+
+                            BILSAT
+                        
+",Sun Synchronous,686, ,2003,2006,TUBITAK UZAY/STRI- Turkey
+"
+
+                            BIOMASS
+                        
+",Sun Synchronous,660,26,2023, ,ESA
+"
+
+                            BIRD
+                        
+",Sun Synchronous,572, ,2001,2006,DLR - Germany
+"
+
+                            BlackSky Global 1
+                        
+",Sun Synchronous,500, ,2018, ,BlackSky - USA
+"
+
+                            BlackSky Global 2
+                        
+",Sun Synchronous,500, ,2018, ,BlackSky - USA
+"
+
+                            BlackSky Global 3
+                        
+",Sun Synchronous,500, ,2019, ,BlackSky - USA
+"
+
+                            BlackSky Global 4
+                        
+",Sun Synchronous,500, ,2019, ,BlackSky - USA
+"
+
+                            BlackSky Global 5-24
+                        
+",Sun Synchronous,500, ,2020, ,BlackSky - USA
+"
+
+                            CALIPSO
+                        
+",Sun Synchronous,705, ,2006, ,NASA - USA
+"
+
+                            CartoSat-1 (IRS-P5)
+                        
+",Sun Synchronous,618,116,2005,2019,ISRO - India
+"
+
+                            CartoSat-2
+                        
+",Sun Synchronous,635,4,2007,2019,ISRO - India
+"
+
+                            CartoSat-2 Series (2C)
+                        
+",Sun Synchronous,505, ,2016, ,ISRO - India
+"
+
+                            CartoSat-2 Series (2D)
+                        
+",Sun Synchronous,505, ,2017, ,ISRO - India
+"
+
+                            Cartosat-2 Series (2E)
+                        
+",Sun Synchronous,505, ,2017, ,ISRO - India
+"
+
+                            Cartosat-2 Series (2F)
+                        
+",Sun Synchronous,505, ,2018, ,ISRO - India
+"
+
+                            CartoSat-2A
+                        
+",Sun Synchronous,635, ,2008, ,ISRO - India
+"
+
+                            CartoSat-2B
+                        
+",Sun Synchronous,637,4,2010, ,ISRO - India
+"
+
+                            CartoSat-3
+                        
+",Sun Synchronous,509, ,2019, ,ISRO - India
+"
+
+                            CBERS-1
+                        
+",Sun Synchronous,778,26,1999,2003,INPE - Brazil
+"
+
+                            CBERS-2
+                        
+",Sun Synchronous,778,26,2003,2009,INPE - Brazil
+"
+
+                            CBERS-3
+                        
+",Sun Synchronous,778,26,2013,2013,INPE - Brazil
+"
+
+                            CBERS-4
+                        
+",Sun Synchronous,778,26,2014, ,INPE - Brazil
+"
+
+                            CBERS-4A
+                        
+",Sun Synchronous,628,31,2019, ,INPE - Brazil
+"
+
+                            CFOSAT
+                        
+",Sun Synchronous,519,13,2018, ,CNSA - China
+"
+
+                            CloudSat
+                        
+",Sun Synchronous,705, ,2006,2020,NASA - USA
+"
+
+                            COMS-1
+                        
+",Geostationary,35786, ,2010, ,KARI - Korea
+"
+
+                            Coriolis
+                        
+",Sun Synchronous,830,8,2003, ,US Naval Research Lab
+"
+
+                            COSMO-SkyMed
+                        
+",Sun Synchronous,620,16,2007, ,ASI - Italy
+"
+
+                            Cosmo-SkyMed 2nd Gen (CSG-1)
+                        
+",Sun Synchronous,619,16,2019, ,ASI - Italy
+"
+
+                            Cosmo-SkyMed 2nd Gen (CSG-2)
+                        
+",Sun Synchronous,619,16,2022, ,ASI - Italy
+"
+
+                            Cosmos
+                        
+",Sun Synchronous,800, ,1987,2008,ROSCOSMOS - Russia
+"
+
+                            CryoSat-2
+                        
+",Non Sun Synchronous,717,369,2010, ,ESA
+"
+
+                            CYGNSS
+                        
+",Non Sun Synchronous,500, ,2016, ,NASA - USA
+"
+
+                            DEMETER
+                        
+",Sun Synchronous,715, ,2004,2010,CNES - France
+"
+
+                            DMC-3/TripleSat
+                        
+",Sun Synchronous,647,1,2015, ,SSTL - UK
+"
+
+                            DMSP-F16
+                        
+",near polar - sun synchronous,830, ,2003, ,US Department of Defense
+"
+
+                            Earth Probe
+                        
+",Sun Synchronous,740, ,1996,2005,NASA - USA
+"
+
+                            EarthCARE
+                        
+",Sun Synchronous,393,25,2023, ,ESA
+"
+
+                            ECOSTRESS on ISS
+                        
+",Other,408,3,2018, ,NASA - USA
+"
+
+                            Electro-1 (GOMS)
+                        
+",Geostationary, , ,1994,2000,ROSHYDROMET - Russia
+"
+
+                            Elektro-L
+                        
+",Geostationary,36000, ,2011, ,ROSHYDROMET - Russia
+"
+
+                            EnMAP
+                        
+",Sun Synchronous,652,27,2022, ,DLR - Germany
+"
+
+                            ENVISAT
+                        
+",Sun Synchronous,783,35,2002,2012,ESA
+"
+
+                            EO-1
+                        
+",Sun Synchronous,705,16,2000,2017,NASA - USA
+"
+
+                            EO-3 GIFTS
+                        
+",Geostationary,36000, , , ,NASA - USA
+"
+
+                            EOS-3 (GISAT-1)
+                        
+",Geostationary,35786, ,2021,2021,ISRO - India
+"
+
+                            EOS-4 (RISAT-1B)
+                        
+",Sun Synchronous,529, ,2022, ,ISRO - India
+"
+
+                            EROS-A
+                        
+",Sun Synchronous,530,4,2000,2016,ImageSAT International
+"
+
+                            EROS-B
+                        
+",Sun Synchronous,520,4,2006, ,ImageSAT International
+"
+
+                            EROS-C
+                        
+",Sun Synchronous,510, ,2019, ,ImageSAT International
+"
+
+                            ERS-1
+                        
+",Sun Synchronous,785,35,1991,2000,ESA
+"
+
+                            ERS-2
+                        
+",Sun Synchronous,785,35,1995,2011,ESA
+"
+
+                            FedSat
+                        
+",Sun Synchronous,803, ,2002,2007,CSIRO - Australia
+"
+
+                            Fengyun-1C/1D
+                        
+",Sun Synchronous,863,12,1999,2012,NSMC - China
+"
+
+                            Fengyun-2A
+                        
+",Geostationary, , ,1997,2000,NSMC - China
+"
+
+                            Fengyun-2B
+                        
+",Geostationary, , ,2000,2006,NSMC - China
+"
+
+                            FengYun-2E
+                        
+",Geostationary,36000, ,2008,2018,NSMC - China
+"
+
+                            FengYun-2H
+                        
+",Geostationary,3600, ,2018, ,NSMC - China
+"
+
+                            FengYun-3A
+                        
+",Sun Synchronous,836, ,2008,2015,NSMC - China
+"
+
+                            FengYun-3B
+                        
+",Sun Synchronous,836, ,2010, ,NSMC - China
+"
+
+                            FengYun-3C
+                        
+",Sun Synchronous,836, ,2013, ,NSMC - China
+"
+
+                            FengYun-4A
+                        
+",Geostationary,35786, ,2016, ,CMA - China
+"
+
+                            FLEX
+                        
+",Sun Synchronous,815,27,2024, ,ESA
+"
+
+                            FORMOSAT-1
+                        
+",Circular,600, ,1999,2004,NSPO - Taiwan
+"
+
+                            FORMOSAT-2
+                        
+",Sun Synchronous,891, ,2004,2016,NSPO - Taiwan
+"
+
+                            FORMOSAT-3 / COSMIC
+                        
+",Circular,800, ,2006,2020,NSPO - Taiwan
+"
+
+                            FORMOSAT-5
+                        
+",Sun Synchronous,720, ,2017, ,NSPO - Taiwan
+"
+
+                            FORMOSAT-7 / COSMIC-2
+                        
+",Circular,550, ,2019, ,NSPO - Taiwan
+"
+
+                            GaoFen-5
+                        
+",Sun Synchronous, , ,2018, ,CNSA - China
+"
+
+                            GCOM-C1
+                        
+",Sun Synchronous,798,2,2017, ,JAXA - Japan
+"
+
+                            GCOM-W1
+                        
+",Sun Synchronous,700,2,2012, ,JAXA - Japan
+"
+
+                            GEO-KOMPSAT-2A
+                        
+",Geostationary,35786, ,2018, ,KARI - Korea
+"
+
+                            GEO-KOMPSAT-2B
+                        
+",Geostationary,35786, ,2020, ,KARI - Korea
+"
+
+                            GeoEye-1
+                        
+",Sun Synchronous,681, ,2008, ,Maxar/DigitalGlobe - USA
+"
+
+                            Geosat Follow-On (GFO)
+                        
+",Sun Synchronous,800,17,1998,2008,US Naval Research Lab
+"
+
+                            Geosat-1 (Deimos-1)
+                        
+",Sun Synchronous,650,3,2009, ,GEOSAT - Spain
+"
+
+                            Geosat-2 (Deimos-2)
+                        
+",Sun Synchronous,620,2,2014, ,GEOSAT - Spain
+"
+
+                            GeoXO
+                        
+",Geostationary, , ,2035, ,NOAA
+"
+
+                            GISAT-2 - GEO Imaging Satellite
+                        
+",Geostationary,35786, ,2022, ,ISRO - India
+"
+
+                            GLORY
+                        
+",Sun Synchronous,705, ,2011,2011,NASA - USA
+"
+
+                            GMS-5
+                        
+",Geostationary, , ,1995,2003,JMA - Japan
+"
+
+                            GOCE
+                        
+",Sun Synchronous,235, ,2009,2013,ESA
+"
+
+                            GOES-10
+                        
+",Geostationary,35800, ,1997,2009,NOAA
+"
+
+                            GOES-11
+                        
+",Geostationary,35800, ,2000,2011,NOAA
+"
+
+                            GOES-12
+                        
+",Geostationary,35800, ,2001,2013,NOAA
+"
+
+                            GOES-13
+                        
+",Geostationary,35800,0.01,2006,2018,NOAA
+"
+
+                            GOES-14
+                        
+",Geostationary,35800, ,2009, ,NOAA
+"
+
+                            GOES-15
+                        
+",Geostationary,35800, ,2010, ,NOAA
+"
+
+                            GOES-16 (GOES-EAST)
+                        
+",Geostationary,35786, ,2016, ,NOAA
+"
+
+                            GOES-17 (GOES-WEST)
+                        
+",Geostationary,35786, ,2018, ,NOAA
+"
+
+                            GOES-18
+                        
+",Geostationary,35888, ,2022, ,NOAA
+"
+
+                            GOES-8
+                        
+",Geostationary,35800, ,1994,2004,NOAA
+"
+
+                            GOES-9
+                        
+",Geostationary,35800, ,1995,2007,NOAA
+"
+
+                            GOES-U
+                        
+",Geostationary, , ,2024, ,NOAA
+"
+
+                            GOKTURK-2
+                        
+",Sun Synchronous,700,2.5,2012, ,TUBITAK UZAY/STRI- Turkey
+"
+
+                            GOSAT
+                        
+",Sun Synchronous,666,3,2009, ,JAXA - Japan
+"
+
+                            GOSAT-2
+                        
+",Sun Synchronous,613,6,2018, ,JAXA - Japan
+"
+
+                            GPM Core
+                        
+",Non Sun Synchronous,407, ,2014, ,NASA - USA
+"
+
+                            GRACE
+                        
+",Near polar,437, ,2002,2017,NASA - USA
+"
+
+                            GRACE-FO
+                        
+",Near polar,490,30,2018, ,NASA - USA
+"
+
+                            Himawari-8
+                        
+",Geostationary,35800,0.0069,2014, ,JMA - Japan
+"
+
+                            Himawari-9
+                        
+",Geostationary,35800, ,2016, ,JMA - Japan
+"
+
+                            HJ - 1A
+                        
+",Sun Synchronous,649,31,2008, ,CAST - China
+"
+
+                            HY - 1B
+                        
+",Other,798,7,2007,2016,CAST - China
+"
+
+                            HysIS
+                        
+",Sun Synchronous,636, ,2018, ,ISRO - India
+"
+
+                            ICESat
+                        
+",Near polar,600, ,2003,2010,NASA - USA
+"
+
+                            ICESat-2
+                        
+",Near polar,498,91,2018, ,NASA - USA
+"
+
+                            ICEYE-X1
+                        
+",Sun Synchronous,505, ,2018,2018,ICEYE - Finland
+"
+
+                            ICEYE-X2
+                        
+",Sun Synchronous,590, ,2018, ,ICEYE - Finland
+"
+
+                            ICEYE-X4
+                        
+",Sun Synchronous,590, ,2019, ,ICEYE - Finland
+"
+
+                            ICEYE-X5
+                        
+",Sun Synchronous,565, ,2019, ,ICEYE - Finland
+"
+
+                            IKONOS
+                        
+",Sun Synchronous,681,3,1999,2015,Maxar/DigitalGlobe - USA
+"
+
+                            IMS-1
+                        
+",Sun Synchronous,635, ,2008, ,ISRO - India
+"
+
+                            INSAT-2A
+                        
+",Geostationary, , ,1992,2002,ISRO - India
+"
+
+                            INSAT-2B
+                        
+",Geostationary, , ,1993,2004,ISRO - India
+"
+
+                            INSAT-2E
+                        
+",Geostationary, , ,1999,2012,ISRO - India
+"
+
+                            INSAT-3D
+                        
+",Geostationary,35786, ,2013, ,ISRO - India
+"
+
+                            IRS-1A
+                        
+",Sun Synchronous,904,22,1988,1995,ISRO - India
+"
+
+                            IRS-1B
+                        
+",Sun Synchronous,904,22,1991,2003,ISRO - India
+"
+
+                            IRS-1C
+                        
+",Sun Synchronous,817,24,1995,2007,ISRO - India
+"
+
+                            IRS-1D
+                        
+",Sun Synchronous,824,25,1997,2010,ISRO - India
+"
+
+                            IRS-P2
+                        
+",Sun Synchronous,817,24,1994,1997,ISRO - India
+"
+
+                            IRS-P3
+                        
+",Sun Synchronous,817,5,1996,2006,ISRO - India
+"
+
+                            Jason-1
+                        
+",Non Sun Synchronous,1337,10,2001,2013,NASA - USA
+"
+
+                            Jason-2
+                        
+",Non Sun Synchronous,1336,9.9,2008,2019,NOAA
+"
+
+                            Jason-3
+                        
+",Non Sun Synchronous,1336,9.9,2016, ,NOAA
+"
+
+                            JERS-1
+                        
+",Sun Synchronous,568,44,1992,1998,JAXA - Japan
+"
+
+                            JPSS-2
+                        
+",Sun Synchronous,824, ,2022, ,NOAA
+"
+
+                            JPSS-3
+                        
+",Sun Synchronous, , ,2028, ,NOAA
+"
+
+                            JPSS-4
+                        
+",Sun Synchronous, , ,2032, ,NOAA
+"
+
+                            Kanopus-V1
+                        
+",Sun Synchronous,510,17,2012, ,ROSCOSMOS - Russia
+"
+
+                            KANOPUS-V3
+                        
+",Sun Synchronous,510,5,2018, ,ROSCOSMOS - Russia
+"
+
+                            KANOPUS-V4
+                        
+",Sun Synchronous,510,5,2018, ,ROSCOSMOS - Russia
+"
+
+                            KANOPUS-V5
+                        
+",Sun Synchronous,510, ,2018, ,ROSCOSMOS - Russia
+"
+
+                            KANOPUS-V6
+                        
+",Sun Synchronous,510, ,2018, ,ROSCOSMOS - Russia
+"
+
+                            KOMPSAT-1
+                        
+",Sun Synchronous,685,28,1999,2007,KARI - Korea
+"
+
+                            KOMPSAT-2
+                        
+",Sun Synchronous,685,28,2006,2015,KARI - Korea
+"
+
+                            KOMPSAT-3
+                        
+",Sun Synchronous,685,28,2012, ,KARI - Korea
+"
+
+                            KOMPSAT-3A
+                        
+",Sun Synchronous,528,28,2015, ,KARI - Korea
+"
+
+                            KOMPSAT-5
+                        
+",Sun Synchronous,550,28,2013, ,KARI - Korea
+"
+
+                            KOMPSAT-6
+                        
+",Sun Synchronous,505,11,2022, ,KARI - Korea
+"
+
+                            KOMPSAT-7
+                        
+",Sun Synchronous,685,28,2022, ,KARI - Korea
+"
+
+                            Landsat 1
+                        
+",Sun Synchronous,907,18,1972,1978,NASA - USA
+"
+
+                            Landsat 2
+                        
+",Sun Synchronous,908,18,1975,1982,NASA - USA
+"
+
+                            Landsat 3
+                        
+",Sun Synchronous,915,18,1978,1983,NASA - USA
+"
+
+                            Landsat 4
+                        
+",Sun Synchronous,705,16,1982,2001,NASA - USA
+"
+
+                            Landsat 5
+                        
+",Sun Synchronous,705,16,1984,2013,NASA - USA
+"
+
+                            Landsat 7
+                        
+",Sun Synchronous,705,16,1999, ,NASA - USA
+"
+
+                            Landsat 8
+                        
+",Sun Synchronous,705,16,2013, ,NASA - USA
+"
+
+                            Landsat 9
+                        
+",Sun Synchronous,705,16,2021, ,NASA - USA
+"
+
+                            LAPAN-TUBSAT
+                        
+",Sun Synchronous,625, ,2007, ,LAPAN - Indonesia
+"
+
+                            MEGHA-TROPIQUES
+                        
+",Sun Synchronous,867, ,2011, ,CNES - France
+"
+
+                            MERLIN
+                        
+",Sun Synchronous,506,28,2024, ,DLR - Germany
+"
+
+                            METEOR-3M N1
+                        
+",Sun Synchronous,1012,3,2001,2006,ROSHYDROMET - Russia
+"
+
+                            Meteor-M N2-2
+                        
+",Sun Synchronous,821, ,2019, ,ROSHYDROMET - Russia
+"
+
+                            Meteor-M1
+                        
+",Sun Synchronous,832, ,2009,2014,ROSHYDROMET - Russia
+"
+
+                            Meteor-M2
+                        
+",Sun Synchronous,825, ,2014, ,ROSHYDROMET - Russia
+"
+
+                            Meteosat 5
+                        
+",Geostationary,35786, ,1991,2007,EUMETSAT
+"
+
+                            Meteosat 6
+                        
+",Geostationary,35786, ,1993,2011,EUMETSAT
+"
+
+                            Meteosat 7
+                        
+",Geostationary,36000,0.01,1997,2017,EUMETSAT
+"
+
+                            Meteosat 8
+                        
+",Geostationary,36000,0.01,2002, ,EUMETSAT
+"
+
+                            Meteosat 9
+                        
+",Geostationary,36000,0.003,2005, ,EUMETSAT
+"
+
+                            Meteosat-10
+                        
+",Geostationary,36000,0.01,2012, ,EUMETSAT
+"
+
+                            Meteosat-11
+                        
+",Geostationary,36000,0.01,2015, ,EUMETSAT
+"
+
+                            Metop-A
+                        
+",Sun Synchronous,817,29,2006,2021,EUMETSAT
+"
+
+                            Metop-B
+                        
+",Sun Synchronous,817,29,2012, ,EUMETSAT
+"
+
+                            Metop-C
+                        
+",Sun Synchronous,817,29,2018, ,EUMETSAT
+"
+
+                            MetOp-SG A1
+                        
+",Sun Synchronous,817,29,2024, ,EUMETSAT
+"
+
+                            Metop-SG A2
+                        
+",Sun Synchronous,817,29,2031, ,EUMETSAT
+"
+
+                            Metop-SG A3
+                        
+",Sun Synchronous,817,29,2036, ,EUMETSAT
+"
+
+                            Metop-SG B1
+                        
+",Sun Synchronous,817,29,2025, ,EUMETSAT
+"
+
+                            Metop-SG B2
+                        
+",Sun Synchronous,817,29,2032, ,EUMETSAT
+"
+
+                            Metop-SG B3
+                        
+",Sun Synchronous,817,29,2039, ,EUMETSAT
+"
+
+                            MOS-1
+                        
+",Sun Synchronous,909,17,1987,1995,JAXA - Japan
+"
+
+                            MOS-1b
+                        
+",Sun Synchronous,909,17,1990,1996,JAXA - Japan
+"
+
+                            MTG-I1
+                        
+",Geostationary,35786, ,2022, ,EUMETSAT
+"
+
+                            MTG-I2
+                        
+",Geostationary,35786, ,2025, ,EUMETSAT
+"
+
+                            MTG-I3
+                        
+",Geostationary,35786, ,2032, ,EUMETSAT
+"
+
+                            MTG-I4
+                        
+",Geostationary,35786, ,2042, ,EUMETSAT
+"
+
+                            MTG-S1
+                        
+",Geostationary,35786,0.04166,2024, ,EUMETSAT
+"
+
+                            MTG-S2
+                        
+",Geostationary,35786,0.04166,2034, ,EUMETSAT
+"
+
+                            MTI
+                        
+",Sun Synchronous,575, ,2000, ,US Department of Energy
+"
+
+                            MTSAT-1R
+                        
+",Geostationary,35800, ,2005,2010,JMA - Japan
+"
+
+                            MTSAT-2
+                        
+",Geostationary,35800, ,2006,2016,JMA - Japan
+"
+
+                            NigeriaSat - 1
+                        
+",Sun Synchronous,686, ,2003,2012,NASRDA - Nigeria
+"
+
+                            NigeriaSat - 2
+                        
+",Sun Synchronous,700, ,2011, ,NASRDA - Nigeria
+"
+
+                            NigeriaSat - X
+                        
+",Sun Synchronous,700, ,2011, ,NASRDA - Nigeria
+"
+
+                            NIMBUS-7
+                        
+",Sun Synchronous,955,6,1978,1994,NASA - USA
+"
+
+                            NISAR
+                        
+",Sun Synchronous, , ,2023, ,NASA - USA
+"
+
+                            NOAA-10
+                        
+",near polar - sun synchronous,833,11,1986,2001,NOAA
+"
+
+                            NOAA-11
+                        
+",near polar - sun synchronous,870,11,1988,2004,NOAA
+"
+
+                            NOAA-12
+                        
+",near polar - sun synchronous,833,11,1991,2007,NOAA
+"
+
+                            NOAA-14
+                        
+",near polar - sun synchronous,870,11,1994,2007,NOAA
+"
+
+                            NOAA-15
+                        
+",near polar - sun synchronous,833,11,1998, ,NOAA
+"
+
+                            NOAA-16
+                        
+",near polar - sun synchronous,870,11,2000,2014,NOAA
+"
+
+                            NOAA-17
+                        
+",near polar - sun synchronous,833,11,2002,2013,NOAA
+"
+
+                            NOAA-18
+                        
+",near polar - sun synchronous,854,11,2005, ,NOAA
+"
+
+                            NOAA-19
+                        
+",near polar - sun synchronous,870, ,2009, ,NOAA
+"
+
+                            NOAA-20 (JPSS-1)
+                        
+",Sun Synchronous,824,20,2017, ,NOAA
+"
+
+                            NovaSAR-1
+                        
+",Sun Synchronous,580,14,2018, ,SSTL - UK
+"
+
+                            OceanSat-1
+                        
+",Sun Synchronous,720,2,1999,2010,ISRO - India
+"
+
+                            OceanSat-2
+                        
+",Sun Synchronous,720,2,2009, ,ISRO - India
+"
+
+                            OceanSat-3
+                        
+",Sun Synchronous,720,2,2022, ,ISRO - India
+"
+
+                            OCO-2
+                        
+",Sun Synchronous,705,16,2014, ,NASA - USA
+"
+
+                            OCO-3 on ISS
+                        
+",Other,407, ,2019, ,NASA - USA
+"
+
+                            ODIN
+                        
+",Sun Synchronous,625, ,2001, ,SNSB - Sweden
+"
+
+                            PACE
+                        
+",Sun Synchronous,676, ,2023, ,NASA - USA
+"
+
+                            Parasol
+                        
+",Sun Synchronous,705, ,2004,2013,CNES - France
+"
+
+                            Planet - Dove
+                        
+",Sun Synchronous,400, ,2015, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 1c
+                        
+",Sun Synchronous,600, ,2014, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 2k
+                        
+",Sun Synchronous,455, ,2017, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 2p
+                        
+",Sun Synchronous,495, ,2016, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 3k
+                        
+",Sun Synchronous,485, ,2018, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 3m
+                        
+",Sun Synchronous,510, ,2017, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 3p
+                        
+",Sun Synchronous,495, ,2017, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 3p'
+                        
+",Sun Synchronous,500, ,2018, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 3r
+                        
+",Sun Synchronous,485, ,2018, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 3s
+                        
+",Sun Synchronous,585, ,2018, ,Planet - USA
+"
+
+                            Planet - Dove, Flock 4a
+                        
+",Sun Synchronous,500, ,2019, ,Planet - USA
+"
+
+                            Pleiades 1A
+                        
+",Sun Synchronous,694,26,2011, ,Airbus Defence and Space
+"
+
+                            Pleiades 1B
+                        
+",Sun Synchronous,694,26,2012, ,Airbus Defence and Space
+"
+
+                            Pleiades Neo 3
+                        
+",Sun Synchronous,620, ,2021, ,Airbus Defence and Space
+"
+
+                            Pleiades Neo 4
+                        
+",Sun Synchronous,620, ,2021, ,Airbus Defence and Space
+"
+
+                            Pleiades Neo 5
+                        
+",Sun Synchronous,620, ,2022, ,Airbus Defence and Space
+"
+
+                            Pleiades Neo 6
+                        
+",Sun Synchronous,620, ,2022, ,Airbus Defence and Space
+"
+
+                            PRIRODA-MIR
+                        
+",Sun Synchronous,400, ,1996,2001,ROSCOSMOS - Russia
+"
+
+                            PRISMA
+                        
+",Sun Synchronous,615,29,2019, ,ASI - Italy
+"
+
+                            PROBA-1
+                        
+",Sun Synchronous,615,7,2001, ,ESA
+"
+
+                            PROBA-V
+                        
+",Sun Synchronous,820,1,2013,2021,ESA
+"
+
+                            Quickbird
+                        
+",Sun Synchronous,450, ,2001,2015,Maxar/DigitalGlobe - USA
+"
+
+                            QuikSCAT
+                        
+",Sun Synchronous,803, ,1999,2018,NASA - USA
+"
+
+                            RADARSAT Constellation Mission
+                        
+",Sun Synchronous,600,12,2019, ,CSA - Canadian Space Agency
+"
+
+                            RADARSAT-1
+                        
+",Sun Synchronous,798,24,1995,2013,CSA - Canadian Space Agency
+"
+
+                            RADARSAT-2
+                        
+",Sun Synchronous,798,24,2007, ,MDA - Canada
+"
+
+                            RapidEye
+                        
+",Sun Synchronous,630,5.5,2008,2020,Planet - USA
+"
+
+                            RASAT
+                        
+",Sun Synchronous,700,4,2011, ,TUBITAK UZAY/STRI- Turkey
+"
+
+                            RazakSAT
+                        
+",Other,685, ,2009, ,ATSB - Malaysia
+"
+
+                            RESOURCESAT-1 (IRS-P6)
+                        
+",Sun Synchronous,817,24,2003,2013,ISRO - India
+"
+
+                            RESOURCESAT-2
+                        
+",Sun Synchronous,817,24,2011, ,ISRO - India
+"
+
+                            RESOURCESAT-2A
+                        
+",Sun Synchronous,817,24,2016, ,ISRO - India
+"
+
+                            Resurs DK1
+                        
+",Non Sun Synchronous,480, ,2006,2016,ROSCOSMOS - Russia
+"
+
+                            RESURS-O-1
+                        
+",Sun Synchronous,835, ,1998, ,ROSCOSMOS - Russia
+"
+
+                            RESURS-O1-3
+                        
+",Sun Synchronous,678,21,1994, ,ROSCOSMOS - Russia
+"
+
+                            RISAT-1
+                        
+",Sun Synchronous,536,25,2012,2017,ISRO - India
+"
+
+                            RISAT-2
+                        
+",Sun Synchronous,550, ,2009, ,ISRO - India
+"
+
+                            RISAT-2B
+                        
+",Sun Synchronous,440, ,2019, ,ISRO - India
+"
+
+                            SAC-C
+                        
+",Sun Synchronous,705,16,2000,2013,CONAE - Argentina
+"
+
+                            SAC-D (Aquarius)
+                        
+",Sun Synchronous,657, ,2011,2015,NASA - USA
+"
+
+                            SAOCOM-1A
+                        
+",Sun Synchronous,620,8,2018, ,CONAE - Argentina
+"
+
+                            SAOCOM-1B
+                        
+",Sun Synchronous,620,8,2020, ,CONAE - Argentina
+"
+
+                            SAR-XL (OptiSAR)
+                        
+",Other, , ,2023, ,UrtheCast - Canada
+"
+
+                            SARAL/AltiKa
+                        
+",Sun Synchronous,800,35,2013, ,CNES - France
+"
+
+                            ScatSat-1
+                        
+",Sun Synchronous,720, ,2016, ,ISRO - India
+"
+
+                            SCISAT
+                        
+",Circular,650, ,2003, ,CSA - Canadian Space Agency
+"
+
+                            Seasat
+                        
+",Sun Synchronous,800, ,1978,1978,NASA - USA
+"
+
+                            Sentinel-1A
+                        
+",Sun Synchronous,693,6,2014, ,ESA
+"
+
+                            Sentinel-1B
+                        
+",Sun Synchronous,693,6,2016, ,ESA
+"
+
+                            Sentinel-1C
+                        
+",Sun Synchronous,693, ,2022, ,ESA
+"
+
+                            Sentinel-1D
+                        
+",Sun Synchronous,693, ,2023, ,ESA
+"
+
+                            Sentinel-2A
+                        
+",Sun Synchronous,786,5,2015, ,ESA
+"
+
+                            Sentinel-2B
+                        
+",Sun Synchronous,786,5,2017, ,ESA
+"
+
+                            Sentinel-2C
+                        
+",Sun Synchronous,786, ,2024, ,ESA
+"
+
+                            Sentinel-2D
+                        
+",Sun Synchronous,786, ,2025, ,ESA
+"
+
+                            Sentinel-3A
+                        
+",Sun Synchronous,814,27,2016, ,ESA
+"
+
+                            Sentinel-3B
+                        
+",Sun Synchronous,814, ,2018, ,ESA
+"
+
+                            Sentinel-3C
+                        
+",Sun Synchronous,814, ,2023, ,ESA
+"
+
+                            Sentinel-3D
+                        
+",Sun Synchronous,814, ,2025, ,ESA
+"
+
+                            Sentinel-5P
+                        
+",Sun Synchronous,824,17,2017, ,ESA
+"
+
+                            Sentinel-6A/Jason-CS-A
+                        
+",Non Sun Synchronous,1336,10,2020, ,EUMETSAT
+"
+
+                            Sentinel-6B/Jason-CS-B
+                        
+",Non Sun Synchronous,1336,10,2026, ,EUMETSAT
+"
+
+                            SICH - 1M
+                        
+",Non Sun Synchronous, , ,2004,2007,NSAU - Ukraine
+"
+
+                            SkySat 14-15
+                        
+",Sun Synchronous,505, ,2018, ,Planet - USA
+"
+
+                            SkySat-1
+                        
+",Sun Synchronous,578, ,2013, ,Planet - USA
+"
+
+                            SkySat-2
+                        
+",Sun Synchronous,637, ,2014, ,Planet - USA
+"
+
+                            SkySat-3
+                        
+",Sun Synchronous,515, ,2016, ,Planet - USA
+"
+
+                            SkySat-4-7
+                        
+",Sun Synchronous,500, ,2016, ,Planet - USA
+"
+
+                            SkySat-8-13
+                        
+",Sun Synchronous,500, ,2017, ,Planet - USA
+"
+
+                            SMAP
+                        
+",Sun Synchronous,685,3,2015, ,NASA - USA
+"
+
+                            SMOS
+                        
+",Sun Synchronous,758,3,2009, ,ESA
+"
+
+                            SORCE
+                        
+",Circular,645,1,2003,2020,NASA - USA
+"
+
+                            SPOT 1
+                        
+",Sun Synchronous,832,26,1986,2003,CNES - France
+"
+
+                            SPOT 2
+                        
+",Sun Synchronous,832,26,1990,2009,CNES - France
+"
+
+                            SPOT 3
+                        
+",Sun Synchronous,832,26,1993,1996,CNES - France
+"
+
+                            SPOT 4
+                        
+",Sun Synchronous,832,26,1998,2013,CNES - France
+"
+
+                            SPOT 5
+                        
+",Sun Synchronous,832,26,2002,2015,CNES - France
+"
+
+                            SPOT 6
+                        
+",Sun Synchronous,694,26,2012, ,Airbus Defence and Space
+"
+
+                            SPOT 7
+                        
+",Sun Synchronous,694,26,2014, ,Airbus Defence and Space
+"
+
+                            SRTM
+                        
+",Other,233, ,2000,2000,NASA - USA
+"
+
+                            SSOT
+                        
+",Sun Synchronous, , ,2011, ,Airbus Defence and Space
+"
+
+                            Suomi NPP
+                        
+",Sun Synchronous,824,16,2011, ,NOAA
+"
+
+                            SWARM
+                        
+",Near polar,530, ,2013, ,ESA
+"
+
+                            SWOT
+                        
+",Circular,891,21,2022, ,NASA - USA
+"
+
+                            Tandem-L
+                        
+",Sun Synchronous,760,8,2024, ,DLR - Germany
+"
+
+                            TanDEM-X
+                        
+",Other,515,11,2010, ,DLR - Germany
+"
+
+                            TARANIS
+                        
+",Sun Synchronous,676, ,2020,2020,CNES - France
+"
+
+                            TecSAR
+                        
+",Other,800,36,2008, ,IAI - Israel
+"
+
+                            TEMPO
+                        
+",Geostationary,35786, ,2022, ,NASA - USA
+"
+
+                            Terra
+                        
+",Sun Synchronous,705,16,1999, ,NASA - USA
+"
+
+                            TerraSAR-X
+                        
+",Sun Synchronous,514,11,2007, ,DLR - Germany
+"
+
+                            THEOS (Thaichote)
+                        
+",Sun Synchronous,822, ,2008, ,GISTDA - Thailand
+"
+
+                            TIMED
+                        
+",Non Sun Synchronous,625, ,2001, ,NASA - USA
+"
+
+                            TOPEX/Poseidon
+                        
+",Non Sun Synchronous,1336,10,1992,2005,NASA - USA
+"
+
+                            TopSat
+                        
+",Sun Synchronous,686,4,2005,2009,UK Space Agency
+"
+
+                            TRMM
+                        
+",Non Sun Synchronous,350,0.5,1997,2015,NASA - USA
+"
+
+                            UARS
+                        
+",Non Sun Synchronous,470, ,1991,2005,NASA - USA
+"
+
+                            UK-DMC-1
+                        
+",Sun Synchronous,686, ,2003,2011,UK Space Agency
+"
+
+                            UK-DMC-2
+                        
+",Sun Synchronous,686, ,2009, ,SSTL - UK
+"
+
+                            UrtheDaily
+                        
+",Sun Synchronous, , ,2023, ,UrtheCast - Canada
+"
+
+                            VENUS
+                        
+",Sun Synchronous,720,2,2017, ,CNES - France
+"
+
+                            Vision-1 (SSTL - S1-4)
+                        
+",Sun Synchronous,583,1,2018, ,Airbus Defence and Space
+"
+
+                            Vivid-i Constellation
+                        
+",Sun Synchronous,500,0.5,2023, ,earth-i
+"
+
+                            VividX2
+                        
+",Sun Synchronous,505, ,2018, ,earth-i
+"
+
+                            VNREDSat-1A
+                        
+",Sun Synchronous,680, ,2013, ,Airbus Defence and Space
+"
+
+                            Vulkan-Kompas-2
+                        
+",Non Sun Synchronous,500, ,2005,2006,ROSCOSMOS - Russia
+"
+
+                            WorldView-1
+                        
+",Sun Synchronous,496, ,2007, ,Maxar/DigitalGlobe - USA
+"
+
+                            WorldView-2
+                        
+",Sun Synchronous,770,1.1,2009, ,Maxar/DigitalGlobe - USA
+"
+
+                            WorldView-3
+                        
+",Sun Synchronous,617,1,2014, ,Maxar/DigitalGlobe - USA
+"
+
+                            WorldView-4
+                        
+",Sun Synchronous,617,1,2016,2019,Maxar/DigitalGlobe - USA
+"
+
+                            WorldView-Legion
+                        
+",Other,450, ,2022, ,Maxar/DigitalGlobe - USA
+"
+
+                            YaoGan - 5
+                        
+",Sun Synchronous, , ,2008, ,CAST - China
