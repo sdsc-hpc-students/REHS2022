@@ -1,0 +1,1 @@
+Folder for project ideas and other stuff relating to the final project for REHS
