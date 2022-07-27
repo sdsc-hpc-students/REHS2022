@@ -1,0 +1,23 @@
+{
+    "id": "<username>-img-classify",
+    "version": "0.1",
+    "description": "An image classifier run using Singularity in batch mode.",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://tapis/img-classify:0.1",
+    "jobAttributes": {
+        "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
+        "parameterSet": {
+            "archiveFilter": { 
+                "includeLaunchFiles": false 
+            }
+        },
+        "memoryMB": 1,
+        "nodeCount": 1,
+        "coresPerNode": 1,
+        "maxMinutes": 10
+    }
+}

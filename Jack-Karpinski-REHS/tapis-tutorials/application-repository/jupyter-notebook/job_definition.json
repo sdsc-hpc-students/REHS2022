@@ -1,0 +1,6 @@
+{
+    "name": "jupyter-notebook-hpc-job",
+    "appId": "jupyter-notebook-hpc",
+    "appVersion": "1",
+    "execSystemId": "<SYSTEM_NAME_HERE>"
+}

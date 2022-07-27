@@ -1,0 +1,28 @@
+{
+    "name": "opensees-express-multiple-file-inputs",
+    "appId": "opensees-express",
+    "appVersion": "1",
+    "fileInputs": [
+        {
+            "name": "TCL_input",
+            "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<MAIN_TCL_FILE>.tcl",
+            "targetPath": "input.tcl"
+        },
+        {
+            "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<EXTRA_FILE_1>.tcl",
+            "targetPath": "get_pyParam.tcl"
+        },
+        {
+            "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<EXTRA_FILE_2>.tcl",
+            "targetPath": "get_qzParam.tcl"
+        },
+        {
+            "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<EXTRA_FILE_3>.tcl",
+            "targetPath": "get_tzParam.tcl"
+        },
+        {
+            "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<EXTRA_FILE_4>.tcl",
+            "targetPath": "elasticPileSection.tcl"
+        }
+    ]
+}
