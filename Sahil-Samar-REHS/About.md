@@ -14,3 +14,4 @@
 
 ### Created some instructional material on Neo4J and TAPIS. It's [linked here](https://github.com/sdsc-hpc-students/REHS2022/tree/main/InstructionalMaterial)
 
+### Perhaps my greatest achievement was creating an icon for our discord.
