@@ -1,0 +1,24 @@
+{
+    "name": "img-classify-job",
+    "appId": "<username>-img-classify",
+    "appVersion": "0.1",
+    "execSystemId": "<SYSTEM_NAME_HERE>",
+    "parameterSet": {
+        "appArgs": [
+            {
+                "arg": "--image_file"
+            },
+            {
+                "arg": "'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231410/Labrador-Retriever-On-White-01.jpg'"
+            }
+        ],
+        "schedulerOptions": [
+            {
+                "arg": "--tapis-profile tacc"
+            },
+            {
+                "arg": "--account <ACCOUNT_ALLOCATION>"
+            }
+        ]
+    }
+}

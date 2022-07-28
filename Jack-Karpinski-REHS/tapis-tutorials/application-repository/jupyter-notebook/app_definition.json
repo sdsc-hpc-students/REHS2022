@@ -1,0 +1,15 @@
+{
+    "id": "jupyter-notebook-hpc",
+    "version": "1",
+    "description": "A reference application for running an HPC version of Jupyter Notebook in Tapis v3. Runs interactively on a Stampede2 or Frontera compute node.",
+    "appType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://tylerclemens/jupyter-v3:latest",
+    "jobAttributes": {
+        "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
+        "maxMinutes": 60 
+    }
+}

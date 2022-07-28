@@ -1,0 +1,12 @@
+{
+    "name": "opensees-express-default-input-override",
+    "appId": "opensees-express",
+    "appVersion": "1",
+    "fileInputs": [
+        {
+            "name": "TCL_input",
+            "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<NEW_TCL_FILE>.tcl",
+            "targetPath": "input.tcl"
+        }
+    ]
+}
