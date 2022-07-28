@@ -1,0 +1,6 @@
+{
+    "name": "opensees-express-job",
+    "appId": "opensees-express",
+    "appVersion": "1",
+    "execSystemId": "<SYSTEM_NAME_HERE>"
+}
