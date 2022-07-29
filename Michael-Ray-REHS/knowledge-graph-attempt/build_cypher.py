@@ -1,5 +1,6 @@
 import os
 import json
+from neo4j import GraphDatabase
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 database_file = r'user_database.cypher'
@@ -7,10 +8,11 @@ user_info_file = r'user_information'
 
 
 class databaseBuilder:
-    def __init__(self, user_data_directory=None, database_file=None):
-        self.cypher_file = os.path.join(pwd, database_file)
+    def __init__(self, user_data_directory=None, cypher_file=None, database_address=None, database_user=None, database_password=None):
+        self.cypher_file = os.path.join(pwd, cypher_file)
         self.user_info_file = os.path.join(pwd, user_data_directory)
-        self.completed_expressions = []
+        self.expressions = []
+        self.graph_driver = GraphDatabase.driver(database_address, auth=(database_user, database_password))
 
     def create_user(self, user_info:dict) -> tuple:
         properties = f'{{userid:"{user_info["user_id"]}", username:"{user_info["username"]}", fullname:"{user_info["full_name"]}", isprivate:"{user_info["is_private"]}", isverified:"{user_info["is_verified"]}", mediacount:"{user_info["media_count"]}", numfollowers:"{user_info["num_followers"]}", numfollowing:"{user_info["num_following"]}"}}'
@@ -33,19 +35,26 @@ class databaseBuilder:
             data = json.loads(data)
         return data
 
-    def write_to_file(self, expression_list: list, file_name):
+    def write_to_list(self, expression_list: list):
         if isinstance(expression_list[0], tuple):
             expression_list = list(map(lambda x: x[0], expression_list))
 
-        with open(file_name, 'w') as f:
-            for l in expression_list:
-                if l not in self.completed_expressions:
-                    try:
-                        f.write(l)
-                    except UnicodeEncodeError:
-                        continue
+        for expression in expression_list:
+            if expression not in self.expressions:
+                self.expressions.append(expression)
 
-                
+    def write_to_file(self):
+        with open(self.cypher_file, 'w') as f:
+            for expression in self.expressions:
+                try:
+                    f.write(expression)
+                except UnicodeEncodeError:
+                    continue
+
+    def write_to_database(self):
+        with self.graph_driver.session() as ses:
+            for expression in self.expressions:
+                ses.run(expression)
 
     def construct_user_data_graph(self):
         file_list = os.listdir(self.user_info_file)
@@ -54,20 +63,29 @@ class databaseBuilder:
 
         username_list = [node[1] for node in node_list]
 
-        self.write_to_file(node_list, self.cypher_file)
+        self.write_to_list(node_list)
 
         for expression, username, followers, following in node_list:
             if isinstance(followers, list):
                 user_followers = [self.create_relationship(username, follower, "FOLLOWED_BY") for follower in followers if follower in username_list]
                 if user_followers:
-                    self.write_to_file(user_followers, self.cypher_file)
+                    self.write_to_list(user_followers)
 
             if isinstance(following, list):
                 user_followees = [self.create_relationship(username, followee, "FOLLOWING") for followee in following if followee in username_list]
                 if user_followees:
-                    self.write_to_file(user_followees, self.cypher_file)
+                    self.write_to_list(user_followees)
+        
+        self.write_to_file()
+        self.write_to_database()
 
 
 if __name__ == "__main__":
-    database_builder = databaseBuilder(user_data_directory=user_info_file, database_file=database_file)
+    database_builder = databaseBuilder(user_data_directory=user_info_file, 
+                                       cypher_file=database_file, 
+                                       database_address='bolt://72.194.82.31:7687', 
+                                       database_user='neo4j',
+                                       database_password='password')
     database_builder.construct_user_data_graph()
+    print("all done")
+
