@@ -1,6 +1,5 @@
 import os
 import json
-from neo4j import GraphDatabase
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 database_file = r'user_database.cypher'
@@ -11,6 +10,7 @@ class databaseBuilder:
     def __init__(self, user_data_directory=None, database_file=None):
         self.cypher_file = os.path.join(pwd, database_file)
         self.user_info_file = os.path.join(pwd, user_data_directory)
+        self.completed_expressions = []
 
     def create_user(self, user_info:dict) -> tuple:
         properties = f'{{userid:"{user_info["user_id"]}", username:"{user_info["username"]}", fullname:"{user_info["full_name"]}", isprivate:"{user_info["is_private"]}", isverified:"{user_info["is_verified"]}", mediacount:"{user_info["media_count"]}", numfollowers:"{user_info["num_followers"]}", numfollowing:"{user_info["num_following"]}"}}'
@@ -24,12 +24,8 @@ class databaseBuilder:
             user1, user2 = user2, user1
 
         expression = f'''\nMATCH (USER1), (USER2) WHERE USER1.username = "{user1}" AND USER2.username = "{user2}" CREATE (USER1)-[:FOLLOWING]->(USER2)''' 
-        
-        return expression
 
-    def empty_file(self, file_name):
-        with open(file_name, 'w') as f:
-            f.write('')
+        return expression
 
     def read_json_file(self, file_name):
         with open(file_name, 'r') as f:
@@ -41,14 +37,15 @@ class databaseBuilder:
         if isinstance(expression_list[0], tuple):
             expression_list = list(map(lambda x: x[0], expression_list))
 
-        with open(file_name, 'a+') as f:
+        with open(file_name, 'w') as f:
             for l in expression_list:
-                contents = f.read()
-                if l not in contents:
+                if l not in self.completed_expressions:
                     try:
                         f.write(l)
                     except UnicodeEncodeError:
                         continue
+
+                
 
     def construct_user_data_graph(self):
         file_list = os.listdir(self.user_info_file)
@@ -73,6 +70,4 @@ class databaseBuilder:
 
 if __name__ == "__main__":
     database_builder = databaseBuilder(user_data_directory=user_info_file, database_file=database_file)
-    database_builder.empty_file(database_builder.cypher_file)
     database_builder.construct_user_data_graph()
-
