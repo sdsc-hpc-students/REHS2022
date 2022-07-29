@@ -1,5 +1,6 @@
 import os
 import json
+from neo4j import GraphDatabase
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 database_file = r'user_database.cypher'
@@ -20,14 +21,9 @@ class databaseBuilder:
 
     def create_relationship(self, user1, user2, relationship: str):
         if relationship == 'FOLLOWED_BY':
-            node_2_username = user1
-            node_1_username = user2
+            user1, user2 = user2, user1
 
-        if relationship == 'FOLLOWING':
-            node_1_username = user1
-            node_2_username = user2
-
-        expression = f'''\nMATCH (USER1), (USER2) WHERE USER1.username = "{node_1_username}" AND USER2.username = "{node_2_username}" CREATE (USER1)-[:FOLLOWING]->(USER2)''' 
+        expression = f'''\nMATCH (USER1), (USER2) WHERE USER1.username = "{user1}" AND USER2.username = "{user2}" CREATE (USER1)-[:FOLLOWING]->(USER2)''' 
         
         return expression
 
