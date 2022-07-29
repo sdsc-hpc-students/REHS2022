@@ -33,8 +33,8 @@ class InstagramCrawler:
             followers_unprocessed = profile.get_followers()
             followees_unprocessed = profile.get_followees()
 
-            profile_information['followers'] = [(user.username, user.user_id) for user in followers_unprocessed]
-            profile_information['following'] = [(user.username, user.user_id) for user in followees_unprocessed]
+            profile_information['followers'] = [user.username for user in followers_unprocessed]
+            profile_information['following'] = [user.username for user in followees_unprocessed]
         
         return profile_information
 
@@ -58,11 +58,11 @@ class InstagramCrawler:
 
     def write_files(self, usernames, batch_size: int):
         if isinstance(usernames, str):
-            followers, following = self.read_json(usernames)['followers'][0], self.read_json(usernames)['following'][0]
+            followers, following = self.read_json(usernames)['followers'], self.read_json(usernames)['following']
             usernames_processes = ([multiprocessing.Process(target=self.gather_and_write, args=[username]) for username in followers],
                                    [multiprocessing.Process(target=self.gather_and_write, args=[username]) for username in following])
         else:  
-            usernames_processes = ([multiprocessing.Process(target=self.gather_and_write, args=[username[0]]) for username in usernames])
+            usernames_processes = ([multiprocessing.Process(target=self.gather_and_write, args=[username]) for username in usernames])
 
         for usernames_process in usernames_processes:
             while usernames_process:
