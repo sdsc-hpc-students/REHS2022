@@ -96,7 +96,7 @@ class InstagramCrawler:
                     continue
                 else:
                     self.write_files(user.split('.json')[0], batch_size)
-                    completed.append()
+                    completed.append(user)
                     self.write_json(self.completed_usernames_file, completed, pwd)
 
 if __name__ == '__main__':

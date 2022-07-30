@@ -56,6 +56,11 @@ class databaseBuilder:
             for expression in self.expressions:
                 ses.run(expression)
 
+    def clear_database(self):
+        with self.graph_driver.session() as ses:
+            ses.run('MATCH ()-[r]-() DELETE r')
+            ses.run('MATCH (p) DELETE p')
+
     def construct_user_data_graph(self):
         file_list = os.listdir(self.user_info_file)
 
@@ -77,6 +82,7 @@ class databaseBuilder:
                     self.write_to_list(user_followees)
         
         self.write_to_file()
+        self.clear_database()
         self.write_to_database()
 
 
