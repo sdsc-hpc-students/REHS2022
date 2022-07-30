@@ -1,0 +1,9 @@
+{
+    "label":"ORGANIZATION",
+    "properties":[
+        "name"
+    ],
+    "relationships":[
+        false
+    ]
+}

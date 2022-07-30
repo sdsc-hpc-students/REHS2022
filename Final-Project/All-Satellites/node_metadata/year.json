@@ -1,0 +1,9 @@
+{
+    "label":"YEAR",
+    "properties": [
+        "year"
+    ],
+    "relationships"  :[
+        false
+    ]
+}

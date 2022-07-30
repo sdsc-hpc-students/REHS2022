@@ -1,0 +1,22 @@
+{
+    "label":"SATELLITE",
+    "properties":[
+        "name",
+        "orbit_height_km",
+        "repeat_cycle_d"
+    ],
+    "relationships":[
+        {
+            "has_orbit":"orbit_type"
+        },
+        {
+            "part_of":"organization"
+        },
+        {
+            "launched_in":"year"
+        },
+        {
+            "decomissioned":"year"
+        }
+    ]
+}

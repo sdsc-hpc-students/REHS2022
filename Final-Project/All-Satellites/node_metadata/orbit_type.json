@@ -1,0 +1,9 @@
+{
+    "label":"ORBIT",
+    "properties":[
+        "orbit_type"
+    ],
+    "relationships":[
+        false
+    ]
+}
