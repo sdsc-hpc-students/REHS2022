@@ -1,0 +1,16 @@
+{
+    "label":"INSERT_LABEL_HERE",
+    "properties":[
+        "property1",
+        "property2",
+        "property3"
+    ],
+    "relationships":[
+        {
+            "relationship_type1":"node_type_related_to1"
+        },
+        {
+            "relationship_type2":"node_type_related_to"
+        } 
+    ]
+}
