@@ -9,8 +9,9 @@ Pt2:Tapis Pods
 query_neo4j_pod.ipynb Go over important parts
 
 Pt3: KGs Creation
-Basic Neo4j and some demo Cypher commands
-Database-Creation.ipynb 
+Basic Neo4j
+Demo Cypher commands
+Database-Creation.ipynb - .csv --> Neo4j KG
 
 Pt4: NN/ML into KG
 Michaels NN and how it connects to KGs
