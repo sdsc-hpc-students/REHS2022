@@ -5,13 +5,13 @@
 Pt1: Tapis Authentication
 Hello Tapis Tutorial NB, go over what it does and what is required for it
 
-Pt2:Tapis Pods
-query_neo4j_pod.ipynb Go over important parts
-
-Pt3: KGs Creation
+Pt2: KGs Creation
 Basic Neo4j
 Demo Cypher commands
 Database-Creation.ipynb - .csv --> Neo4j KG
+
+Pt3:Tapis Pods
+query_neo4j_pod.ipynb Go over important parts
 
 Pt4: NN/ML into KG
 Michaels NN and how it connects to KGs
