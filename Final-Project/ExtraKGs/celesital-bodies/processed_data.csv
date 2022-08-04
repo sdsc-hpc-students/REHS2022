@@ -1,4 +1,4 @@
-,id,name,est_diameter_min,est_diameter_max,relative_velocity,miss_distance,orbiting_body,sentry_object,absolute_magnitude,hazardous,predicted_values,Classification_Success
+id,name,est_diameter_min,est_diameter_max,relative_velocity,miss_distance,orbiting_body,sentry_object,absolute_magnitude,hazardous,predicted_values,Classification_Success
 73623,3843797,(2019 RQ1),True,True,True,True,Earth,False,True,False,True,Incorrectly_Classified
 26353,3763102,(2016 UB107),True,True,True,True,Earth,False,True,False,True,Incorrectly_Classified
 21923,3395954,(2007 WK3),True,True,True,True,Earth,False,True,False,False,Correctly_Classified
