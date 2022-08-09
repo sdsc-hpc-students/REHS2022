@@ -1,3 +1,4 @@
+print('Initializing...')
 import os
 import time
 import json
@@ -7,6 +8,7 @@ from getpass import getpass
 import pytz
 import sys
 import json
+import re
 
 import pandas
 import neo4jupyter
@@ -23,6 +25,7 @@ def show(res):
         pp.pprint(res.text)
 
 neo4jupyter.init_notebook_mode()
+print('Initialization success!')
 
 class Neo4jCLI:
     def __init__(self, username, password):
@@ -51,7 +54,7 @@ class Neo4jCLI:
         print(f"serv_url: {self.url}\n")
 
         self.authenticator = self.t.access_token
-        self.access_token = re.findall(r'(?<=access_token: )(.*)', str(authenticator))[0]
+        self.access_token = re.findall(r'(?<=access_token: )(.*)', str(self.authenticator))[0]
         print(self.authenticator)
 
         self.commands_list = {
@@ -338,45 +341,45 @@ class Neo4jCLI:
         while True:
             command_request = str(input(f'[NEO4J TAPIS CLI {self.username}]: '))
             command, args, kwargs = self.command_parser(command_request)
-            try:
-                if not command:
-                    print('Enter a command')
-                    continue
-                elif command == 'help':
-                    self.help()
-                elif command == 'whoami':
-                    print(self.whoami())
-                elif command == 'get_pods':
-                    print(self.get_pods())
-                elif command == 'create_pod':
-                    print(self.create_pod(kwargs, args))
-                elif command == 'restart_pod':
-                    print(self.restart_pod(kwargs, args))
-                elif command == 'delete_pod':
-                    print(self.delete_pod(kwargs, args))
-                elif command == "set_pod_perms":
-                    print(self.set_pod_perms(kwargs, args))
-                elif command == 'delete_pod_perms':
-                    print(self.delete_pod_perms(kwargs, args))
-                elif command == 'get_perms':
-                    print(self.get_perms(kwargs, args))
-                elif command == "get_pod_info":
-                    pod_username, pod_password, pod_link = self.get_pod_information(kwargs, args)
-                    print(f'Pod Username: {pod_username}\nPod Password: {pod_password}\nPod Link: {pod_link}')
-                elif command == 'query':
-                    print(self.kg_query_cli(kwargs, args))
-                elif command == 'systems':
-                    print(self.systems(kwargs, args))
-                elif command == 'files':
-                    print(self.files(kwargs, args))
-                elif command == 'jobs':
-                    print(self.jobs(kwargs, args))
-                elif command == 'exit':
-                    sys.exit(1)
-                else:
-                    print('Command not recognized')
-            except:
-                print('Error executing command, please see "help" for more details')
+            # try:
+            if not command:
+                print('Enter a command')
+                continue
+            elif command == 'help':
+                self.help()
+            elif command == 'whoami':
+                print(self.whoami())
+            elif command == 'get_pods':
+                print(self.get_pods())
+            elif command == 'create_pod':
+                print(self.create_pod(kwargs, args))
+            elif command == 'restart_pod':
+                print(self.restart_pod(kwargs, args))
+            elif command == 'delete_pod':
+                print(self.delete_pod(kwargs, args))
+            elif command == "set_pod_perms":
+                print(self.set_pod_perms(kwargs, args))
+            elif command == 'delete_pod_perms':
+                print(self.delete_pod_perms(kwargs, args))
+            elif command == 'get_perms':
+                print(self.get_perms(kwargs, args))
+            elif command == "get_pod_info":
+                pod_username, pod_password, pod_link = self.get_pod_information(kwargs, args)
+                print(f'Pod Username: {pod_username}\nPod Password: {pod_password}\nPod Link: {pod_link}')
+            elif command == 'query':
+                print(self.kg_query_cli(kwargs, args))
+            elif command == 'systems':
+                print(self.systems(kwargs, args))
+            elif command == 'files':
+                print(self.files(kwargs, args))
+            elif command == 'jobs':
+                print(self.jobs(kwargs, args))
+            elif command == 'exit':
+                sys.exit(1)
+            else:
+                print('Command not recognized')
+            # except:
+            #     print('Error executing command, please see "help" for more details')
                 
 
 if __name__ == '__main__':
@@ -386,7 +389,7 @@ if __name__ == '__main__':
         try:
             client = Neo4jCLI(username, password)
             break
-        except Exception:
+        except Exception as e:
             print('Invalid login, try again')
             continue
     client.main()
