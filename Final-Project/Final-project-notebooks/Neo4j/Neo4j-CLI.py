@@ -66,6 +66,9 @@ class Neo4jCLI:
             'get_perms':'gets a list of permissions for a pod\nFormat: get_perms <pod_id>',
             'get_pod_info':'get the link and auth information for selected pod ID\nFormat: get_pod_info <pod_id>',
             'query':'open the Neo4j Query command line\nFormat: query -L <graph_link> -u <graph_auth_username> -p <graph_auth_password>',
+            'systems':'add here',
+            'files':'add here',
+            'jobs':'add here',
             'exit':'exit the CLI app'
         }
         print("#" * 100 + "\nWelcome to the Neo4j CLI Application\nEnter 'help' for a list of commands\n" + "#" * 100)
