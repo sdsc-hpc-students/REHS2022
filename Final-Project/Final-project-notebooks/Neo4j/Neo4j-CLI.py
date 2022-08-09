@@ -47,14 +47,18 @@ class Neo4jCLI:
 
         print(time.time() - start)
         print(f"base_url: {base_url}")
-        print(f"serv_url: {self.url}")
+        print(f"serv_url: {self.url}\n")
 
         self.commands_list = {
             'help':'get list of commands',
             'whoami':'returns active user username',
             'get_pods':'get list of pods available to selected account',
             'create_pod':'create a pod\nFormat: create_pod <pod-id> -t <template>',
+            'restart_pod':'restart the pod\nFormat: restart_pod <pod_id>',
+            'delete_pod':'delete the pod. Requires user confirmation\nFormat: delete_pod <pod_id>',
             'set_pod_perms':'sets the permissions on a pod\nFormat: set_pod_perms <pod_id> -u <username to give perms> -L <permission level>',
+            'delete_pod_perms':'deletes the permissions for the selected user\nFormat: delete_pod_perms <pod_id> -u <user to take perms from>',
+            'get_perms':'gets a list of permissions for a pod\nFormat: get_perms <pod_id>',
             'get_pod_info':'get the link and auth information for selected pod ID\nFormat: get_pod_info <pod_id>',
             'query':'open the Neo4j Query command line\nFormat: query -L <graph_link> -u <graph_auth_username> -p <graph_auth_password>',
             'exit':'exit the CLI app'
@@ -76,7 +80,23 @@ class Neo4jCLI:
         pod_description = str(input("Enter your pod description below:\n"))
         pod_information = self.t.pods.create_pod(pod_id=args[0], pod_template=kwargs['t'], description=pod_description)
         return pod_information
-    
+
+    def restart_pod(self, kwargs: dict, args: list):
+        decision = input(f'Please enter, "Restart pod {args[0]}"\nNote that data may not be persistent on restart')
+        if decision == f'Restart pod {args[0]}':
+            return 'Restart Aborted'
+
+        return_information = self.t.pods.restart_pod(pod_id=args[0])
+        return return_information
+
+    def delete_pod(self, kwargs: dict, args: list):
+        decision = input(f'Please enter, "Delete pod {args[0]}"\nNote that all data WILL BE LOST')
+        if decision == f'Delete pod {args[0]}':
+            return 'Deletion Aborted'
+
+        return_information = self.t.pods.delete_pod(pod_id=args[0])
+        return return_information
+
     def set_pod_perms(self, kwargs: dict, args: list):
         try:
             return_information = self.t.pods.set_pod_permission(pod_id=args[0], user=kwargs['u'], level=kwargs['L'])
@@ -85,6 +105,17 @@ class Neo4jCLI:
             return 'Invalid level given'
         except:
             return 'error'
+    
+    def delete_pod_perms(self, kwargs: dict, args: list):
+        try:
+            return_information = self.t.pods.delete_pod_perms(pod_id=args[0], user=kwargs['u'])
+            return return_information
+        except:
+            return 'error'
+
+    def get_perms(self, kwargs, args):
+        return_information = self.t.pods.get_pod_permissions(pod_id=args[0])
+        return return_information
 
     def get_pod_information(self, kwargs: dict, args: list):
         username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
@@ -135,28 +166,39 @@ class Neo4jCLI:
         while True:
             command_request = str(input(f'[NEO4J TAPIS CLI {self.username}]: '))
             command, args, kwargs = self.command_parser(command_request)
-            if not command:
-                print('Enter a command')
-                continue
-            elif command == 'help':
-                self.help()
-            elif command == 'whoami':
-                print(self.whoami())
-            elif command == 'get_pods':
-                print(self.get_pods())
-            elif command == 'create_pod':
-                print(self.create_pod(kwargs, args))
-            elif command == "set_pod_perms":
-                print(self.set_pod_perms(kwargs, args))
-            elif command == "get_pod_info":
-                pod_username, pod_password, pod_link = self.get_pod_information(kwargs, args)
-                print(f'Pod Username: {pod_username}\nPod Password: {pod_password}\nPod Link: {pod_link}')
-            elif command == 'query':
-                print(self.kg_query_cli(kwargs, args))
-            elif command == 'exit':
-                sys.exit(1)
-            else:
-                print('Command not recognized')
+            try:
+                if not command:
+                    print('Enter a command')
+                    continue
+                elif command == 'help':
+                    self.help()
+                elif command == 'whoami':
+                    print(self.whoami())
+                elif command == 'get_pods':
+                    print(self.get_pods())
+                elif command == 'create_pod':
+                    print(self.create_pod(kwargs, args))
+                elif command == 'restart_pod':
+                    print(self.restart_pod(kwargs, args))
+                elif command == 'delete_pod':
+                    print(self.delete_pod(kwargs, args))
+                elif command == "set_pod_perms":
+                    print(self.set_pod_perms(kwargs, args))
+                elif command == 'delete_pod_perms':
+                    print(self.delete_pod_perms(kwargs, args))
+                elif command == 'get_perms':
+                    print(self.get_perms(kwargs, args))
+                elif command == "get_pod_info":
+                    pod_username, pod_password, pod_link = self.get_pod_information(kwargs, args)
+                    print(f'Pod Username: {pod_username}\nPod Password: {pod_password}\nPod Link: {pod_link}')
+                elif command == 'query':
+                    print(self.kg_query_cli(kwargs, args))
+                elif command == 'exit':
+                    sys.exit(1)
+                else:
+                    print('Command not recognized')
+            except:
+                print('Error executing command, please see "help" for more details')
                 
 
 if __name__ == '__main__':
