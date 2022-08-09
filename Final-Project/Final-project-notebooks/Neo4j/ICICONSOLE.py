@@ -9,88 +9,101 @@ from getpass import getpass
 from tapipy.tapis import Tapis
 import io
 import os
-
 start = time.time()
 
  
 # Base URL for Tapis
 base_url = "https://icicle.develop.tapis.io"
-username = ""
+pod_id = ""
+user = ""
+
+def heavyFormat(message):
+    print("*" * len(message))
+    print("-" * len(message))
+    print(message)
+    print("-" * len(message))
+    print("*" * len(message))
+
+def lightFormat(message):
+    print("-" * len(message))
+    print(message)
+    print("-" * len(message))
+
+heavyFormat("Welcome to ICICONSOLE. Login to get started. ")
+
+def console(graph, pod_id):
+    lightFormat("Type \"new\" to access a different pod, or type \"exit\" to leave ICICONSOLE. ")
+
+    while(True):
+        query = str(input("[" + user + "@" + pod_id + "] "))
+        if(query == "exit"):
+            os._exit(0)
+        if(query == "new"):
+            choosePod()
+            return
+        if(query == "clear"):
+            os.system('cls' if os.name == 'nt' else 'clear')
+            console(graph, pod_id)
+        try: 
+            df = graph.run(query).to_data_frame()
+            with pd.option_context('expand_frame_repr', False, 'display.max_rows', None): 
+                print(df)
+        except:
+            print("Something went wrong")
 
 
+def choosePod():
+
+    heavyFormat("Here are the IDs for your available TAPIS Pods: ")
+
+    i = 1
+    for pod in t.pods.get_pods():
+        print(str(i) + ". " + pod.pod_id)
+        i += 1
+    i = 1
+
+    while(True):
+        try: 
+            pod_id = str(input("Enter the ID of the pod you want to access: ")).lower()
+            pod_username, password = t.pods.get_pod_credentials(pod_id=pod_id).user_username, t.pods.get_pod_credentials(pod_id=pod_id).user_password
+            break
+        except:
+            print("Invalid Pod ID. Make sure you have access to this Pod.")
+
+    graph_link = f"bolt+ssc://{pod_id}.pods.icicle.develop.tapis.io:443"
+    while(True):
+        try:
+            graph = Graph(graph_link, auth=(pod_username, password), secure=True, verify=True)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            time.sleep(0.25)
+            heavyFormat(f"Hey there {user}! Welcome to the Neo4j Cypher Console for: " + str(pod_id))
+            console(graph, pod_id)
+        except:
+            print("There was a connection error.")
+            
 # Get Tapis object if it isn't already created.
 while(True):
     try:
         try:
             t
-            if t.base_url == base_url and t.username == username and t.access_token:
+            if t.base_url == base_url and t.username == user and t.access_token:
                 print("Tapis object already exists.")
                 if t.access_token.expires_at < datetime.datetime.now(pytz.utc):
-                    print("Existing Tapis token expired, getting new token.")
                     raise
             else:
                 raise
         except:
             try:
-                t = Tapis(base_url = base_url,
-                        username = str(input("Enter Your TACC Username: ")),
+                user = str(input("Enter Your TACC Username: "))
+                t = Tapis(base_url = base_url, username=user,
                         password = getpass('Enter Your TACC Password: '))
                 t.get_tokens()
+                choosePod()
                 break
             except Exception as e:
                 raise
     except:
         print("An error occurred, likely due to mistyped login. Try again. ")
 
-print("*" * 50)
-print("-" * 50)
-print("Here are the IDs for your available TAPIS Pods: ")
-print("-" * 50)
-print("*" * 50)
-
-time.sleep(1)
-
-i = 1
-for pod in t.pods.get_pods():
-    print(str(i) + ". " + pod.pod_id)
-    i += 1
-i = 1
-
-while(True):
-    try: 
-        pod_id = str(input("Enter the pod_id of the pod you want to access: ")).lower()
-        pod_username, password = t.pods.get_pod_credentials(pod_id=pod_id).user_username, t.pods.get_pod_credentials(pod_id=pod_id).user_password
-        break
-    except:
-        print("Invalid Pod ID. Make sure you have access to this Pod.")
-
-graph_link = f"bolt+ssc://{pod_id}.pods.icicle.develop.tapis.io:443"
-while(True):
-    try:
-        graph = Graph(graph_link, auth=(pod_username, password), secure=True, verify=True)
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("*" * 50)
-        print("-" * 50)
-        print("Welcome to the Neo4j Cypher Console for: " + str(pod_id))
-        print("-" * 50)
-        print("*" * 50)
-
-        break
-    except:
-        print("There was a connection error.")
-
-while(True):
-    query = str(input("[" + pod_username + "@" + pod_id + "] "))
-    if(query == "exit"):
-        break
-    if(query == "clear"):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        query = str(input("[" + pod_username + "@" + pod_id + "] "))
-    try: 
-        df = graph.run(query).to_data_frame()
-        with pd.option_context('expand_frame_repr', False, 'display.max_rows', None): 
-            print(df)
-    except:
-        print("Something went wrong")
 
 
