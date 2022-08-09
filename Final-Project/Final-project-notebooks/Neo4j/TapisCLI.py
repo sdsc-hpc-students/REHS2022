@@ -137,7 +137,7 @@ class Neo4jCLI:
     def submit_queries(self, graph, expression):
         return_value = graph.run(expression)
 
-        if return_value == '(No data)':
+        if return_value:
             return 'Success'
 
         return return_value
@@ -154,6 +154,7 @@ class Neo4jCLI:
                     print('ERROR: KG failed connection after 5 tries to connect')
                     return None
         
+        print(f'Entered the {kwargs["u"]}')
         while True:
             expression = str(input('> '))
             if expression == 'exit':
