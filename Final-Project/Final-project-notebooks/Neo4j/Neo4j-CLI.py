@@ -96,7 +96,7 @@ class Neo4jCLI:
 
         if return_value == '(No data)':
             return 'Success'
-            
+
         return return_value
 
     def kg_query_cli(self, kwargs: dict, args: list):
@@ -135,9 +135,6 @@ class Neo4jCLI:
         while True:
             command_request = str(input(f'[NEO4J TAPIS CLI {self.username}]: '))
             command, args, kwargs = self.command_parser(command_request)
-            print(command)
-            print(args)
-            print(kwargs)
             if not command:
                 print('Enter a command')
                 continue
