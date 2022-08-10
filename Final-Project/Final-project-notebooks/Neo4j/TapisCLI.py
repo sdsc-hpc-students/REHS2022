@@ -89,25 +89,34 @@ class Neo4jCLI:
         return user_info
 
     def create_pod(self, kwargs: dict, args: list):
-        pod_description = str(input("Enter your pod description below:\n"))
-        pod_information = self.t.pods.create_pod(pod_id=args[0], pod_template=kwargs['t'], description=pod_description)
-        return pod_information
+        try:
+            pod_description = str(input("Enter your pod description below:\n"))
+            pod_information = self.t.pods.create_pod(pod_id=args[0], pod_template=kwargs['t'], description=pod_description)
+            return pod_information
+        except Exception as e:
+            return e
 
     def restart_pod(self, kwargs: dict, args: list):
         decision = input(f'Please enter, "Restart pod {args[0]}"\nNote that data may not be persistent on restart')
         if decision == f'Restart pod {args[0]}':
             return 'Restart Aborted'
 
-        return_information = self.t.pods.restart_pod(pod_id=args[0])
-        return return_information
+        try:
+            return_information = self.t.pods.restart_pod(pod_id=args[0])
+            return return_information
+        except Exception as e:
+            return e
 
     def delete_pod(self, kwargs: dict, args: list):
         decision = input(f'Please enter, "Delete pod {args[0]}"\nNote that all data WILL BE LOST')
         if decision == f'Delete pod {args[0]}':
             return 'Deletion Aborted'
 
-        return_information = self.t.pods.delete_pod(pod_id=args[0])
-        return return_information
+        try:
+            return_information = self.t.pods.delete_pod(pod_id=args[0])
+            return return_information
+        except Exception as e:
+            return e
 
     def set_pod_perms(self, kwargs: dict, args: list):
         try:
@@ -115,15 +124,15 @@ class Neo4jCLI:
             return return_information
         except tapipy.errors.BaseTapyException:
             return 'Invalid level given'
-        except:
-            return 'error'
+        except Exception as e:
+            return e
     
     def delete_pod_perms(self, kwargs: dict, args: list):
         try:
             return_information = self.t.pods.delete_pod_perms(pod_id=args[0], user=kwargs['u'])
             return return_information
-        except:
-            return 'error'
+        except Exception as e:
+            return e
 
     def get_perms(self, kwargs, args):
         try:
@@ -131,31 +140,39 @@ class Neo4jCLI:
             return return_information
         except IndexError:
             return 'enter valid pod id, see help'
+        except Exception as e:
+            return e
 
     def get_pod_information(self, kwargs: dict, args: list):
-        username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
-        link = f"bolt+ssc://{args[0]}.pods.icicle.develop.tapis.io:443"
-        return username, password, link
+        try:
+            username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
+            link = f"bolt+ssc://{args[0]}.pods.icicle.develop.tapis.io:443"
+            return username, password, link
+        except Exception as e:
+            return e
     
     def submit_queries(self, graph, expression):
-        return_value = graph.run(expression)
+        try:
+            return_value = graph.run(expression)
 
-        if str(return_value) == '(No data)':
-            return 'Success'
+            if str(return_value) == '(No data)':
+                return 'Success'
 
-        return return_value
+            return return_value
+        except Exception as e:
+            return e
 
     def kg_query_cli(self, kwargs: dict, args: list):
         for x in range(5):
             try:
                 graph = Graph(kwargs['L'], auth=(kwargs['u'], kwargs['p']), secure=True, verify=True)
                 break
-            except:
+            except Exception as e:
                 if x < 5:
                     continue
                 else:
                     print('ERROR: KG failed connection after 5 tries to connect')
-                    return None
+                    return e
         
         print(f'Entered the {kwargs["u"]}')
         while True:
@@ -170,46 +187,55 @@ class Neo4jCLI:
                     print(e)
 
     def get_system_list(self):
-        systems = self.t.systems.getSystems()
-        return systems
+        try:
+            systems = self.t.systems.getSystems()
+            return systems
+        except Exception as e:
+            return e
 
     def get_system_info(self, kwargs: dict, args: list):
         try:
             system_info = self.t.systems.getSystem(systemId=args[1])
             return system_info
-        except:
-            return "System does not exist"
+        except Exception as e:
+            return e
         
     def create_system(self, kwargs: dict, args: list):
-        with open(kwargs['F'], 'r') as f:
-            system = json.loads(f.read())
-            print(system)
-        system_id = system['id']
         try:
+            with open(kwargs['F'], 'r') as f:
+                system = json.loads(f.read())
+                print(system)
+            system_id = system['id']
             self.t.systems.createSystem(**system)
             return system_id
         except:
             return f"Failed to start {system_id}"
 
     def system_credential_upload(self, kwargs: dict, args: list):
-        with open(kwargs['pvk'], 'r') as f:
-            private_key = f.read()
+        try:
+            with open(kwargs['pvk'], 'r') as f:
+                private_key = f.read()
 
-        with open(kwargs['pbk'], 'r') as f:
-            public_key = f.read()
+            with open(kwargs['pbk'], 'r') as f:
+                public_key = f.read()
 
-        cred_return_value = self.t.systems.createUserCredential(systemId=args[0],
-                               userName=self.username,
-                               privateKey=private_key,
-                               publicKey=public_key)
+            cred_return_value = self.t.systems.createUserCredential(systemId=args[0],
+                                userName=self.username,
+                                privateKey=private_key,
+                                publicKey=public_key)
 
-        return cred_return_value
+            return cred_return_value
+        except Exception as e:
+            return e
 
     def system_password_set(self, kwargs: dict, args: list):
-        password_return_value = self.t.systems.createUserCredential(systemId=args[0],
-                               userName=self.username,
-                               password=kwargs['p'])
-        return password_return_value
+        try:
+            password_return_value = self.t.systems.createUserCredential(systemId=args[0],
+                                userName=self.username,
+                                password=kwargs['p'])
+            return password_return_value
+        except Exception as e:
+            return e
         
     def systems(self, kwargs: dict, args: list):
         try:
@@ -227,13 +253,15 @@ class Neo4jCLI:
                 return 'Command not recognized'
         except IndexError:
             return "must specify subcommand. See 'help'"
+        except Exception as e:
+            return e
 
     def list_files(self, kwargs: dict, args: list):
         try:
             file_list = self.t.files.listFiles(systemId=args[0], path=rkwargs['F'])
             return file_list
-        except:
-            return 'Error retrieving files'
+        except Exception as e:
+            return e
 
     def upload(self, kwargs: dict, args: list):
         try:
@@ -268,6 +296,8 @@ class Neo4jCLI:
                 return 'Command not recognized'
         except IndexError:
             return "must specify subcommand. See 'help'"
+        except Exception as e:
+            return e
 
     def create_app(self, kwargs: dict, args: list):
         try:
@@ -275,15 +305,15 @@ class Neo4jCLI:
                 app_def = json.loads(f.read())
             url = self.t.apps.createAppVersion(**app_def)
             return f"App created successfully\nID: {app_def['id']}\nVersion: {app_def['version']}\nURL: {url}"
-        except:
-            return f"Failed to create app"
+        except Exception as e:
+            return e
 
     def get_app(self, kwargs: dict, args: list):
         try:
             app = self.t.apps.getApp(appId=args[0], appVersion=kwargs['v'])
             return app
-        except:
-            return 'app not found'
+        except Exception as e:
+            return e
 
     def run_job(self, kwargs: dict, args: list):
         try:
@@ -299,8 +329,8 @@ class Neo4jCLI:
             }
             job = self.t.jobs.submitJob(**job)
             return job.uuid
-        except:
-            return 'Failed to start job'
+        except Exception as e:
+            return e
 
     def get_job_status(self, kwargs: dict, args: list):
         job_status = self.t.jobs.getJobStatus(jobUuid=args[0])
@@ -312,8 +342,8 @@ class Neo4jCLI:
             with open(kwargs['of'], 'w') as f:
                 f.write(jobs_output)
             return f"Successfully downloaded job output to {kwargs['of']}"
-        except:
-            return 'download failed'
+        except Exception as e:
+            return e
 
     def jobs(self, kwargs: dict, args: list):
         try:
@@ -331,6 +361,8 @@ class Neo4jCLI:
                 return 'Command not recognized'
         except IndexError:
             return "must specify subcommand. See 'help'"
+        except Exception as e:
+            return e
 
     def command_parser(self, command_input):
         command_input = command_input.split(' -')
