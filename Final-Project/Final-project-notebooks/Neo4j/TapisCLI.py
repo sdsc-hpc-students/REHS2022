@@ -126,8 +126,11 @@ class Neo4jCLI:
             return 'error'
 
     def get_perms(self, kwargs, args):
-        return_information = self.t.pods.get_pod_permissions(pod_id=args[0])
-        return return_information
+        try:
+            return_information = self.t.pods.get_pod_permissions(pod_id=args[0])
+            return return_information
+        except IndexError:
+            return 'enter valid pod id, see help'
 
     def get_pod_information(self, kwargs: dict, args: list):
         username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
@@ -137,7 +140,7 @@ class Neo4jCLI:
     def submit_queries(self, graph, expression):
         return_value = graph.run(expression)
 
-        if return_value:
+        if not return_value:
             return 'Success'
 
         return return_value
