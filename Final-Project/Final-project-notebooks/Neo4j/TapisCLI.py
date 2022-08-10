@@ -57,6 +57,28 @@ class Neo4jCLI:
         self.access_token = re.findall(r'(?<=access_token: )(.*)', str(self.authenticator))[0]
         print(self.authenticator)
 
+        systems_help = '''Format:
+            get_systems: systems -r get_systems
+            get_system_info: systems <system_id> -r get_system_info
+            create_system: systems -r create_system -F <path to system json config file>
+            set_credentials: systems <system_id> -r set_credentials -pvk <path to private key> -pbk <path to public key>
+            set_password: systems <system_id> -r set_password -p <password>
+        '''
+        
+        files_help = '''Format:
+            list_files: files <system_id> -r list_files -F <folder path in remote tapis system>
+            download: files <system_id> -r download -sf <path to remote file on tapis system to download from> -df <path to local file to download into>
+            upload: files <system_id> -r upload -sf <path of local file to upload> -df <remote destination filename on tapis system>
+        '''
+
+        jobs_help = '''Format:
+            create_app: jobs -r create_app -F <path to app json config file>
+            get_app_info: jobs <app_id> -r get_app_info -v <app_version>
+            run_app: jobs <app_id> -r run_app -F <path to json job config file> -n <name to assign job> -v <app_version>
+            get_app_status: jobs <job_uuid> -r get_app_status
+            download_app_results: jobs <jobs_uuid> -r download_app_results -of <path to local output file>
+        '''
+
         self.commands_list = {
             'help':'get list of commands',
             'whoami':'returns active user username',
@@ -69,9 +91,9 @@ class Neo4jCLI:
             'get_perms':'gets a list of permissions for a pod\nFormat: get_perms <pod_id>',
             'get_pod_info':'get the link and auth information for selected pod ID\nFormat: get_pod_info <pod_id>',
             'query':'open the Neo4j Query command line\nFormat: query -L <graph_link> -u <graph_auth_username> -p <graph_auth_password>',
-            'systems':'add here',
-            'files':'add here',
-            'jobs':'add here',
+            'systems':f'commands to make use of Tapis systems\n{systems_help}',
+            'files':f'commands to make use of Tapis file system\n{files_help}',
+            'jobs':f'commands to make use of Tapis jobs and apps\n{jobs_help}',
             'exit':'exit the CLI app'
         }
         print("\n" + "#" * 100 + "\nWelcome to the Neo4j CLI Application\nEnter 'help' for a list of commands\n" + "#" * 100 + "\n")
@@ -195,7 +217,7 @@ class Neo4jCLI:
 
     def get_system_info(self, kwargs: dict, args: list):
         try:
-            system_info = self.t.systems.getSystem(systemId=args[1])
+            system_info = self.t.systems.getSystem(systemId=args[0])
             return system_info
         except Exception as e:
             return e
@@ -239,15 +261,15 @@ class Neo4jCLI:
         
     def systems(self, kwargs: dict, args: list):
         try:
-            if kwargs['p'] == 'get_systems':
+            if kwargs['r'] == 'get_systems':
                 return self.get_system_list()
-            elif kwargs['p'] == 'get_system_info':
+            elif kwargs['r'] == 'get_system_info':
                 return self.get_system_info(kwargs, args)
-            elif kwargs['p'] == 'create_system':
+            elif kwargs['r'] == 'create_system':
                 return self.create_system(kwargs, args)
-            elif kwargs['p'] == "set_credentials":
+            elif kwargs['r'] == "set_credentials":
                 return self.system_credential_upload(kwargs, args)
-            elif kwargs['p'] == "set_password":
+            elif kwargs['r'] == "set_password":
                 return self.system_password_set(kwargs, args)
             else:
                 return 'Command not recognized'
@@ -258,7 +280,7 @@ class Neo4jCLI:
 
     def list_files(self, kwargs: dict, args: list):
         try:
-            file_list = self.t.files.listFiles(systemId=args[0], path=rkwargs['F'])
+            file_list = self.t.files.listFiles(systemId=args[0], path=kwargs['F'])
             return file_list
         except Exception as e:
             return e
@@ -286,11 +308,11 @@ class Neo4jCLI:
 
     def files(self, kwargs: dict, args: list):
         try:
-            if kwargs['p'] == 'list_files':
+            if kwargs['r'] == 'list_files':
                 return self.list_files(kwargs, args)
-            elif kwargs['p'] == 'upload':
+            elif kwargs['r'] == 'upload':
                 return self.upload(kwargs, args)
-            elif kwargs['p'] == 'download':
+            elif kwargs['r'] == 'download':
                 return self.download(kwargs, args)
             else:
                 return 'Command not recognized'
@@ -322,7 +344,7 @@ class Neo4jCLI:
 
             job = {
                 "name": kwargs['n'],
-                "appId": kwargs['id'], 
+                "appId": args[0], 
                 "appVersion": kwargs['v'],
                 "parameterSet": {"appArgs": [app_args]        
                                 }
@@ -333,8 +355,11 @@ class Neo4jCLI:
             return e
 
     def get_job_status(self, kwargs: dict, args: list):
-        job_status = self.t.jobs.getJobStatus(jobUuid=args[0])
-        return job_status
+        try:
+            job_status = self.t.jobs.getJobStatus(jobUuid=args[0])
+            return job_status
+        except Exception as e:
+            return e
 
     def download_job_output(self, kwargs: dict, args: list):
         try:
@@ -347,15 +372,15 @@ class Neo4jCLI:
 
     def jobs(self, kwargs: dict, args: list):
         try:
-            if kwargs['p'] == 'create_app':
+            if kwargs['r'] == 'create_app':
                 return self.create_app(kwargs, args)
-            elif kwargs['p'] == 'get_app_info':
+            elif kwargs['r'] == 'get_app_info':
                 return self.get_app(kwargs, args)
-            elif kwargs['p'] == 'run_app':
+            elif kwargs['r'] == 'run_app':
                 return self.run_job(kwargs, args)
-            elif kwargs['p'] == 'get_app_status':
+            elif kwargs['r'] == 'get_app_status':
                 return self.get_job_status(kwargs, args)
-            elif kwargs['p'] == 'download_app_results':
+            elif kwargs['r'] == 'download_app_results':
                 return self.download_job_output(kwargs, args)
             else:
                 return 'Command not recognized'
