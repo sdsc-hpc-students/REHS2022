@@ -60,11 +60,15 @@ def choosePod():
     for pod in t.pods.get_pods():
         print(str(i) + ". " + pod.pod_id)
         i += 1
+    if (i == 1):
+        print("You don't have access to any TAPIS pods. Try again after you have verified access to at least one pod.")
     i = 1
 
     while(True):
         try: 
             pod_id = str(input("Enter the ID of the pod you want to access: ")).lower()
+            if(pod_id == "exit"):
+                os._exit(0)
             pod_username, password = t.pods.get_pod_credentials(pod_id=pod_id).user_username, t.pods.get_pod_credentials(pod_id=pod_id).user_password
             break
         except:
