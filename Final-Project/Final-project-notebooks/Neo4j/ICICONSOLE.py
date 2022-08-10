@@ -32,7 +32,7 @@ def lightFormat(message):
 heavyFormat("Welcome to ICICONSOLE. Login to get started. ")
 
 def console(graph, pod_id):
-    lightFormat("Type \"new\" to access a different pod, or type \"exit\" to leave ICICONSOLE. ")
+    lightFormat("Type \"new\" to access a different pod, or type \"exit\" to leave ICICONSOLE. Type \"clear\" to clear the screen. ")
 
     while(True):
         query = str(input("[" + user + "@" + pod_id + "] "))
