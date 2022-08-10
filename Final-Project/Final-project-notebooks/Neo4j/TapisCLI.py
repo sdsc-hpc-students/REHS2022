@@ -74,7 +74,7 @@ class Neo4jCLI:
             'jobs':'add here',
             'exit':'exit the CLI app'
         }
-        print("#" * 100 + "\nWelcome to the Neo4j CLI Application\nEnter 'help' for a list of commands\n" + "#" * 100)
+        print("\n" + "#" * 100 + "\nWelcome to the Neo4j CLI Application\nEnter 'help' for a list of commands\n" + "#" * 100 + "\n")
 
     def help(self):
         for command, desc in self.commands_list.items():
@@ -140,7 +140,7 @@ class Neo4jCLI:
     def submit_queries(self, graph, expression):
         return_value = graph.run(expression)
 
-        if not return_value:
+        if str(return_value) == '(No data)':
             return 'Success'
 
         return return_value
