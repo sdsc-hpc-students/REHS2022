@@ -9,6 +9,7 @@ import pytz
 import sys
 import json
 import re
+import pyperclip
 
 import pandas
 import neo4jupyter
@@ -89,8 +90,8 @@ class Neo4jCLI:
             'set_pod_perms':'sets the permissions on a pod\nFormat: set_pod_perms <pod_id> -u <username to give perms> -L <permission level>',
             'delete_pod_perms':'deletes the permissions for the selected user\nFormat: delete_pod_perms <pod_id> -u <user to take perms from>',
             'get_perms':'gets a list of permissions for a pod\nFormat: get_perms <pod_id>',
-            'get_pod_info':'get the link and auth information for selected pod ID\nFormat: get_pod_info <pod_id>',
-            'query':'open the Neo4j Query command line\nFormat: query -L <graph_link> -u <graph_auth_username> -p <graph_auth_password>',
+            'copy_pod_password':'get the password for selected pod ID\nFormat: copy_pod_password <pod_id>',
+            'query':'open the Neo4j Query command line\nFormat: query <pod_id>',
             'systems':f'commands to make use of Tapis systems\n{systems_help}',
             'files':f'commands to make use of Tapis file system\n{files_help}',
             'jobs':f'commands to make use of Tapis jobs and apps\n{jobs_help}',
@@ -165,11 +166,12 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def get_pod_information(self, kwargs: dict, args: list):
+    def copy_pod_password(self, kwargs: dict, args: list):
         try:
-            username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
-            link = f"bolt+ssc://{args[0]}.pods.icicle.develop.tapis.io:443"
-            return username, password, link
+            password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
+            pyperclip.copy(password)
+            password = None
+            return 'copied to clipboard'
         except Exception as e:
             return e
     
@@ -187,7 +189,8 @@ class Neo4jCLI:
     def kg_query_cli(self, kwargs: dict, args: list):
         for x in range(5):
             try:
-                graph = Graph(kwargs['L'], auth=(kwargs['u'], kwargs['p']), secure=True, verify=True)
+                username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
+                graph = Graph(f"bolt+ssc://{args[0]}.pods.icicle.develop.tapis.io:443", auth=(username, password), secure=True, verify=True)
                 break
             except Exception as e:
                 if x < 5:
@@ -196,7 +199,7 @@ class Neo4jCLI:
                     print('ERROR: KG failed connection after 5 tries to connect')
                     return e
         
-        print(f'Entered the {kwargs["u"]}')
+        print(f'Entered the {args[0]}')
         while True:
             expression = str(input('> '))
             if expression == 'exit':
@@ -226,12 +229,12 @@ class Neo4jCLI:
         try:
             with open(kwargs['F'], 'r') as f:
                 system = json.loads(f.read())
-                print(system)
             system_id = system['id']
             self.t.systems.createSystem(**system)
             return system_id
-        except:
-            return f"Failed to start {system_id}"
+        except Exception as e:
+            return e
+
 
     def system_credential_upload(self, kwargs: dict, args: list):
         try:
@@ -424,9 +427,8 @@ class Neo4jCLI:
                 print(self.delete_pod_perms(kwargs, args))
             elif command == 'get_perms':
                 print(self.get_perms(kwargs, args))
-            elif command == "get_pod_info":
-                pod_username, pod_password, pod_link = self.get_pod_information(kwargs, args)
-                print(f'Pod Username: {pod_username}\nPod Password: {pod_password}\nPod Link: {pod_link}')
+            elif command == "copy_pod_password":
+                print(self.copy_pod_password(kwargs, args))
             elif command == 'query':
                 print(self.kg_query_cli(kwargs, args))
             elif command == 'systems':
