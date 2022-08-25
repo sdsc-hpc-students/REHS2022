@@ -12,7 +12,6 @@ import re
 import pyperclip
 
 import pandas
-import neo4jupyter
 import py2neo
 from py2neo import Graph, Node, Relationship, GraphService
 
@@ -28,8 +27,8 @@ def show(res):
 neo4jupyter.init_notebook_mode()
 print('Initialization success!')
 
-class Neo4jCLI:
-    def __init__(self, username, password):
+class TapisCLI:
+    def __init__(self, username, password): # initialize tapis connection with icicle, TACC
         self.username, self.password = username, password
 
         start = time.time()
@@ -54,10 +53,12 @@ class Neo4jCLI:
         print(f"base_url: {base_url}")
         print(f"serv_url: {self.url}\n")
 
+        # create authenticator for tapis systems
         self.authenticator = self.t.access_token
         self.access_token = re.findall(r'(?<=access_token: )(.*)', str(self.authenticator))[0]
         print(self.authenticator)
 
+        # help menu stuff to go into a separate file (someday)
         systems_help = '''Format:
             get_systems: systems -r get_systems
             get_system_info: systems <system_id> -r get_system_info
@@ -80,7 +81,7 @@ class Neo4jCLI:
             download_app_results: jobs <jobs_uuid> -r download_app_results -of <path to local output file>
         '''
 
-        self.commands_list = {
+        self.commands_list = { # *could* put all of this stuff in a file
             'help':'get list of commands',
             'whoami':'returns active user username',
             'get_pods':'get list of pods available to selected account',
@@ -99,28 +100,28 @@ class Neo4jCLI:
         }
         print("\n" + "#" * 100 + "\nWelcome to the Neo4j CLI Application\nEnter 'help' for a list of commands\n" + "#" * 100 + "\n")
 
-    def help(self):
+    def help(self): # displays all instructions in help menus
         for command, desc in self.commands_list.items():
             print(f'{command}:::{desc}\n')
 
-    def get_pods(self):
+    def get_pods(self): # returns a list of pods
         pods_list = self.t.pods.get_pods()
         return pods_list
     
-    def whoami(self):
+    def whoami(self): # returns user information
         user_info = self.t.authenticator.get_userinfo()
         return user_info
 
-    def create_pod(self, kwargs: dict, args: list):
+    def create_pod(self, kwargs: dict, args: list): # creates a pod with a pod id, template, and description
         try:
-            pod_description = str(input("Enter your pod description below:\n"))
+            pod_description = str(input("Enter your pod description below:\n")) 
             pod_information = self.t.pods.create_pod(pod_id=args[0], pod_template=kwargs['t'], description=pod_description)
             return pod_information
         except Exception as e:
             return e
 
-    def restart_pod(self, kwargs: dict, args: list):
-        decision = input(f'Please enter, "Restart pod {args[0]}"\nNote that data may not be persistent on restart')
+    def restart_pod(self, kwargs: dict, args: list): # restarts a pod if needed
+        decision = input(f'Please enter, "Restart pod {args[0]}"\nNote that data may not be persistent on restart') # user confirmation
         if decision == f'Restart pod {args[0]}':
             return 'Restart Aborted'
 
@@ -130,8 +131,8 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def delete_pod(self, kwargs: dict, args: list):
-        decision = input(f'Please enter, "Delete pod {args[0]}"\nNote that all data WILL BE LOST')
+    def delete_pod(self, kwargs: dict, args: list): # deletes a pod
+        decision = input(f'Please enter, "Delete pod {args[0]}"\nNote that all data WILL BE LOST') # user confirmation
         if decision == f'Delete pod {args[0]}':
             return 'Deletion Aborted'
 
@@ -141,7 +142,7 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def set_pod_perms(self, kwargs: dict, args: list):
+    def set_pod_perms(self, kwargs: dict, args: list): # set pod permissions, given a pod id, user, and permission level
         try:
             return_information = self.t.pods.set_pod_permission(pod_id=args[0], user=kwargs['u'], level=kwargs['L'])
             return return_information
@@ -150,14 +151,14 @@ class Neo4jCLI:
         except Exception as e:
             return e
     
-    def delete_pod_perms(self, kwargs: dict, args: list):
+    def delete_pod_perms(self, kwargs: dict, args: list): # take away someones perms if they are being malicious, or something
         try:
             return_information = self.t.pods.delete_pod_perms(pod_id=args[0], user=kwargs['u'])
             return return_information
         except Exception as e:
             return e
 
-    def get_perms(self, kwargs, args):
+    def get_perms(self, kwargs, args): # return a list of permissions on a given pod
         try:
             return_information = self.t.pods.get_pod_permissions(pod_id=args[0])
             return return_information
@@ -166,7 +167,7 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def copy_pod_password(self, kwargs: dict, args: list):
+    def copy_pod_password(self, kwargs: dict, args: list): # copies the pod password to clipboard so that the user can access the pod via the neo4j desktop app. Maybe a security risk? not as bad as printing passwords out!
         try:
             password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
             pyperclip.copy(password)
@@ -175,19 +176,19 @@ class Neo4jCLI:
         except Exception as e:
             return e
     
-    def submit_queries(self, graph, expression):
+    def submit_queries(self, graph, expression): # function to submit queries to a Neo4j knowledge graph
         try:
             return_value = graph.run(expression)
 
-            if str(return_value) == '(No data)':
+            if str(return_value) == '(No data)' and 'CREATE' in expression.upper(): # if no data is returned (mostly if something is created) then just say 'success'
                 return 'Success'
 
             return return_value
         except Exception as e:
             return e
 
-    def kg_query_cli(self, kwargs: dict, args: list):
-        for x in range(5):
+    def kg_query_cli(self, kwargs: dict, args: list): # open a terminal connection with a neo4j pod.
+        for x in range(5): # give the client 5 tries to connect to the KG. This often fails once or twice, users will not like entering stuff over and over
             try:
                 username, password = self.t.pods.get_pod_credentials(pod_id=args[0]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
                 graph = Graph(f"bolt+ssc://{args[0]}.pods.icicle.develop.tapis.io:443", auth=(username, password), secure=True, verify=True)
@@ -199,7 +200,7 @@ class Neo4jCLI:
                     print('ERROR: KG failed connection after 5 tries to connect')
                     return e
         
-        print(f'Entered the {args[0]}')
+        print(f'Entered the {args[0]}') # enter commands into the neo4j client
         while True:
             expression = str(input('> '))
             if expression == 'exit':
@@ -211,21 +212,21 @@ class Neo4jCLI:
                 except Exception as e:
                     print(e)
 
-    def get_system_list(self):
+    def get_system_list(self): # return a list of systems active on the account
         try:
             systems = self.t.systems.getSystems()
             return systems
         except Exception as e:
             return e
 
-    def get_system_info(self, kwargs: dict, args: list):
+    def get_system_info(self, kwargs: dict, args: list): # get information about a system given its ID
         try:
             system_info = self.t.systems.getSystem(systemId=args[0])
             return system_info
         except Exception as e:
             return e
         
-    def create_system(self, kwargs: dict, args: list):
+    def create_system(self, kwargs: dict, args: list): # create a tapius system. Takes a path to a json file with all system information, as well as an ID
         try:
             with open(kwargs['F'], 'r') as f:
                 system = json.loads(f.read())
@@ -236,7 +237,7 @@ class Neo4jCLI:
             return e
 
 
-    def system_credential_upload(self, kwargs: dict, args: list):
+    def system_credential_upload(self, kwargs: dict, args: list): # upload key credentials for the system
         try:
             with open(kwargs['pvk'], 'r') as f:
                 private_key = f.read()
@@ -253,16 +254,16 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def system_password_set(self, kwargs: dict, args: list):
+    def system_password_set(self, kwargs: dict, args: list): # set the password for a system
         try:
-            password_return_value = self.t.systems.createUserCredential(systemId=args[0],
+            password_return_value = self.t.systems.createUserCredential(systemId=args[0], # will put this in a getpass later
                                 userName=self.username,
                                 password=kwargs['p'])
             return password_return_value
         except Exception as e:
             return e
         
-    def systems(self, kwargs: dict, args: list):
+    def systems(self, kwargs: dict, args: list): # function for managing all of the system commands, makes life easier later
         try:
             if kwargs['r'] == 'get_systems':
                 return self.get_system_list()
@@ -281,14 +282,14 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def list_files(self, kwargs: dict, args: list):
+    def list_files(self, kwargs: dict, args: list): # lists files available on a tapis account
         try:
             file_list = self.t.files.listFiles(systemId=args[0], path=kwargs['F'])
             return file_list
         except Exception as e:
             return e
 
-    def upload(self, kwargs: dict, args: list):
+    def upload(self, kwargs: dict, args: list): # upload a file from local to remote using tapis. Takes source and destination paths
         try:
             self.t.upload(system_id=args[0],
                     source_file_path=kwargs['sf'],
@@ -297,7 +298,7 @@ class Neo4jCLI:
         except:
             return f'failed to upload {kwargs["sf"]} to {kwargs["df"]}'
             
-    def download(self, kwargs: dict, args: list):
+    def download(self, kwargs: dict, args: list): # download a remote file using tapis, operates basically the same as upload
         try:
             file_info = self.t.files.getContents(systemId=args[0],
                                 path=kwargs['sf'])
@@ -309,7 +310,7 @@ class Neo4jCLI:
         except:
             return f'failed to download {kwargs["sf"]} to {kwargs["df"]}'
 
-    def files(self, kwargs: dict, args: list):
+    def files(self, kwargs: dict, args: list): # function to manage all the file commands
         try:
             if kwargs['r'] == 'list_files':
                 return self.list_files(kwargs, args)
@@ -324,7 +325,7 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def create_app(self, kwargs: dict, args: list):
+    def create_app(self, kwargs: dict, args: list): # create a tapis app taking a json descriptor file path
         try:
             with open(kwargs['F'], 'r') as f:
                 app_def = json.loads(f.read())
@@ -333,14 +334,14 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def get_app(self, kwargs: dict, args: list):
+    def get_app(self, kwargs: dict, args: list): # returns app information with an id and version as arguments
         try:
             app = self.t.apps.getApp(appId=args[0], appVersion=kwargs['v'])
             return app
         except Exception as e:
             return e
 
-    def run_job(self, kwargs: dict, args: list):
+    def run_job(self, kwargs: dict, args: list): # run a job using an app. Takes a job descriptor json file path
         try:
             with open(kwargs['F'], 'r') as f:
                 app_args = json.loads(f.read())
@@ -357,14 +358,14 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def get_job_status(self, kwargs: dict, args: list):
+    def get_job_status(self, kwargs: dict, args: list): # return a job status with its Uuid
         try:
             job_status = self.t.jobs.getJobStatus(jobUuid=args[0])
             return job_status
         except Exception as e:
             return e
 
-    def download_job_output(self, kwargs: dict, args: list):
+    def download_job_output(self, kwargs: dict, args: list): # download the output of a job with its Uuid
         try:
             jobs_output = self.t.jobs.getJobOutputDownload(jobUuid=args[0], outputPath='tapisjob.out')
             with open(kwargs['of'], 'w') as f:
@@ -373,7 +374,7 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def jobs(self, kwargs: dict, args: list):
+    def jobs(self, kwargs: dict, args: list): # function to manage all jobs
         try:
             if kwargs['r'] == 'create_app':
                 return self.create_app(kwargs, args)
@@ -392,7 +393,7 @@ class Neo4jCLI:
         except Exception as e:
             return e
 
-    def command_parser(self, command_input):
+    def command_parser(self, command_input): # parse commands (to some degree of competence) should have just used optparse
         command_input = command_input.split(' -')
         args = command_input[0].split(' ')[1:]
         command_input = list(map(lambda x: tuple(x.split(' ')), command_input))
@@ -401,7 +402,7 @@ class Neo4jCLI:
 
         return command, args, kwargs
 
-    def main(self):
+    def main(self): # manage ALL the commands
         while True:
             command_request = str(input(f'[NEO4J TAPIS CLI {self.username}]: '))
             command, args, kwargs = self.command_parser(command_request)
@@ -450,7 +451,7 @@ if __name__ == '__main__':
         username = str(input('enter your TACC username: '))
         password = getpass('enter your TACC password: ')
         try:
-            client = Neo4jCLI(username, password)
+            client = TapisCLI(username, password)
             break
         except Exception as e:
             print('Invalid login, try again')
