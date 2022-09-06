@@ -1,0 +1,2 @@
+# TapisCLI
+The tapis CLI is designed to provide a streamlined, accessible interface for Stampede at TACC through Tapis. The client focuses on putting pods, systems, file management, and apps all in the same place to make managing resources easier for the user. 
