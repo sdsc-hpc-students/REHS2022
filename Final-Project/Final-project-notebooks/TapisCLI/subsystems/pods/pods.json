@@ -1,0 +1,9 @@
+{
+    "get_pods":"get list of pods available to selected account",
+    "create_pod":"create a pod\nFormat: create_pod <pod-id> -t <template>",
+    "restart_pod":"restart the pod\nFormat: restart_pod <pod_id>",
+    "delete_pod":"delete the pod. Requires user confirmation\nFormat: delete_pod <pod_id>",
+    "set_pod_perms":"sets the permissions on a pod\nFormat: set_pod_perms <pod_id> -u <username to give perms> -L <permission level>",
+    "delete_pod_perms":"deletes the permissions for the selected user\nFormat: delete_pod_perms <pod_id> -u <user to take perms from>",
+    "get_perms":"gets a list of permissions for a pod\nFormat: get_perms <pod_id>"
+}
