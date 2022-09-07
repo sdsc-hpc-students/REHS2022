@@ -1,4 +1,19 @@
 import pyfiglet
+import argparse
+import sys
+from getpass import getpass
+import time
+import re
+
+from tapipy.tapis import Tapis
+sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\pods')
+from pods import Pods
+sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\systems')
+from systems import Systems
+sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\files')
+from files import Files
+sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\apps')
+from apps import Apps
 
 
 class CLI:
@@ -32,27 +47,68 @@ class CLI:
         self.access_token = re.findall(r'(?<=access_token: )(.*)', str(self.authenticator))[0]
         print(self.authenticator)
 
-        title = pyfiglet.figlet_format("Tapiconsole")
+        title = pyfiglet.figlet_format("Tapiconsole", font="slant")
         print(title)
-    
-    def command_parser(self, command_input): # parse commands (to some degree of competence) should have just used optparse
-        command_input = command_input.split(' -')
-        args = command_input[0].split(' ')[1:]
-        command_input = list(map(lambda x: tuple(x.split(' ')), command_input))
-        command = command_input[0][0]
-        kwargs = {element[0]:element[1] for element in command_input[1:] if len(element) > 1}
 
-        return command, args, kwargs
+        self.parser = argparse.ArgumentParser(description="Command Line Argument Parser")
+        self.parser.add_argument('command_group')
+        self.parser.add_argument('-c', '--command')
+        self.parser.add_argument('-i', '--id')
+        self.parser.add_argument('-t', '--template')
+        self.parser.add_argument('-u', '--username')
+        self.parser.add_argument('-L', '--level')
+        self.parser.add_argument('-v', '--version')
+        self.parser.add_argument('-F', '--file')
+        self.parser.add_argument('-n', '--name')
+        self.parser.add_argument('--uuid')
+        self.parser.add_argument('-d', '--destination')
+        self.parser.add_argument('-p', '--password')
+
+        self.pods = Pods(self.t, self.username, self.password)
+        self.systems = Systems(self.t, self.username, self.password)
+        self.files = Files(self.t, self.username, self.password)
+        self.apps = Apps(self.t, self.username, self.password)
+
+    def process_command(self, command):
+        command = command.split(' ')
+
+    def run_command(self, **kwargs):
+        try:
+            if kwargs['command_group'] == 'pods':
+                return self.pods.pods_cli(**kwargs)
+            elif kwargs['command_group'] == 'systems':
+                return self.systems.systems_cli(**kwargs)
+            elif kwargs['command_group'] == 'files':
+                return self.files.files_cli(**kwargs)
+            elif kwargs['command_group'] == 'apps':
+                return self.apps.apps_cli(**kwargs)
+            else:
+                return "Failed"
+        except Exception as e:
+            return e
+
+    def main(self):
+        if len(sys.argv) > 1: # checks if any command line arguments were provided
+            try:
+                kwargs = parser.parse_args()
+            except e:
+                print(e)
+                sys.exit(1)
+            print(self.run_command(**kwargs))
+            sys.exit(0)
+        
+        while True:
+            command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
+            self.run_command(**command_input)
 
 
 if __name__ == '__main__':
-    while True:
-        username = str(input('enter your TACC username: '))
-        password = getpass('enter your TACC password: ')
-        try:
-            client = CLI(username, password)
-            break
-        except Exception as e:
-            print('Invalid login, try again')
-            continue
+    username = str(input('enter your TACC username: '))
+    password = getpass('enter your TACC password: ')
+    try:
+        client = CLI(username, password)
+    except Exception as e:
+        print(e)
+        print('Invalid login, try again')
+        sys.exit(1)
     client.main()

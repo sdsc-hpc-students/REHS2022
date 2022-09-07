@@ -1,7 +1,7 @@
-from tapipy import tapis
+from tapipy.tapis import Tapis
 import sys
 
-sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\Neo4j\TapisCLI\subsystems\tapis-object.py')
+sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
 from tapisobject import tapisObject
 
 class Systems(tapisObject):
@@ -15,16 +15,16 @@ class Systems(tapisObject):
         except Exception as e:
             return e
 
-    def get_system_info(self, kwargs: dict, args: list): # get information about a system given its ID
+    def get_system_info(self, **kwargs): # get information about a system given its ID
         try:
-            system_info = self.t.systems.getSystem(systemId=args[0])
+            system_info = self.t.systems.getSystem(systemId=kwargs["id"])
             return system_info
         except Exception as e:
             return e
         
-    def create_system(self, kwargs: dict, args: list): # create a tapius system. Takes a path to a json file with all system information, as well as an ID
+    def create_system(self, **kwargs): # create a tapius system. Takes a path to a json file with all system information, as well as an ID
         try:
-            with open(kwargs['F'], 'r') as f:
+            with open(kwargs['file'], 'r') as f:
                 system = json.loads(f.read())
             system_id = system['id']
             self.t.systems.createSystem(**system)
@@ -33,15 +33,15 @@ class Systems(tapisObject):
             return e
 
 
-    def system_credential_upload(self, kwargs: dict, args: list): # upload key credentials for the system
+    def system_credential_upload(self, **kwargs): # upload key credentials for the system
         try:
-            with open(kwargs['pvk'], 'r') as f:
+            with open(kwargs['file'].split(",")[0], 'r') as f:
                 private_key = f.read()
 
-            with open(kwargs['pbk'], 'r') as f:
+            with open(kwargs['file'].split(",")[1], 'r') as f:
                 public_key = f.read()
 
-            cred_return_value = self.t.systems.createUserCredential(systemId=args[0],
+            cred_return_value = self.t.systems.createUserCredential(systemId=kwargs['id'],
                                 userName=self.username,
                                 privateKey=private_key,
                                 publicKey=public_key)
@@ -50,27 +50,27 @@ class Systems(tapisObject):
         except Exception as e:
             return e
 
-    def system_password_set(self, kwargs: dict, args: list): # set the password for a system
+    def system_password_set(self, **kwargs): # set the password for a system
         try:
-            password_return_value = self.t.systems.createUserCredential(systemId=args[0], # will put this in a getpass later
+            password_return_value = self.t.systems.createUserCredential(systemId=kwargs['id'], # will put this in a getpass later
                                 userName=self.username,
-                                password=kwargs['p'])
+                                password=kwargs['password'])
             return password_return_value
         except Exception as e:
             return e
 
-    def systems_cli(self, kwargs: dict, args: list): # function for managing all of the system commands, makes life easier later
+    def systems_cli(self, **kwargs): # function for managing all of the system commands, makes life easier later
         try:
-            if kwargs['r'] == 'get_systems':
+            if kwargs['command'] == 'get_systems':
                 return self.get_system_list()
-            elif kwargs['r'] == 'get_system_info':
-                return self.get_system_info(kwargs, args)
-            elif kwargs['r'] == 'create_system':
-                return self.create_system(kwargs, args)
-            elif kwargs['r'] == "set_credentials":
-                return self.system_credential_upload(kwargs, args)
-            elif kwargs['r'] == "set_password":
-                return self.system_password_set(kwargs, args)
+            elif kwargs['command'] == 'get_system_info':
+                return self.get_system_info(**kwargs)
+            elif kwargs['command'] == 'create_system':
+                return self.create_system(**kwargs)
+            elif kwargs['command'] == "set_credentials":
+                return self.system_credential_upload(**kwargs)
+            elif kwargs['command'] == "set_password":
+                return self.system_password_set(**kwargs)
             else:
                 return 'Command not recognized'
         except IndexError:

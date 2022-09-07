@@ -16,7 +16,7 @@ from py2neo import Graph, Node, Relationship, GraphService
 
 
 class tapisObject:
-    def __init__(tapis_instance, username, password, help_path):
+    def __init__(self, tapis_instance, username, password, help_path):
         self.t = tapis_instance
         self.username = username
         self.password = password
