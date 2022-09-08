@@ -1,5 +1,0 @@
-{
-    "list_files": "files <system_id> -r list_files -F <folder path in remote tapis system>",
-    "download": "files <system_id> -r download -sf <path to remote file on tapis system to download from> -df <path to local file to download into>",
-    "upload": "files <system_id> -r upload -sf <path of local file to upload> -df <remote destination filename on tapis system>"
-}

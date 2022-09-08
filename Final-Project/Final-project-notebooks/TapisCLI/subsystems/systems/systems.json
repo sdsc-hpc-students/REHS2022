@@ -1,7 +1,0 @@
-{
-    "get_systems": "systems -r get_systems",
-    "get_system_info": "systems <system_id> -r get_system_info",
-    "create_system": "systems -r create_system -F <path to system json config file>",
-    "set_credentials": "systems <system_id> -r set_credentials -pvk <path to private key> -pbk <path to public key>",
-    "set_password": "systems <system_id> -r set_password -p <password>"
-}

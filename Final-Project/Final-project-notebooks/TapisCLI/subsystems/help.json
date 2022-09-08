@@ -1,0 +1,34 @@
+{
+    "apps":
+    {
+    "create_app": "jobs -r create_app -F <path to app json config file>",
+    "get_app_info": "jobs <app_id> -r get_app_info -v <app_version>",
+    "run_app": "jobs <app_id> -r run_app -F <path to json job config file> -n <name to assign job> -v <app_version>",
+    "get_app_status": "jobs <job_uuid> -r get_app_status",
+    "download_app_results": "jobs <jobs_uuid> -r download_app_results -of <path to local output file>"
+    },
+    "pods":
+    {
+    "get_pods":"get list of pods available to selected account",
+    "create_pod":"create a pod\nFormat: create_pod <pod-id> -t <template>",
+    "restart_pod":"restart the pod\nFormat: restart_pod <pod_id>",
+    "delete_pod":"delete the pod. Requires user confirmation\nFormat: delete_pod <pod_id>",
+    "set_pod_perms":"sets the permissions on a pod\nFormat: set_pod_perms <pod_id> -u <username to give perms> -L <permission level>",
+    "delete_pod_perms":"deletes the permissions for the selected user\nFormat: delete_pod_perms <pod_id> -u <user to take perms from>",
+    "get_perms":"gets a list of permissions for a pod\nFormat: get_perms <pod_id>"
+    },
+    "systems":
+    {
+    "get_systems": "systems -r get_systems",
+    "get_system_info": "systems <system_id> -r get_system_info",
+    "create_system": "systems -r create_system -F <path to system json config file>",
+    "set_credentials": "systems <system_id> -r set_credentials -pvk <path to private key> -pbk <path to public key>",
+    "set_password": "systems <system_id> -r set_password -p <password>"
+    },
+    "files":
+    {
+    "list_files": "files <system_id> -r list_files -F <folder path in remote tapis system>",
+    "download": "files <system_id> -r download -sf <path to remote file on tapis system to download from> -df <path to local file to download into>",
+    "upload": "files <system_id> -r upload -sf <path of local file to upload> -df <remote destination filename on tapis system>"
+    }
+}

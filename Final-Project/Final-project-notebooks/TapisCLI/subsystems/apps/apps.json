@@ -1,7 +1,0 @@
-{
-    "create_app": "jobs -r create_app -F <path to app json config file>",
-    "get_app_info": "jobs <app_id> -r get_app_info -v <app_version>",
-    "run_app": "jobs <app_id> -r run_app -F <path to json job config file> -n <name to assign job> -v <app_version>",
-    "get_app_status": "jobs <job_uuid> -r get_app_status",
-    "download_app_results": "jobs <jobs_uuid> -r download_app_results -of <path to local output file>"
-}
