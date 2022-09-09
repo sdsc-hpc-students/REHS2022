@@ -1,32 +1,51 @@
 import pyfiglet
 import argparse
 import sys
-from getpass import getpass
 import time
 import re
-from tapipy.tapis import Tapis
+import multiprocessing
 
+
+def import_pyfiglet():
+    global pyfiglet
+    import pyfiglet
+def import_tapis():
+    global Tapis
+    from tapipy.tapis import Tapis
 sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
-from pods import Pods
-from systems import Systems
-from files import Files
-from apps import Apps
-sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\encryption')
-from SSL import SSLSystem
-from AES import AESSystem
-sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\client-server\client-server-classes')
-from clientserverclasses import ConnectionServerSide
+def import_pods():
+    global Pods
+    from pods import Pods
+def import_systems():
+    global Systems
+    from systems import Systems
+def import_files():
+    global Files
+    from files import Files
+def import_apps():
+    global Apps
+    from apps import Apps
+def import_getpass():
+    global getpass
+    from getpass import getpass
 
-class ClientConnection:
-    def __init__(self):
-        self.ip = '127.0.0.1'
-        self.port = 70412
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.sock.bind((self.ip, self.port))
-        self.sock.listen(1)
+processes = [
+    multiprocessing.Process(target=import_pyfiglet),
+    multiprocessing.Process(target=import_tapis),
+    multiprocessing.Process(target=import_pods),
+    multiprocessing.Process(target=import_systems),
+    multiprocessing.Process(target=import_apps),
+    multiprocessing.Process(target=import_files),
+    multiprocessing.Process(target=import_getpass),
+]
 
-    
+for p in processes:
+    p.start()
+
+# with Pool(7) as p:
+#     p.map(lambda x: x.)
+
+
 class CLI:
     def __init__(self, username, password):
         self.username, self.password = username, password
