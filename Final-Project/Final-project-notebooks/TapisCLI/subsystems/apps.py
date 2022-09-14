@@ -1,6 +1,5 @@
 from tapipy.tapis import Tapis
 import sys
-import argparse
 
 sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
 from tapisobject import tapisObject

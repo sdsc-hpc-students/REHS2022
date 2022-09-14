@@ -1,11 +1,7 @@
 import sys
 from tapipy.tapis import Tapis
-import json
 import pyperclip
-import argparse
-import py2neo
 from py2neo import Graph
-import argparse
 
 sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
 from tapisobject import tapisObject
@@ -13,7 +9,7 @@ from tapisobject import tapisObject
 
 class Neo4jCLI(tapisObject):
     def __init__(self, tapis_object, username, password):
-        super().__init__(tapis_object, username, password, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\Neo4j\TapisCLI\subsystems\pods\Neo4j.json')
+        super().__init__(tapis_object, username, password)
          
     def submit_queries(self, graph, expression): # function to submit queries to a Neo4j knowledge graph
         try:
