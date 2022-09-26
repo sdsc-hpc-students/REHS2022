@@ -8,10 +8,10 @@ import threading
 
 
 class CLI:
-    def __init__(self):
-        self.username, self.password = None, None
+    def __init__(self, IP, PORT):
+        self.ip, self.port = IP, PORT
         self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-        self.connect()
+        self.connection.connect((self.ip, self.port))
 
         self.parser = argparse.ArgumentParser(description="Command Line Argument Parser")
         self.parser.add_argument('command_group')
@@ -39,19 +39,6 @@ class CLI:
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
-
-    def connect(self):
-        self.connection.connect(('127.0.0.1', 3003))
-        connection_type = self.json_receive()
-        if connection_type['type'] == 'initial':
-            self.username = str(input('enter your TACC username: '))
-            self.password = getpass('enter your TACC password: ')
-            self.json_send({
-            "username":self.username,
-            "password":self.password
-            })
-            start_data = self.json_receive()
-            self.url = start_data['url']
         
     def process_command(self, command):
         command = command.split(' ')
@@ -63,9 +50,6 @@ class CLI:
             except e:
                 print(e)
                 sys.exit(1)
-            self.json_send({"end_state":"exit", "message":kwargs})
-            results = self.json_receive()
-            print(results)
             sys.exit(0)
 
         title = pyfiglet.figlet_format("Tapiconsole", font="slant")
@@ -73,8 +57,6 @@ class CLI:
         
         while True:
             command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
-            self.json_send(command_input)
-            results = self.json_receive()
             print(results)
 
 
