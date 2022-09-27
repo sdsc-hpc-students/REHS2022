@@ -26,9 +26,9 @@ class Server:
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((self.ip, self.port))
         self.sock.listen(1)
-        self.connection, ip_port = self.sock.accept()
+        self.connection = None
         
-        self.t, self.url, self.access_token = self.tapis_init()
+        self.username, self.password, self.t, self.url, self.access_token = self.accept(initial=True)
 
         self.pods = Pods(self.t, self.username, self.password)
         self.systems = Systems(self.t, self.username, self.password)
@@ -43,8 +43,8 @@ class Server:
             base_url = "https://icicle.develop.tapis.io"
             try:
                 t = Tapis(base_url = base_url,
-                        username = self.username,
-                        password = self.password)
+                        username = username,
+                        password = password)
                 t.get_tokens()
                 break
             except Exception as e:
@@ -75,6 +75,19 @@ class Server:
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
+    
+    def accept(self, initial=False):
+        self.connection, ip_port = self.sock.accept()
+        if initial:
+            self.json_send("initial")
+            credentials = self.json_receive()
+            username, password = credentials['username'], credentials['password']
+            t, url, access_token = self.tapis_init(username, password)
+            self.json_send(url)
+            return username, password, t, url, access_token
+        else:
+            self.json_send("continuing")
+            self.json_send({"username":self.username, "url":self.url})
 
     def run_command(self, **kwargs):
         try:
@@ -90,7 +103,12 @@ class Server:
                 with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
                     return json.loads(f)
             elif kwargs['command_group'] == 'exit':
-            elif kwargs['command_group'] == 'shutdown'
+                self.connection.close()
+                self.accept()
+                return "Connection Success"
+            elif kwargs['command_group'] == 'shutdown':
+                self.connection.close()
+                sys.exit(0)
             else:
                 return "Failed"
         except Exception as e:
@@ -99,11 +117,13 @@ class Server:
     def main(self):
         while True: # checks if any command line arguments were provided
             try:
-                self.run_command(**kwargs)
+                kwargs = self.json_receive()
+                result = self.run_command(**kwargs)
+                self.json_send(result)
             except (ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError, WindowsError, socket.error) as e:
-                pass
+                print(e)
             except Exception as e:
-                pass
+                print(e)
 
 
 if __name__ == '__main__':

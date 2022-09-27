@@ -11,7 +11,7 @@ class CLI:
     def __init__(self, IP, PORT):
         self.ip, self.port = IP, PORT
         self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-        self.connection.connect((self.ip, self.port))
+        self.username, self.url = self.connect()
 
         self.parser = argparse.ArgumentParser(description="Command Line Argument Parser")
         self.parser.add_argument('command_group')
@@ -39,14 +39,33 @@ class CLI:
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
-        
+
+    def connect(self):
+        self.connection.connect((self.ip, self.port))
+        connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
+        if connection_type == "initial": # if the server is receiving its first connection for the session
+            username = str(input("Username: ")) # take the username
+            password = getpass("Password: ") # take the password
+            self.json_send({"username":username, "password":password}) # send the username and password to the server to be used
+            url = self.json_receive() # receive the url
+            return username, url # return the username and url
+
+        elif connection_type == "continuing": # if it is not the first connection to the session
+            connection_info = self.json.receive() # receive connection info. No need to send password and username
+            username, url = connection_info['username'], connection_info['url'] # receive username and URL
+            return username, url # return username and url
+
     def process_command(self, command):
         command = command.split(' ')
+        return command
 
     def main(self):
         if len(sys.argv) > 1: # checks if any command line arguments were provided
             try:
-                kwargs = parser.parse_args()
+                kwargs = self.parser.parse_args()
+                self.json_send(kwargs)
+                result = self.json_receive()
+                print(result)
             except e:
                 print(e)
                 sys.exit(1)
@@ -57,12 +76,16 @@ class CLI:
         
         while True:
             command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
+            print(command_input)
+            command_input = self.parser.parse_args(command_input)
+            self.json_send(command_input)
+            results = self.json_receive()
             print(results)
 
 
 if __name__ == "__main__":
     try:
-        client = CLI()
+        client = CLI('127.0.0.1', 3000)
     except Exception as e:
         print(e)
         print('Invalid login, try again')
