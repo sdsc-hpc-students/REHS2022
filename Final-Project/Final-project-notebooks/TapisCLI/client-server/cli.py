@@ -5,6 +5,7 @@ import json
 import pyfiglet
 from getpass import getpass
 import threading
+import os
 
 
 class CLI:
@@ -41,7 +42,12 @@ class CLI:
                 continue
 
     def connect(self):
-        self.connection.connect((self.ip, self.port))
+        while True:
+            try:
+                self.connection.connect((self.ip, self.port))
+                break
+            except:
+                os.system(r"pythonw C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\client-server\server.py &")
         connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
         if connection_type == "initial": # if the server is receiving its first connection for the session
             username = str(input("Username: ")) # take the username
@@ -51,7 +57,7 @@ class CLI:
             return username, url # return the username and url
 
         elif connection_type == "continuing": # if it is not the first connection to the session
-            connection_info = self.json.receive() # receive connection info. No need to send password and username
+            connection_info = self.json_receive() # receive connection info. No need to send password and username
             username, url = connection_info['username'], connection_info['url'] # receive username and URL
             return username, url # return username and url
 
@@ -62,7 +68,7 @@ class CLI:
     def main(self):
         if len(sys.argv) > 1: # checks if any command line arguments were provided
             try:
-                kwargs = self.parser.parse_args()
+                kwargs = vars(self.parser.parse_args())
                 self.json_send(kwargs)
                 result = self.json_receive()
                 print(result)
@@ -76,10 +82,11 @@ class CLI:
         
         while True:
             command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
-            print(command_input)
-            command_input = self.parser.parse_args(command_input)
+            command_input = vars(self.parser.parse_args(command_input))
             self.json_send(command_input)
             results = self.json_receive()
+            if results == 'exiting' or results == 'shutting down':
+                sys.exit(0)
             print(results)
 
 

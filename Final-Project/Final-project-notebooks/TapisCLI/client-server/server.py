@@ -103,12 +103,9 @@ class Server:
                 with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
                     return json.loads(f)
             elif kwargs['command_group'] == 'exit':
-                self.connection.close()
-                self.accept()
-                return "Connection Success"
+                return "exiting"
             elif kwargs['command_group'] == 'shutdown':
-                self.connection.close()
-                sys.exit(0)
+                return "shutting down"
             else:
                 return "Failed"
         except Exception as e:
@@ -120,6 +117,12 @@ class Server:
                 kwargs = self.json_receive()
                 result = self.run_command(**kwargs)
                 self.json_send(result)
+                if result == 'exiting':
+                    self.connection.close()
+                    self.accept()
+                elif result == 'shutting down':
+                    self.connection.close()
+                    sys.exit(0)
             except (ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError, WindowsError, socket.error) as e:
                 print(e)
             except Exception as e:
