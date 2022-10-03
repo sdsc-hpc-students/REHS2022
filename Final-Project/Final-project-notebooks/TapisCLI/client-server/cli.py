@@ -6,6 +6,8 @@ import pyfiglet
 from getpass import getpass
 import threading
 import os
+import time
+from pprint import pprint
 
 
 class CLI:
@@ -41,14 +43,40 @@ class CLI:
             except ValueError:
                 continue
 
-    def connect(self):
+    def initialize_server(self):
+        if 'win' in sys.platform:
+            os.system(r"pythonw C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\client-server\server.py")
+        else:
+            os.system(r"python C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\client-server\server.py &")
+
+    def connection_initialization(self):
+        flag = False
         while True:
             try:
+                print("Attempting to connect")
                 self.connection.connect((self.ip, self.port))
+                print("Initial connection success!")
                 break
-            except:
-                os.system(r"pythonw C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\client-server\server.py &")
+            except Exception as e:
+                print(e)
+                if not flag:
+                    print("Starting server...")
+                    startup = threading.Thread(target=self.initialize_server)
+                    startup.start()
+                    print("Server startup initialized")
+                    flag = True
+                    continue
+                else:
+                    print("Connection failed...")
+                    continue
+        print("Moving on")
+
+    def connect(self):
+        self.connection_initialization()
+        #self.connection.connect((self.ip, self.port))
+        print("Connected")
         connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
+        print(connection_type)
         if connection_type == "initial": # if the server is receiving its first connection for the session
             username = str(input("Username: ")) # take the username
             password = getpass("Password: ") # take the password
@@ -69,7 +97,7 @@ class CLI:
         if len(sys.argv) > 1: # checks if any command line arguments were provided
             try:
                 kwargs = vars(self.parser.parse_args())
-                self.json_send(kwargs)
+                self.json_send({'kwargs':kwargs, 'exit':True})
                 result = self.json_receive()
                 print(result)
             except e:
@@ -81,13 +109,20 @@ class CLI:
         print(title)
         
         while True:
-            command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
-            command_input = vars(self.parser.parse_args(command_input))
-            self.json_send(command_input)
-            results = self.json_receive()
-            if results == 'exiting' or results == 'shutting down':
-                sys.exit(0)
-            print(results)
+            try:
+                command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
+                command_input = vars(self.parser.parse_args(command_input))
+                print(command_input)
+                print(type(command_input))
+                self.json_send({'kwargs':command_input, 'exit':False})
+                results = self.json_receive()
+                if results == 'exiting' or results == 'shutting down':
+                    os._exit(0)
+                pprint(results)
+            except KeyboardInterrupt:
+                pass
+            except Exception as e:
+                print(e)
 
 
 if __name__ == "__main__":

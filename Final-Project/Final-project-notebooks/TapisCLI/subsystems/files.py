@@ -55,4 +55,4 @@ class Files(tapisObject):
         except IndexError:
             return "must specify subcommand. See 'help'"
         except Exception as e:
-            return e
+            return str(e)

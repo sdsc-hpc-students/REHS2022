@@ -4,7 +4,7 @@ import sys
 import trace
 
 
-class ServerThread(threading.Thread):
+class k_thread(threading.Thread):
     def __init__(self, *args, **keywords):
         threading.Thread.__init__(self, *args, **keywords)
         self.killed = False

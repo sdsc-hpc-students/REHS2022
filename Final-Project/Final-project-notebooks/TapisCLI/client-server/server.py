@@ -9,7 +9,8 @@ import socket
 import json
 import threading
 import multiprocessing
-from killable_thread import ServerThread
+from killable_thread import k_thread
+import os
 
 sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
 from pods import Pods, Neo4jCLI
@@ -27,8 +28,16 @@ class Server:
         self.sock.bind((self.ip, self.port))
         self.sock.listen(1)
         self.connection = None
+        self.end_time = time.time() + 300
         
-        self.username, self.password, self.t, self.url, self.access_token = self.accept(initial=True)
+        while True:
+            try:
+                print("waiting for connection")
+                self.username, self.password, self.t, self.url, self.access_token = self.accept(initial=True)
+                break
+            except Exception as e:
+                print(e)
+                continue
 
         self.pods = Pods(self.t, self.username, self.password)
         self.systems = Systems(self.t, self.username, self.password)
@@ -77,17 +86,26 @@ class Server:
                 continue
     
     def accept(self, initial=False):
+        print("Startin connection startup process")
         self.connection, ip_port = self.sock.accept()
+        print("accepted")
         if initial:
+            print("initial connection")
             self.json_send("initial")
+            print("sent connection type")
             credentials = self.json_receive()
+            print("received credentials")
             username, password = credentials['username'], credentials['password']
             t, url, access_token = self.tapis_init(username, password)
             self.json_send(url)
+            print("url sent")
             return username, password, t, url, access_token
         else:
+            print("continuing connection")
             self.json_send("continuing")
+            print("sent connection type")
             self.json_send({"username":self.username, "url":self.url})
+            print("sent credentials")
 
     def run_command(self, **kwargs):
         try:
@@ -101,7 +119,7 @@ class Server:
                 return self.apps.apps_cli(**kwargs)
             elif kwargs['command_group'] == 'help':
                 with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
-                    return json.loads(f)
+                    return json.load(f)
             elif kwargs['command_group'] == 'exit':
                 return "exiting"
             elif kwargs['command_group'] == 'shutdown':
@@ -109,24 +127,40 @@ class Server:
             else:
                 return "Failed"
         except Exception as e:
-            return e
+            return str(e)
+
+    def timer(self):
+        while True:
+            if time.time() > self.end_time:
+                self.json_send("shutting down")
+                self.connection.close()
+                os._exit()
 
     def main(self):
+        timer = k_thread(target=self.timer)
+        timer.start()
         while True: # checks if any command line arguments were provided
             try:
-                kwargs = self.json_receive()
+                message = self.json_receive()
+                kwargs, exit_status = message['kwargs'], message['exit']
                 result = self.run_command(**kwargs)
+                self.end_time = time.time() + 300
                 self.json_send(result)
-                if result == 'exiting':
+                print(result)
+                if result == 'shutting down':
+                    timer.kill()
+                    sys.exit(0)
+                elif result == 'exiting' or exit_status:
                     self.connection.close()
                     self.accept()
-                elif result == 'shutting down':
-                    self.connection.close()
-                    sys.exit(0)
             except (ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError, WindowsError, socket.error) as e:
                 print(e)
+                timer.kill()
+                os._exit(0)
             except Exception as e:
                 print(e)
+                timer.kill()
+                os._exit(0)
 
 
 if __name__ == '__main__':

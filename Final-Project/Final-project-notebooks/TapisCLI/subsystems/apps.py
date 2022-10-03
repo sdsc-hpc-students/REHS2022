@@ -16,14 +16,14 @@ class Apps(tapisObject):
             url = self.t.apps.createAppVersion(**app_def)
             return f"App created successfully\nID: {app_def['id']}\nVersion: {app_def['version']}\nURL: {url}"
         except Exception as e:
-            return e
+            return str(e)
 
     def get_app(self, **kwargs): # returns app information with an id and version as arguments
         try:
             app = self.t.apps.getApp(appId=kwargs['id'], appVersion=kwargs['version'])
             return app
         except Exception as e:
-            return e
+            return str(e)
 
     def run_job(self, **kwargs): # run a job using an app. Takes a job descriptor json file path
         try:
@@ -40,14 +40,14 @@ class Apps(tapisObject):
             job = self.t.jobs.submitJob(**job)
             return job.uuid
         except Exception as e:
-            return e
+            return str(e)
 
     def get_job_status(self, **kwargs): # return a job status with its Uuid
         try:
             job_status = self.t.jobs.getJobStatus(jobUuid=kwargs['uuid'])
             return job_status
         except Exception as e:
-            return e
+            return str(e)
 
     def download_job_output(self, **kwargs): # download the output of a job with its Uuid
         try:
@@ -56,7 +56,7 @@ class Apps(tapisObject):
                 f.write(jobs_output)
             return f"Successfully downloaded job output to {kwargs['file']}"
         except Exception as e:
-            return e
+            return str(e)
 
     def jobs_cli(self, **kwargs): # function to manage all jobs
         try:
@@ -75,4 +75,4 @@ class Apps(tapisObject):
         except IndexError:
             return "must specify subcommand. See 'help'"
         except Exception as e:
-            return e
+            return str(e)
