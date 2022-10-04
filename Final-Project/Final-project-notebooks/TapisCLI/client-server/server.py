@@ -30,14 +30,8 @@ class Server:
         self.connection = None
         self.end_time = time.time() + 300
         
-        while True:
-            try:
-                print("waiting for connection")
-                self.username, self.password, self.t, self.url, self.access_token = self.accept(initial=True)
-                break
-            except Exception as e:
-                print(e)
-                continue
+        print("awaiting initial connection")
+        self.username, self.password, self.t, self.url, self.access_token = self.accept(initial=True)
 
         self.pods = Pods(self.t, self.username, self.password)
         self.systems = Systems(self.t, self.username, self.password)
@@ -47,17 +41,17 @@ class Server:
         print("inited")
 
     def tapis_init(self, username, password):
-        while True:
-            start = time.time()
-            base_url = "https://icicle.develop.tapis.io"
-            try:
-                t = Tapis(base_url = base_url,
-                        username = username,
-                        password = password)
-                t.get_tokens()
-                break
-            except Exception as e:
-                print(f"\nBROKEN! timeout: {time.time() - start}\n")
+        # while True:
+        start = time.time()
+        base_url = "https://icicle.tapis.io"
+            # try:
+        t = Tapis(base_url = base_url,
+                username = username,
+                password = password)
+        t.get_tokens()
+                # break
+            # except Exception as e:
+            #     print(f"\nBROKEN! timeout: {time.time() - start}\n")
 
         # V3 Headers
         header_dat = {"X-Tapis-token": t.access_token.access_token,
@@ -93,10 +87,24 @@ class Server:
             print("initial connection")
             self.json_send("initial")
             print("sent connection type")
-            credentials = self.json_receive()
-            print("received credentials")
-            username, password = credentials['username'], credentials['password']
-            t, url, access_token = self.tapis_init(username, password)
+            for attempt in range(1,4):
+                credentials = self.json_receive()
+                print("received credentials")
+                username, password = credentials['username'], credentials['password']
+                try:
+                    t, url, access_token = self.tapis_init(username, password)
+                    self.json_send([True, attempt])
+                    print("verification success")
+                    break
+                except:
+                    self.json_send([False, attempt])
+                    print("verification failure")
+                    print(attempt)
+                    if attempt == 3:
+                        print("failed too many times. Shutting down")
+                        os._exit(0)
+                    continue
+
             self.json_send(url)
             print("url sent")
             return username, password, t, url, access_token

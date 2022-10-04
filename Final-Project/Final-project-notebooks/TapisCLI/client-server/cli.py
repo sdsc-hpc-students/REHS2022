@@ -77,10 +77,22 @@ class CLI:
         print("Connected")
         connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
         print(connection_type)
-        if connection_type == "initial": # if the server is receiving its first connection for the session
-            username = str(input("Username: ")) # take the username
-            password = getpass("Password: ") # take the password
-            self.json_send({"username":username, "password":password}) # send the username and password to the server to be used
+        if connection_type == "initial": # if the server is receiving its first connection for the session\
+            while True:
+                username = str(input("Username: ")) # take the username
+                password = getpass("Password: ") # take the password
+                self.json_send({"username":username, "password":password}) # send the username and password to the server to be used
+                verification = self.json_receive()
+                if verification[0]:
+                    print("verification success")
+                    break
+                else:
+                    print("verification failure")
+                    print(verification)
+                    if verification[1] == 3:
+                        sys.exit(0)
+                    continue
+
             url = self.json_receive() # receive the url
             return username, url # return the username and url
 
@@ -121,6 +133,8 @@ class CLI:
                 pprint(results)
             except KeyboardInterrupt:
                 pass
+            except WindowsError:
+                os._exit(0)
             except Exception as e:
                 print(e)
 
