@@ -32,20 +32,20 @@ class Neo4jCLI(tapisObject):
                 if x < 5:
                     continue
                 else:
-                    print('ERROR: KG failed connection after 5 tries to connect')
+                    return 'ERROR: KG failed connection after 5 tries to connect'
                     return e
         
-        print(f'Entered the {kwargs["id"]}') # enter kwargs['command']s into the neo4j client
+        return f'Entered the {kwargs["id"]}' # enter kwargs['command']s into the neo4j client
         while True:
             expression = str(input('> '))
             if expression == 'exit':
-                print("Exiting the query CLI now...")
+                return "Exiting the query CLI now..."
                 return "successfully exited the query CLI"
             else:
                 try:
-                    print(self.submit_queries(graph, expression))
+                    return self.submit_queries(graph, expression)
                 except Exception as e:
-                    print(e)
+                    return e
 
 
 class Pods(tapisObject):
@@ -55,7 +55,7 @@ class Pods(tapisObject):
 
     def get_pods(self): # returns a list of pods
         pods_list = self.t.pods.get_pods()
-        return pods_list
+        return str(pods_list)
     
     def whoami(self): # returns user information
         user_info = self.t.authenticator.get_userinfo()
@@ -63,11 +63,11 @@ class Pods(tapisObject):
 
     def create_pod(self, **kwargs): # creates a pod with a pod id, template, and description
         try:
-            pod_description = str(input("Enter your pod description below:\n")) 
+            pod_description = "placeholder"#str(input("Enter your pod description below:\n")) 
             pod_information = self.t.pods.create_pod(pod_id=kwargs['id'], pod_template=kwargs['template'], description=pod_description)
-            return pod_information
+            return str(pod_information)
         except Exception as e:
-            return e
+            return str(e)
 
     def restart_pod(self, **kwargs): # restarts a pod if needed
         decision = input(f'Please enter, "Restart pod {kwargs["id"]}"\nNote that data may not be persistent on restart') # user confirmation
@@ -128,23 +128,23 @@ class Pods(tapisObject):
     def pods_cli(self, **kwargs):
         try:
             if kwargs['command'] == 'get_pods':
-                print(self.get_pods())
+                return self.get_pods()
             elif kwargs['command'] == 'create_pod':
-                print(self.create_pod(**kwargs))
+                return self.create_pod(**kwargs)
             elif kwargs['command'] == 'restart_pod':
-                print(self.restart_pod(**kwargs))
+                return self.restart_pod(**kwargs)
             elif kwargs['command'] == 'delete_pod':
-                print(self.delete_pod(**kwargs))
+                return self.delete_pod(**kwargs)
             elif kwargs['command'] == "set_pod_perms":
-                print(self.set_pod_perms(**kwargs))
+                return self.set_pod_perms(**kwargs)
             elif kwargs['command'] == 'delete_pod_perms':
-                print(self.delete_pod_perms(**kwargs))
+                return self.delete_pod_perms(**kwargs)
             elif kwargs['command'] == 'get_perms':
-                print(self.get_perms(**kwargs))
+                return self.get_perms(**kwargs)
             elif kwargs['command'] == "copy_pod_password":
-                print(self.copy_pod_password(**kwargs))
+                return self.copy_pod_password(**kwargs)
             elif kwargs['command'] == 'query':
-                print(self.neo4j.kg_query_cli(**kwargs))
+                return self.neo4j.kg_query_cli(**kwargs)
             else:
                 return 'Command not recognized'
         except IndexError:

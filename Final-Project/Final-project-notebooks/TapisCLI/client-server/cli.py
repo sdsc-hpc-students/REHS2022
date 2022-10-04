@@ -73,7 +73,7 @@ class CLI:
 
     def connect(self):
         self.connection_initialization()
-        #self.connection.connect((self.ip, self.port))
+        #self.connection.connect((self.ip, self.port)) # enable me for debugging
         print("Connected")
         connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
         print(connection_type)
