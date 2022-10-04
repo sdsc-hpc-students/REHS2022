@@ -63,7 +63,7 @@ class Pods(tapisObject):
 
     def create_pod(self, **kwargs): # creates a pod with a pod id, template, and description
         try:
-            pod_description = "placeholder"#str(input("Enter your pod description below:\n")) 
+            pod_description = kwargs['description']#str(input("Enter your pod description below:\n")) 
             pod_information = self.t.pods.create_pod(pod_id=kwargs['id'], pod_template=kwargs['template'], description=pod_description)
             return str(pod_information)
         except Exception as e:

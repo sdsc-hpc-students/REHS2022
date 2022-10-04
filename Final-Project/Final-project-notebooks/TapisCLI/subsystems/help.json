@@ -10,7 +10,7 @@
     "pods":
     {
     "get_pods":"get list of pods available to selected account\nFormat: pods -c get_pods",
-    "create_pod":"create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template>",
+    "create_pod":"create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>",
     "restart_pod":"restart the pod\nFormat: pods -c restart_pod -i <pod_id>",
     "delete_pod":"delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>",
     "set_pod_perms":"sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>",

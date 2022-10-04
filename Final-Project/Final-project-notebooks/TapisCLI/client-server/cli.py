@@ -27,7 +27,7 @@ class CLI:
         self.parser.add_argument('-F', '--file')
         self.parser.add_argument('-n', '--name')
         self.parser.add_argument('--uuid')
-        self.parser.add_argument('-d', '--destination')
+        self.parser.add_argument('-d', '--description')
         self.parser.add_argument('-p', '--password')
 
     def json_send(self, data):
