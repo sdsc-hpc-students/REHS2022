@@ -8,12 +8,20 @@ from tapisobject import tapisObject
 
 
 class Neo4jCLI(tapisObject):
-    def __init__(self, tapis_object, username, password):
-        super().__init__(tapis_object, username, password)
-         
-    def submit_queries(self, graph, expression): # function to submit queries to a Neo4j knowledge graph
+    def __init__(self, tapis_object, uname, pword, **kwargs):
+        super().__init__(tapis_object, uname, pword)
+        for x in range(5): # give the client 5 tries to connect to the KG. This often fails once or twice, users will not like entering stuff over and over
+            try:
+                uname, pword = self.t.pods.get_pod_credentials(pod_id=kwargs["id"]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
+                self.graph = Graph(f"bolt+ssc://{kwargs['id']}.pods.icicle.develop.tapis.io:443", auth=(uname, pword), secure=True, verify=True)
+                break
+            except Exception as e:
+                if x >= 5:
+                    return 'ERROR: KG failed connection after 5 tries to connect'
+   
+    def submit_queries(self, expression): # function to submit queries to a Neo4j knowledge graph
         try:
-            return_value = graph.run(expression)
+            return_value = self.graph.run(expression)
 
             if str(return_value) == '(No data)' and 'CREATE' in expression.upper(): # if no data is returned (mostly if something is created) then just say 'success'
                 return 'Success'
@@ -21,31 +29,6 @@ class Neo4jCLI(tapisObject):
             return return_value
         except Exception as e:
             return e
-
-    def kg_query_cli(self, **kwargs): # open a terminal connection with a neo4j pod.
-        for x in range(5): # give the client 5 tries to connect to the KG. This often fails once or twice, users will not like entering stuff over and over
-            try:
-                username, password = self.t.pods.get_pod_credentials(pod_id=kwargs["id"]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
-                graph = Graph(f"bolt+ssc://{kwargs['id']}.pods.icicle.develop.tapis.io:443", auth=(username, password), secure=True, verify=True)
-                break
-            except Exception as e:
-                if x < 5:
-                    continue
-                else:
-                    return 'ERROR: KG failed connection after 5 tries to connect'
-                    return e
-        
-        return f'Entered the {kwargs["id"]}' # enter kwargs['command']s into the neo4j client
-        while True:
-            expression = str(input('> '))
-            if expression == 'exit':
-                return "Exiting the query CLI now..."
-                return "successfully exited the query CLI"
-            else:
-                try:
-                    return self.submit_queries(graph, expression)
-                except Exception as e:
-                    return e
 
 
 class Pods(tapisObject):
@@ -55,11 +38,15 @@ class Pods(tapisObject):
 
     def get_pods(self): # returns a list of pods
         pods_list = self.t.pods.get_pods()
-        return str(pods_list)
+        pods_list = ''.join([repr(pod) for pod in pods_list])
+        print(type(pods_list))
+        print(type(pods_list[0]))
+        print(pods_list)
+        return pods_list
     
     def whoami(self): # returns user information
         user_info = self.t.authenticator.get_userinfo()
-        return user_info
+        return str(user_info)
 
     def create_pod(self, **kwargs): # creates a pod with a pod id, template, and description
         try:

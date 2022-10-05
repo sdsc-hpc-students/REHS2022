@@ -1,4 +1,5 @@
 {
+    "whoami":"get user information: whoami",
     "apps":
     {
     "create_app": "create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>",

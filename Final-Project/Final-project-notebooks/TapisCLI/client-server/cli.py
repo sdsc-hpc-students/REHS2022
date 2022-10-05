@@ -30,6 +30,10 @@ class CLI:
         self.parser.add_argument('-d', '--description')
         self.parser.add_argument('-p', '--password')
 
+        self.password_commands = ['system_password_set']
+        self.confirmation_commands = ['restart_pod', 'delete_pod']
+        self.subclients = ['neo4j']
+
     def json_send(self, data):
         json_data = json.dumps(data)
         self.connection.send(bytes((json_data), ('utf-8')))
@@ -51,29 +55,33 @@ class CLI:
 
     def connection_initialization(self):
         flag = False
+        print("[+] Establishing Connection")
+        count = 1
         while True:
             try:
-                print("Attempting to connect")
                 self.connection.connect((self.ip, self.port))
-                print("Initial connection success!")
+                print("[+] Initial connection success!")
                 break
             except Exception as e:
-                print(e)
                 if not flag:
-                    print("Starting server...")
                     startup = threading.Thread(target=self.initialize_server)
                     startup.start()
-                    print("Server startup initialized")
+                    print("[+] Server startup initialized")
                     flag = True
                     continue
                 else:
-                    print("Connection failed...")
+                    sys.stdout.write(f'Starting Server{"."*count}')
+                    sys.stdout.flush()
+                    if count == 3:
+                        count = 1
+                    else:
+                        count += 1
                     continue
         print("Moving on")
 
     def connect(self):
-        self.connection_initialization()
-        #self.connection.connect((self.ip, self.port)) # enable me for debugging
+        #self.connection_initialization()
+        self.connection.connect((self.ip, self.port)) # enable me for debugging
         print("Connected")
         connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
         print(connection_type)
@@ -105,16 +113,51 @@ class CLI:
         command = command.split(' ')
         return command
 
+    def sub_client(self):
+        while True:
+            command = str(input("> "))
+            self.json_send(command)
+            if command == 'exit':
+                break
+            result = self.json_receive()
+            print(result)
+
+    def check_command(self, **kwargs):
+        command = kwargs['command']
+        if command in self.password_commands:
+            kwargs['password'] = getpass(f"{command} password: ")
+        elif command in self.confirmation_commands:
+            decision = str(input("Are you sure? y/n\n"))
+            if decision != 'y':
+                return False
+        elif command in self.subclients:
+            self.sub_client()
+            
+        return kwargs
+
+    def command_operator(self, kwargs, interface=True, exit_=False):
+        if interface:
+            kwargs = vars(self.parser.parse_args(kwargs))
+        
+        kwargs = self.check_command(**kwargs)
+        if not kwargs:
+            raise Exception("Confirmation not given. Command not executed")
+        self.json_send({'kwargs':kwargs, 'exit':exit_})
+        result = self.json_receive()
+        return result
+
     def main(self):
         if len(sys.argv) > 1: # checks if any command line arguments were provided
             try:
-                kwargs = vars(self.parser.parse_args())
-                self.json_send({'kwargs':kwargs, 'exit':True})
-                result = self.json_receive()
-                print(result)
-            except e:
+                kwargs = self.parser.parse_args()
+                kwargs = vars(kwargs)
+                result = self.command_operator(kwargs, interface=False, exit_=True)
+                if isinstance(result, dict):
+                    pprint(result)
+                else:
+                    print(result)
+            except Exception as e:
                 print(e)
-                sys.exit(1)
             sys.exit(0)
 
         title = pyfiglet.figlet_format("Tapiconsole", font="slant")
@@ -122,21 +165,20 @@ class CLI:
         
         while True:
             try:
-                command_input = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
-                command_input = vars(self.parser.parse_args(command_input))
-                print(command_input)
-                print(type(command_input))
-                self.json_send({'kwargs':command_input, 'exit':False})
-                results = self.json_receive()
-                if results == 'exiting' or results == 'shutting down':
+                kwargs = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
+                result = self.command_operator(kwargs)
+                if result == 'exiting' or result == 'shutting down':
                     os._exit(0)
-                pprint(results)
+                if isinstance(result, dict):
+                    pprint(result)
+                    continue
+                print(result)
             except KeyboardInterrupt:
                 pass
             except WindowsError:
-                os._exit(0)
-            except Exception as e:
-                print(e)
+                raise ConnectionError("Connection was dropped. Exiting")
+            # except Exception as e:
+            #     print(e)
 
 
 if __name__ == "__main__":

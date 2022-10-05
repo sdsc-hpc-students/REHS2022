@@ -1,3 +1,5 @@
-import time
-while True:
-    time.sleep(1)
+def func(e=True):
+    return e
+
+x = func
+print(x())

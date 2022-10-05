@@ -1,0 +1,89 @@
+2022-10-04 22:51:08,126 - __main__ - INFO - Awaiting connection
+2022-10-04 22:51:08,127 - __main__ - INFO - Received connection request
+2022-10-04 22:51:51,119 - __main__ - INFO - Received credentials
+2022-10-04 22:51:52,572 - __main__ - INFO - Verification success
+2022-10-04 22:51:52,573 - __main__ - INFO - Connection success
+2022-10-04 22:51:52,578 - __main__ - INFO - initialization complee
+2022-10-04 22:52:06,136 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 22:52:06,814 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-04 22:52:39,091 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 22:52:39,099 - __main__ - INFO - Neo4jCLI.__init__() got multiple values for argument 'username'
+2022-10-04 22:54:44,268 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 22:54:44,269 - __main__ - INFO - shutting down
+2022-10-04 22:54:44,270 - __main__ - INFO - Shutdown initiated
+2022-10-04 23:03:11,417 - __main__ - INFO - Awaiting connection
+2022-10-04 23:03:15,449 - __main__ - INFO - Received connection request
+2022-10-04 23:03:23,734 - __main__ - INFO - Received credentials
+2022-10-04 23:03:24,942 - __main__ - INFO - Verification success
+2022-10-04 23:03:24,943 - __main__ - INFO - Connection success
+2022-10-04 23:03:24,946 - __main__ - INFO - initialization complee
+2022-10-04 23:03:45,911 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 23:03:45,912 - __main__ - INFO - Neo4jCLI.__init__() got multiple values for argument 'username'
+2022-10-04 23:06:04,083 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 23:06:04,084 - __main__ - INFO - shutting down
+2022-10-04 23:06:04,085 - __main__ - INFO - Shutdown initiated
+2022-10-04 23:06:15,304 - __main__ - INFO - Awaiting connection
+2022-10-04 23:06:18,503 - __main__ - INFO - Received connection request
+2022-10-04 23:06:23,877 - __main__ - INFO - Received credentials
+2022-10-04 23:06:25,503 - __main__ - INFO - Verification success
+2022-10-04 23:06:25,504 - __main__ - INFO - Connection success
+2022-10-04 23:06:25,507 - __main__ - INFO - initialization complee
+2022-10-04 23:06:30,724 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 23:06:30,726 - __main__ - INFO - Neo4jCLI.__init__() got multiple values for argument 'password'
+2022-10-04 23:07:08,166 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 23:07:08,167 - __main__ - INFO - shutting down
+2022-10-04 23:07:08,168 - __main__ - INFO - Shutdown initiated
+2022-10-04 23:07:15,718 - __main__ - INFO - Awaiting connection
+2022-10-04 23:07:19,156 - __main__ - INFO - Received connection request
+2022-10-04 23:07:23,397 - __main__ - INFO - Received credentials
+2022-10-04 23:07:25,268 - __main__ - INFO - Verification success
+2022-10-04 23:07:25,269 - __main__ - INFO - Connection success
+2022-10-04 23:07:25,272 - __main__ - INFO - initialization complee
+2022-10-04 23:07:34,544 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 23:07:35,823 - __main__ - INFO - 'Server' object has no attribute 'cli'
+2022-10-04 23:08:33,104 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-04 23:08:33,105 - __main__ - INFO - shutting down
+2022-10-04 23:08:33,106 - __main__ - INFO - Shutdown initiated
+2022-10-04 23:08:40,633 - __main__ - INFO - Awaiting connection
+2022-10-04 23:08:45,591 - __main__ - INFO - Received connection request
+2022-10-04 23:08:50,753 - __main__ - INFO - Received credentials
+2022-10-04 23:08:51,903 - __main__ - INFO - Verification success
+2022-10-04 23:08:51,903 - __main__ - INFO - Connection success
+2022-10-04 23:08:51,906 - __main__ - INFO - initialization complee
+2022-10-04 23:08:59,986 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}

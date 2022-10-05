@@ -9,8 +9,8 @@ import socket
 import json
 import threading
 import multiprocessing
-from killable_thread import k_thread
 import os
+import logging
 
 sys.path.insert(1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
 from pods import Pods, Neo4jCLI
@@ -21,7 +21,26 @@ from apps import Apps
 
 class Server:
     def __init__(self, IP, PORT):
-        print("[+] Started")
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
+        stream_handler = logging.StreamHandler(stream=sys.stdout)
+        file_handler = logging.FileHandler(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\logs\logs.txt', mode='a')
+        stream_handler.setLevel(logging.INFO)
+        file_handler.setLevel(logging.INFO)
+
+        # set formats
+        stream_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+        file_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+        stream_handler.setFormatter(stream_format)
+        file_handler.setFormatter(file_format)
+
+        # add the handlers
+        self.logger.addHandler(stream_handler)
+        self.logger.addHandler(file_handler)
+
+        self.logger.disabled = False
+
         self.ip, self.port = IP, PORT
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -30,28 +49,22 @@ class Server:
         self.connection = None
         self.end_time = time.time() + 300
         
-        print("awaiting initial connection")
+        self.logger.info("Awaiting connection")
         self.username, self.password, self.t, self.url, self.access_token = self.accept(initial=True)
 
         self.pods = Pods(self.t, self.username, self.password)
         self.systems = Systems(self.t, self.username, self.password)
         self.files = Files(self.t, self.username, self.password)
         self.apps = Apps(self.t, self.username, self.password)
-        self.neo4j = Neo4jCLI(self.t, self.username, self.password)
-        print("inited")
+        self.logger.info('initialization complee')
 
     def tapis_init(self, username, password):
-        # while True:
         start = time.time()
         base_url = "https://icicle.tapis.io"
-            # try:
         t = Tapis(base_url = base_url,
                 username = username,
                 password = password)
         t.get_tokens()
-                # break
-            # except Exception as e:
-            #     print(f"\nBROKEN! timeout: {time.time() - start}\n")
 
         # V3 Headers
         header_dat = {"X-Tapis-token": t.access_token.access_token,
@@ -80,40 +93,42 @@ class Server:
                 continue
     
     def accept(self, initial=False):
-        print("Startin connection startup process")
         self.connection, ip_port = self.sock.accept()
-        print("accepted")
+        self.logger.info("Received connection request")
         if initial:
-            print("initial connection")
             self.json_send("initial")
-            print("sent connection type")
             for attempt in range(1,4):
                 credentials = self.json_receive()
-                print("received credentials")
+                self.logger.info("Received credentials")
                 username, password = credentials['username'], credentials['password']
                 try:
                     t, url, access_token = self.tapis_init(username, password)
                     self.json_send([True, attempt])
-                    print("verification success")
+                    self.logger.info("Verification success")
                     break
                 except:
                     self.json_send([False, attempt])
-                    print("verification failure")
-                    print(attempt)
+                    self.logger.warning("Verification failure")
                     if attempt == 3:
-                        print("failed too many times. Shutting down")
+                        self.logger.error("Attempted verification too many times. Exiting")
                         os._exit(0)
                     continue
-
             self.json_send(url)
-            print("url sent")
+            self.logger.info("Connection success")
             return username, password, t, url, access_token
         else:
-            print("continuing connection")
             self.json_send("continuing")
-            print("sent connection type")
             self.json_send({"username":self.username, "url":self.url})
-            print("sent credentials")
+            self.logger.info("Connection success")
+
+    def sub_client(self, cli):
+        while True:
+            command = self.json_receive()
+            if command == 'exit':
+                break
+            result = cli(command)
+            self.json_send(result)
+        return 'exited successfully'
 
     def run_command(self, **kwargs):
         try:
@@ -128,46 +143,48 @@ class Server:
             elif kwargs['command_group'] == 'help':
                 with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
                     return json.load(f)
+            elif kwargs['command_group'] == 'whoami':
+                return self.pods.whoami()
             elif kwargs['command_group'] == 'exit':
                 return "exiting"
             elif kwargs['command_group'] == 'shutdown':
                 return "shutting down"
+            elif kwargs['command_group'] == 'neo4j':
+                neo4j = Neo4jCLI(self.t, self.username, self.password, **kwargs)
+                result = self.sub_client(neo4j.submit_queries)
+                return result
             else:
                 return "Failed"
         except Exception as e:
             return str(e)
 
-    def timer(self):
-        while True:
-            if time.time() > self.end_time:
-                self.json_send("shutting down")
-                self.connection.close()
-                os._exit()
-
     def main(self):
-        timer = k_thread(target=self.timer)
-        timer.start()
         while True: # checks if any command line arguments were provided
             try:
                 message = self.json_receive()
+                self.logger.info(message)
+                if time.time() > self.end_time:
+                    self.logger.error("timeout. Shutting down")
+                    self.json_send("shutting down")
+                    self.connection.close()
+                    os._exit()
                 kwargs, exit_status = message['kwargs'], message['exit']
                 result = self.run_command(**kwargs)
+                self.logger.info(result)
                 self.end_time = time.time() + 300
                 self.json_send(result)
-                print(result)
                 if result == 'shutting down':
-                    timer.kill()
+                    self.logger.info("Shutdown initiated")
                     sys.exit(0)
                 elif result == 'exiting' or exit_status:
+                    self.logger.info("user exit initiated")
                     self.connection.close()
                     self.accept()
             except (ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError, WindowsError, socket.error) as e:
-                print(e)
-                timer.kill()
+                self.logger.error(e)
                 os._exit(0)
             except Exception as e:
-                print(e)
-                timer.kill()
+                self.logger.error(e)
                 os._exit(0)
 
 
