@@ -29,6 +29,7 @@ class CLI:
         self.parser.add_argument('--uuid')
         self.parser.add_argument('-d', '--description')
         self.parser.add_argument('-p', '--password')
+        self.parser.add_argument('-e', '--expression')
 
         self.password_commands = ['system_password_set']
         self.confirmation_commands = ['restart_pod', 'delete_pod']
@@ -36,13 +37,17 @@ class CLI:
 
     def json_send(self, data):
         json_data = json.dumps(data)
+        print("sending")
         self.connection.send(bytes((json_data), ('utf-8')))
+        print("sent")
 
     def json_receive(self):
         json_data = ""
         while True:
             try: #to handle long files, so that it continues to receive data and create a complete file
+                print("waiting to receive")
                 json_data = json_data + self.connection.recv(1024).decode('utf-8') #formulate a full file. Combine sequential data streams to unpack
+                print("received")
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
@@ -57,7 +62,11 @@ class CLI:
         flag = False
         print("[+] Establishing Connection")
         count = 1
+        timeout_time = time.time() + 60
         while True:
+            if time.time() > timeout_time:
+                print("[-] Connection timeout")
+                os._exit(0)
             try:
                 self.connection.connect((self.ip, self.port))
                 print("[+] Initial connection success!")
@@ -70,19 +79,18 @@ class CLI:
                     flag = True
                     continue
                 else:
-                    sys.stdout.write(f'Starting Server{"."*count}')
+                    sys.stdout.write(f'[+] Starting Server{"."*count}')
                     sys.stdout.flush()
                     if count == 3:
                         count = 1
                     else:
                         count += 1
                     continue
-        print("Moving on")
 
     def connect(self):
         #self.connection_initialization()
         self.connection.connect((self.ip, self.port)) # enable me for debugging
-        print("Connected")
+        print("[+] Connected")
         connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
         print(connection_type)
         if connection_type == "initial": # if the server is receiving its first connection for the session\
@@ -92,10 +100,10 @@ class CLI:
                 self.json_send({"username":username, "password":password}) # send the username and password to the server to be used
                 verification = self.json_receive()
                 if verification[0]:
-                    print("verification success")
+                    print("[+] verification success")
                     break
                 else:
-                    print("verification failure")
+                    print("[-] verification failure")
                     print(verification)
                     if verification[1] == 3:
                         sys.exit(0)
@@ -113,14 +121,14 @@ class CLI:
         command = command.split(' ')
         return command
 
-    def sub_client(self):
+    def expression_input(self):
+        expression = ''
         while True:
-            command = str(input("> "))
-            self.json_send(command)
-            if command == 'exit':
+            line = str(input("> "))
+            if line == 'exit':
                 break
-            result = self.json_receive()
-            print(result)
+            expression += line
+        return expression
 
     def check_command(self, **kwargs):
         command = kwargs['command']
@@ -130,19 +138,20 @@ class CLI:
             decision = str(input("Are you sure? y/n\n"))
             if decision != 'y':
                 return False
-        elif command in self.subclients:
-            self.sub_client()
+        elif kwargs['command_group'] in self.subclients and not kwargs['file']:
+            kwargs['expression'] = self.expression_input()
             
         return kwargs
 
-    def command_operator(self, kwargs, interface=True, exit_=False):
-        if interface:
+    def command_operator(self, kwargs, exit_=False):
+        if isinstance(kwargs, list):
             kwargs = vars(self.parser.parse_args(kwargs))
         
         kwargs = self.check_command(**kwargs)
         if not kwargs:
-            raise Exception("Confirmation not given. Command not executed")
+            raise Exception("[-] Confirmation not given. Command not executed")
         self.json_send({'kwargs':kwargs, 'exit':exit_})
+        
         result = self.json_receive()
         return result
 
@@ -151,7 +160,7 @@ class CLI:
             try:
                 kwargs = self.parser.parse_args()
                 kwargs = vars(kwargs)
-                result = self.command_operator(kwargs, interface=False, exit_=True)
+                result = self.command_operator(kwargs, exit_=True)
                 if isinstance(result, dict):
                     pprint(result)
                 else:
@@ -176,7 +185,7 @@ class CLI:
             except KeyboardInterrupt:
                 pass
             except WindowsError:
-                raise ConnectionError("Connection was dropped. Exiting")
+                raise ConnectionError("[-] Connection was dropped. Exiting")
             # except Exception as e:
             #     print(e)
 
@@ -186,6 +195,6 @@ if __name__ == "__main__":
         client = CLI('127.0.0.1', 3000)
     except Exception as e:
         print(e)
-        print('Invalid login, try again')
+        print('[-] Invalid login, try again')
         sys.exit(1)
     client.main()

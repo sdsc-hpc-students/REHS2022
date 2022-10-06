@@ -56,6 +56,7 @@ class Server:
         self.systems = Systems(self.t, self.username, self.password)
         self.files = Files(self.t, self.username, self.password)
         self.apps = Apps(self.t, self.username, self.password)
+        self.neo4j = Neo4jCLI(self.t, self.username, self.password)
         self.logger.info('initialization complee')
 
     def tapis_init(self, username, password):
@@ -81,13 +82,17 @@ class Server:
 
     def json_send(self, data):
         json_data = json.dumps(data)
+        print("sending")
         self.connection.send(bytes((json_data), ('utf-8')))
+        print("sent")
 
     def json_receive(self):
         json_data = ""
         while True:
             try: #to handle long files, so that it continues to receive data and create a complete file
+                print("waiting to receive")
                 json_data = json_data + self.connection.recv(1024).decode('utf-8') #formulate a full file. Combine sequential data streams to unpack
+                print("received")
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
@@ -121,15 +126,6 @@ class Server:
             self.json_send({"username":self.username, "url":self.url})
             self.logger.info("Connection success")
 
-    def sub_client(self, cli):
-        while True:
-            command = self.json_receive()
-            if command == 'exit':
-                break
-            result = cli(command)
-            self.json_send(result)
-        return 'exited successfully'
-
     def run_command(self, **kwargs):
         try:
             if kwargs['command_group'] == 'pods':
@@ -150,8 +146,7 @@ class Server:
             elif kwargs['command_group'] == 'shutdown':
                 return "shutting down"
             elif kwargs['command_group'] == 'neo4j':
-                neo4j = Neo4jCLI(self.t, self.username, self.password, **kwargs)
-                result = self.sub_client(neo4j.submit_queries)
+                result = self.neo4j.submit_query(**kwargs)
                 return result
             else:
                 return "Failed"
@@ -167,7 +162,7 @@ class Server:
                     self.logger.error("timeout. Shutting down")
                     self.json_send("shutting down")
                     self.connection.close()
-                    os._exit()
+                    os._exit(0)
                 kwargs, exit_status = message['kwargs'], message['exit']
                 result = self.run_command(**kwargs)
                 self.logger.info(result)
@@ -181,10 +176,10 @@ class Server:
                     self.connection.close()
                     self.accept()
             except (ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError, WindowsError, socket.error) as e:
-                self.logger.error(e)
+                self.logger.error(str(e))
                 os._exit(0)
             except Exception as e:
-                self.logger.error(e)
+                self.logger.error(str(e))
                 os._exit(0)
 
 

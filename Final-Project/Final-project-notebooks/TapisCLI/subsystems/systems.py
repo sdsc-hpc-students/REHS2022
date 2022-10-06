@@ -11,7 +11,9 @@ class Systems(tapisObject):
     def get_system_list(self): # return a list of systems active on the account
         try:
             systems = self.t.systems.getSystems()
-            return systems
+            if systems:
+                return systems
+            return "[-] No systems registered"
         except Exception as e:
             return e
 
@@ -48,7 +50,7 @@ class Systems(tapisObject):
 
             return cred_return_value
         except Exception as e:
-            return e
+            return str(e)
 
     def system_password_set(self, **kwargs): # set the password for a system
         try:

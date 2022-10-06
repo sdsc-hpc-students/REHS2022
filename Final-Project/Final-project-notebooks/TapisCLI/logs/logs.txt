@@ -87,3 +87,779 @@ url: testingcli.pods.icicle.tapis.io
 2022-10-04 23:08:51,903 - __main__ - INFO - Connection success
 2022-10-04 23:08:51,906 - __main__ - INFO - initialization complee
 2022-10-04 23:08:59,986 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 09:47:49,498 - __main__ - INFO - Awaiting connection
+2022-10-05 09:47:53,064 - __main__ - INFO - Received connection request
+2022-10-05 09:48:04,939 - __main__ - INFO - Received credentials
+2022-10-05 09:48:06,811 - __main__ - INFO - Verification success
+2022-10-05 09:48:06,811 - __main__ - INFO - Connection success
+2022-10-05 09:48:06,836 - __main__ - INFO - initialization complee
+2022-10-05 09:49:00,474 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 09:49:00,474 - __main__ - INFO - shutting down
+2022-10-05 09:49:00,474 - __main__ - INFO - Shutdown initiated
+2022-10-05 09:49:13,179 - __main__ - INFO - Awaiting connection
+2022-10-05 09:49:16,396 - __main__ - INFO - Received connection request
+2022-10-05 09:49:22,962 - __main__ - INFO - Received credentials
+2022-10-05 09:49:24,978 - __main__ - INFO - Verification success
+2022-10-05 09:49:24,978 - __main__ - INFO - Connection success
+2022-10-05 09:49:24,986 - __main__ - INFO - initialization complee
+2022-10-05 09:49:43,339 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:26:32,263 - __main__ - INFO - Awaiting connection
+2022-10-05 11:26:33,534 - __main__ - INFO - Received connection request
+2022-10-05 11:26:37,829 - __main__ - INFO - Received credentials
+2022-10-05 11:26:39,460 - __main__ - INFO - Verification success
+2022-10-05 11:26:39,460 - __main__ - INFO - Connection success
+2022-10-05 11:26:39,467 - __main__ - INFO - initialization complee
+2022-10-05 11:26:51,833 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:28:23,906 - __main__ - INFO - Awaiting connection
+2022-10-05 11:28:28,329 - __main__ - INFO - Received connection request
+2022-10-05 11:28:32,572 - __main__ - INFO - Received credentials
+2022-10-05 11:28:35,736 - __main__ - INFO - Verification success
+2022-10-05 11:28:35,736 - __main__ - INFO - Connection success
+2022-10-05 11:28:35,743 - __main__ - INFO - initialization complee
+2022-10-05 11:28:38,884 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:28:38,891 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-05 11:28:47,616 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:28:48,046 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-05 11:29:06,601 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:29:48,093 - __main__ - INFO - Awaiting connection
+2022-10-05 11:29:50,840 - __main__ - INFO - Received connection request
+2022-10-05 11:29:54,879 - __main__ - INFO - Received credentials
+2022-10-05 11:29:56,466 - __main__ - INFO - Verification success
+2022-10-05 11:29:56,466 - __main__ - INFO - Connection success
+2022-10-05 11:29:56,474 - __main__ - INFO - initialization complee
+2022-10-05 11:30:01,238 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:42:51,092 - __main__ - INFO - Object of type AttributeError is not JSON serializable
+2022-10-05 11:42:53,047 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:42:53,047 - __main__ - INFO - exiting
+2022-10-05 11:42:53,055 - __main__ - INFO - user exit initiated
+2022-10-05 11:43:01,110 - __main__ - INFO - Received connection request
+2022-10-05 11:43:01,118 - __main__ - INFO - Connection success
+2022-10-05 11:43:03,228 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:43:03,228 - __main__ - INFO - shutting down
+2022-10-05 11:43:03,228 - __main__ - INFO - Shutdown initiated
+2022-10-05 11:43:19,434 - __main__ - INFO - Awaiting connection
+2022-10-05 11:43:33,434 - __main__ - INFO - Received connection request
+2022-10-05 11:43:39,292 - __main__ - INFO - Received credentials
+2022-10-05 11:43:40,225 - __main__ - INFO - Verification success
+2022-10-05 11:43:40,225 - __main__ - INFO - Connection success
+2022-10-05 11:43:40,233 - __main__ - INFO - initialization complee
+2022-10-05 11:43:53,350 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:45:23,682 - __main__ - INFO - Object of type AttributeError is not JSON serializable
+2022-10-05 11:45:27,252 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 11:45:27,252 - __main__ - INFO - shutting down
+2022-10-05 11:45:27,260 - __main__ - INFO - Shutdown initiated
+2022-10-05 12:05:19,583 - __main__ - INFO - Awaiting connection
+2022-10-05 12:05:22,155 - __main__ - INFO - Received connection request
+2022-10-05 12:05:26,216 - __main__ - INFO - Received credentials
+2022-10-05 12:05:28,361 - __main__ - INFO - Verification success
+2022-10-05 12:05:28,363 - __main__ - INFO - Connection success
+2022-10-05 12:05:28,363 - __main__ - INFO - initialization complee
+2022-10-05 12:05:48,613 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:28:17,676 - __main__ - INFO - Awaiting connection
+2022-10-05 12:28:23,786 - __main__ - INFO - Received connection request
+2022-10-05 12:28:27,631 - __main__ - INFO - Received credentials
+2022-10-05 12:28:28,672 - __main__ - INFO - Verification success
+2022-10-05 12:28:28,672 - __main__ - INFO - Connection success
+2022-10-05 12:28:28,677 - __main__ - INFO - initialization complee
+2022-10-05 12:28:30,289 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:28:30,292 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-05 12:28:32,465 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:28:32,676 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-05 12:28:36,634 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:28:36,820 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-05 12:28:38,625 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:28:38,625 - __main__ - INFO - exiting
+2022-10-05 12:28:38,633 - __main__ - INFO - user exit initiated
+2022-10-05 12:28:42,561 - __main__ - INFO - Received connection request
+2022-10-05 12:28:42,569 - __main__ - INFO - Connection success
+2022-10-05 12:29:21,297 - __main__ - INFO - Awaiting connection
+2022-10-05 12:29:31,663 - __main__ - INFO - Received connection request
+2022-10-05 12:29:35,794 - __main__ - INFO - Received credentials
+2022-10-05 12:29:37,123 - __main__ - INFO - Verification success
+2022-10-05 12:29:37,123 - __main__ - INFO - Connection success
+2022-10-05 12:29:37,131 - __main__ - INFO - initialization complee
+2022-10-05 12:29:37,131 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': True}
+2022-10-05 12:29:37,363 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-05 12:29:37,363 - __main__ - INFO - user exit initiated
+2022-10-05 12:29:41,663 - __main__ - INFO - Received connection request
+2022-10-05 12:29:41,663 - __main__ - INFO - Connection success
+2022-10-05 12:29:41,671 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': True}
+2022-10-05 12:29:41,975 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-05 12:29:41,975 - __main__ - INFO - user exit initiated
+2022-10-05 12:29:47,792 - __main__ - INFO - Received connection request
+2022-10-05 12:29:47,792 - __main__ - INFO - Connection success
+2022-10-05 12:29:49,027 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:29:49,035 - __main__ - INFO - exiting
+2022-10-05 12:29:49,035 - __main__ - INFO - user exit initiated
+2022-10-05 12:29:52,810 - __main__ - INFO - Received connection request
+2022-10-05 12:29:52,810 - __main__ - INFO - Connection success
+2022-10-05 12:29:52,826 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': True}
+2022-10-05 12:29:54,382 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-05 12:29:54,382 - __main__ - INFO - user exit initiated
+2022-10-05 12:30:02,893 - __main__ - INFO - Received connection request
+2022-10-05 12:30:02,901 - __main__ - INFO - Connection success
+2022-10-05 12:30:02,907 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': True}
+2022-10-05 12:30:03,421 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-05 12:30:03,421 - __main__ - INFO - user exit initiated
+2022-10-05 12:30:09,076 - __main__ - INFO - Received connection request
+2022-10-05 12:30:09,076 - __main__ - INFO - Connection success
+2022-10-05 12:30:14,285 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:30:28,753 - __main__ - INFO - Object of type AttributeError is not JSON serializable
+2022-10-05 12:32:07,868 - __main__ - INFO - exit
+2022-10-05 12:32:07,868 - __main__ - ERROR - string indices must be integers
+2022-10-05 12:33:00,444 - __main__ - INFO - Awaiting connection
+2022-10-05 12:35:01,113 - __main__ - INFO - Awaiting connection
+2022-10-05 12:35:03,844 - __main__ - INFO - Received connection request
+2022-10-05 12:35:08,488 - __main__ - INFO - Received credentials
+2022-10-05 12:35:11,148 - __main__ - INFO - Verification success
+2022-10-05 12:35:11,157 - __main__ - INFO - Connection success
+2022-10-05 12:35:11,157 - __main__ - INFO - initialization complee
+2022-10-05 12:35:27,415 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:35:38,049 - __main__ - INFO - exited successfully
+2022-10-05 12:35:41,179 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:35:41,179 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-05 12:35:44,364 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:35:44,372 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-05 12:35:46,203 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:35:46,211 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-05 12:35:51,532 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None}, 'exit': False}
+2022-10-05 12:48:40,619 - __main__ - INFO - Awaiting connection
+2022-10-05 12:48:44,210 - __main__ - INFO - Received connection request
+2022-10-05 12:49:00,558 - __main__ - INFO - Received credentials
+2022-10-05 12:49:02,334 - __main__ - INFO - Verification success
+2022-10-05 12:49:02,334 - __main__ - INFO - Connection success
+2022-10-05 12:49:02,339 - __main__ - INFO - initialization complee
+2022-10-05 12:49:04,748 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-05 12:49:04,756 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-05 12:49:07,578 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-05 12:49:07,578 - __main__ - INFO - exiting
+2022-10-05 12:49:07,586 - __main__ - INFO - user exit initiated
+2022-10-05 12:49:12,121 - __main__ - INFO - Received connection request
+2022-10-05 12:49:12,130 - __main__ - INFO - Connection success
+2022-10-05 12:51:02,012 - __main__ - INFO - Awaiting connection
+2022-10-05 12:51:05,541 - __main__ - INFO - Received connection request
+2022-10-05 12:51:09,136 - __main__ - INFO - Received credentials
+2022-10-05 12:51:10,492 - __main__ - INFO - Verification success
+2022-10-05 12:51:10,494 - __main__ - INFO - Connection success
+2022-10-05 12:51:10,499 - __main__ - INFO - initialization complee
+2022-10-05 12:52:36,748 - __main__ - INFO - Awaiting connection
+2022-10-05 12:52:40,743 - __main__ - INFO - Received connection request
+2022-10-05 12:52:45,399 - __main__ - INFO - Received credentials
+2022-10-05 12:52:48,371 - __main__ - INFO - Verification success
+2022-10-05 12:52:48,379 - __main__ - INFO - Connection success
+2022-10-05 12:52:48,379 - __main__ - INFO - initialization complee
+2022-10-05 12:54:32,971 - __main__ - INFO - Awaiting connection
+2022-10-05 12:54:41,084 - __main__ - INFO - Received connection request
+2022-10-05 12:54:44,433 - __main__ - INFO - Received credentials
+2022-10-05 12:54:47,315 - __main__ - INFO - Verification success
+2022-10-05 12:54:47,315 - __main__ - INFO - Connection success
+2022-10-05 12:54:47,323 - __main__ - INFO - initialization complee
+2022-10-05 12:54:47,331 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-05 12:54:47,758 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-05 12:54:47,758 - __main__ - INFO - user exit initiated
+2022-10-05 12:55:03,330 - __main__ - INFO - Received connection request
+2022-10-05 12:55:03,330 - __main__ - INFO - Connection success
+2022-10-05 12:55:03,346 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-05 12:55:03,755 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-05 12:55:03,763 - __main__ - INFO - user exit initiated
+2022-10-05 13:41:14,822 - __main__ - INFO - Received connection request
+2022-10-05 13:41:14,822 - __main__ - INFO - Connection success
+2022-10-05 13:41:14,830 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-05 13:41:14,838 - __main__ - ERROR - timeout. Shutting down
+2022-10-05 13:41:14,838 - __main__ - ERROR - _exit() missing required argument 'status' (pos 1)
+2022-10-05 13:43:37,257 - __main__ - INFO - Awaiting connection
+2022-10-05 13:43:39,816 - __main__ - INFO - Received connection request
+2022-10-05 14:23:22,473 - __main__ - INFO - Received credentials
+2022-10-05 14:23:23,416 - __main__ - INFO - Verification success
+2022-10-05 14:23:23,418 - __main__ - INFO - Connection success
+2022-10-05 14:23:23,420 - __main__ - INFO - initialization complee
+2022-10-05 14:23:23,424 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-05 14:23:23,425 - __main__ - ERROR - timeout. Shutting down
+2022-10-05 14:24:00,728 - __main__ - INFO - Awaiting connection
+2022-10-05 14:24:04,434 - __main__ - INFO - Received connection request
+2022-10-05 14:24:08,445 - __main__ - INFO - Received credentials
+2022-10-05 14:24:09,424 - __main__ - INFO - Verification success
+2022-10-05 14:24:09,426 - __main__ - INFO - Connection success
+2022-10-05 14:24:09,429 - __main__ - INFO - initialization complee
+2022-10-05 14:24:09,432 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-05 14:24:09,650 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-05 14:24:09,656 - __main__ - INFO - user exit initiated
+2022-10-05 14:24:36,891 - __main__ - INFO - Received connection request
+2022-10-05 14:24:36,893 - __main__ - INFO - Connection success
+2022-10-05 14:24:59,342 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-05 14:25:00,351 - __main__ - INFO - 'Neo4jCLI' object has no attribute 'graph'
+2022-10-05 14:25:23,897 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-05 14:25:23,898 - __main__ - INFO - shutting down
+2022-10-05 14:25:23,900 - __main__ - INFO - Shutdown initiated
+2022-10-05 14:27:41,447 - __main__ - INFO - Awaiting connection
+2022-10-05 14:27:41,939 - __main__ - INFO - Received connection request
+2022-10-05 14:27:46,574 - __main__ - INFO - Received credentials
+2022-10-05 14:27:47,752 - __main__ - INFO - Verification success
+2022-10-05 14:27:47,753 - __main__ - INFO - Connection success
+2022-10-05 14:27:47,756 - __main__ - INFO - initialization complee
+2022-10-05 14:27:53,737 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-05 14:27:54,791 - __main__ - INFO - 'Neo4jCLI' object has no attribute 'graph'
+2022-10-05 14:30:57,597 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-05 14:30:57,600 - __main__ - INFO - shutting down
+2022-10-05 14:30:57,600 - __main__ - INFO - Shutdown initiated
+2022-10-05 14:31:10,591 - __main__ - INFO - Awaiting connection
+2022-10-05 14:31:16,132 - __main__ - INFO - Received connection request
+2022-10-05 14:31:21,832 - __main__ - INFO - Received credentials
+2022-10-05 14:31:22,786 - __main__ - INFO - Verification success
+2022-10-05 14:31:22,794 - __main__ - INFO - Connection success
+2022-10-05 14:34:40,831 - __main__ - INFO - Awaiting connection
+2022-10-05 14:34:43,988 - __main__ - INFO - Received connection request
+2022-10-05 14:34:49,604 - __main__ - INFO - Received credentials
+2022-10-05 14:34:51,190 - __main__ - INFO - Verification success
+2022-10-05 14:34:51,190 - __main__ - INFO - Connection success
+2022-10-06 08:40:41,897 - __main__ - INFO - Awaiting connection
+2022-10-06 08:40:44,445 - __main__ - INFO - Received connection request
+2022-10-06 08:40:48,413 - __main__ - INFO - Received credentials
+2022-10-06 08:40:49,854 - __main__ - INFO - Verification success
+2022-10-06 08:40:49,854 - __main__ - INFO - Connection success
+2022-10-06 08:40:49,854 - __main__ - INFO - initialization complee
+2022-10-06 08:40:51,564 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:40:51,564 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-06 08:40:54,276 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:40:54,526 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-06 08:40:59,610 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:41:00,280 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-06 08:41:13,371 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:41:13,838 - __main__ - INFO - name '_id' is not defined
+2022-10-06 08:41:28,174 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:41:28,174 - __main__ - INFO - shutting down
+2022-10-06 08:41:28,174 - __main__ - INFO - Shutdown initiated
+2022-10-06 08:41:37,743 - __main__ - INFO - Awaiting connection
+2022-10-06 08:41:40,320 - __main__ - INFO - Received connection request
+2022-10-06 08:41:44,591 - __main__ - INFO - Received credentials
+2022-10-06 08:41:45,601 - __main__ - INFO - Verification success
+2022-10-06 08:41:45,601 - __main__ - INFO - Connection success
+2022-10-06 08:41:45,609 - __main__ - INFO - initialization complee
+2022-10-06 08:41:49,535 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:41:49,829 - __main__ - INFO - 'Neo4jCLI' object has no attribute 'uname'
+2022-10-06 08:42:17,615 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:42:17,615 - __main__ - INFO - shutting down
+2022-10-06 08:42:17,623 - __main__ - INFO - Shutdown initiated
+2022-10-06 08:42:28,800 - __main__ - INFO - Awaiting connection
+2022-10-06 08:42:30,398 - __main__ - INFO - Received connection request
+2022-10-06 08:42:34,057 - __main__ - INFO - Received credentials
+2022-10-06 08:42:35,182 - __main__ - INFO - Verification success
+2022-10-06 08:42:35,182 - __main__ - INFO - Connection success
+2022-10-06 08:42:35,191 - __main__ - INFO - initialization complee
+2022-10-06 08:42:39,416 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:42:40,509 - __main__ - INFO - Cannot open connection to ConnectionProfile('bolt+s://testingcli.pods.icicle.develop.tapis.io:443')
+2022-10-06 08:43:14,467 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:43:14,467 - __main__ - INFO - shutting down
+2022-10-06 08:43:14,467 - __main__ - INFO - Shutdown initiated
+2022-10-06 08:43:24,252 - __main__ - INFO - Awaiting connection
+2022-10-06 08:43:27,296 - __main__ - INFO - Received connection request
+2022-10-06 08:43:32,699 - __main__ - INFO - Received credentials
+2022-10-06 08:43:33,881 - __main__ - INFO - Verification success
+2022-10-06 08:43:33,881 - __main__ - INFO - Connection success
+2022-10-06 08:43:33,881 - __main__ - INFO - initialization complee
+2022-10-06 08:43:38,788 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:43:40,163 - __main__ - INFO - 'Neo4jCLI' object has no attribute 'graph'
+2022-10-06 08:44:24,764 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:44:24,764 - __main__ - INFO - shutting down
+2022-10-06 08:44:24,764 - __main__ - INFO - Shutdown initiated
+2022-10-06 08:44:34,495 - __main__ - INFO - Awaiting connection
+2022-10-06 08:44:37,434 - __main__ - INFO - Received connection request
+2022-10-06 08:44:42,823 - __main__ - INFO - Received credentials
+2022-10-06 08:44:44,110 - __main__ - INFO - Verification success
+2022-10-06 08:44:44,110 - __main__ - INFO - Connection success
+2022-10-06 08:44:44,110 - __main__ - INFO - initialization complee
+2022-10-06 08:44:46,989 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:44:48,184 - __main__ - INFO - local variable 'expression' referenced before assignment
+2022-10-06 08:45:20,577 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:45:20,577 - __main__ - INFO - exiting
+2022-10-06 08:45:20,577 - __main__ - INFO - user exit initiated
+2022-10-06 08:45:23,287 - __main__ - INFO - Received connection request
+2022-10-06 08:45:23,287 - __main__ - INFO - Connection success
+2022-10-06 08:45:25,206 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:45:26,031 - __main__ - INFO - local variable 'expression' referenced before assignment
+2022-10-06 08:46:15,981 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:46:15,982 - __main__ - INFO - shutting down
+2022-10-06 08:46:15,983 - __main__ - INFO - Shutdown initiated
+2022-10-06 08:46:24,853 - __main__ - INFO - Awaiting connection
+2022-10-06 08:46:26,949 - __main__ - INFO - Received connection request
+2022-10-06 08:46:33,037 - __main__ - INFO - Received credentials
+2022-10-06 08:46:35,168 - __main__ - INFO - Verification success
+2022-10-06 08:46:35,170 - __main__ - INFO - Connection success
+2022-10-06 08:46:35,173 - __main__ - INFO - initialization complee
+2022-10-06 08:46:37,281 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:46:38,342 - __main__ - INFO - Failed to read message
+2022-10-06 08:50:52,524 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:50:53,454 - __main__ - INFO - Failed to read message
+2022-10-06 08:52:01,506 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:52:01,506 - __main__ - INFO - exiting
+2022-10-06 08:52:01,514 - __main__ - INFO - user exit initiated
+2022-10-06 08:52:04,245 - __main__ - INFO - Received connection request
+2022-10-06 08:52:04,245 - __main__ - INFO - Connection success
+2022-10-06 08:52:18,205 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': 'match (n) return n'}, 'exit': False}
+2022-10-06 08:52:19,612 - __main__ - INFO - (No data)
+2022-10-06 08:52:19,612 - __main__ - ERROR - Object of type Cursor is not JSON serializable
+2022-10-06 08:54:17,777 - __main__ - INFO - Awaiting connection
+2022-10-06 08:54:20,370 - __main__ - INFO - Received connection request
+2022-10-06 08:54:24,077 - __main__ - INFO - Received credentials
+2022-10-06 08:54:25,574 - __main__ - INFO - Verification success
+2022-10-06 08:54:25,574 - __main__ - INFO - Connection success
+2022-10-06 08:54:25,574 - __main__ - INFO - initialization complee
+2022-10-06 08:54:37,678 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': 'match (n) return n'}, 'exit': False}
+2022-10-06 08:54:38,855 - __main__ - INFO - Success
+2022-10-06 08:58:17,838 - __main__ - INFO - {'kwargs': {'command_group': 'shutdown', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:17,846 - __main__ - INFO - shutting down
+2022-10-06 08:58:17,846 - __main__ - INFO - Shutdown initiated
+2022-10-06 08:58:29,923 - __main__ - INFO - Awaiting connection
+2022-10-06 08:58:32,394 - __main__ - INFO - Received connection request
+2022-10-06 08:58:36,190 - __main__ - INFO - Received credentials
+2022-10-06 08:58:37,088 - __main__ - INFO - Verification success
+2022-10-06 08:58:37,089 - __main__ - INFO - Connection success
+2022-10-06 08:58:37,090 - __main__ - INFO - initialization complee
+2022-10-06 08:58:39,213 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:39,213 - __main__ - INFO - Failed
+2022-10-06 08:58:51,482 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:51,482 - __main__ - INFO - Failed
+2022-10-06 08:58:52,108 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:52,116 - __main__ - INFO - Failed
+2022-10-06 08:58:52,575 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:52,575 - __main__ - INFO - Failed
+2022-10-06 08:58:53,073 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:53,073 - __main__ - INFO - Failed
+2022-10-06 08:58:53,489 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:53,489 - __main__ - INFO - Failed
+2022-10-06 08:58:53,889 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:53,889 - __main__ - INFO - Failed
+2022-10-06 08:58:54,312 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:54,312 - __main__ - INFO - Failed
+2022-10-06 08:58:54,768 - __main__ - INFO - {'kwargs': {'command_group': '', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:54,768 - __main__ - INFO - Failed
+2022-10-06 08:58:57,623 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 08:58:57,623 - __main__ - INFO - exiting
+2022-10-06 08:58:57,623 - __main__ - INFO - user exit initiated
+2022-10-06 08:59:04,536 - __main__ - INFO - Received connection request
+2022-10-06 08:59:04,536 - __main__ - INFO - Connection success
+2022-10-06 08:59:37,568 - __main__ - INFO - Awaiting connection
+2022-10-06 08:59:40,951 - __main__ - INFO - Received connection request
+2022-10-06 08:59:44,435 - __main__ - INFO - Received credentials
+2022-10-06 08:59:45,314 - __main__ - INFO - Verification success
+2022-10-06 08:59:45,323 - __main__ - INFO - Connection success
+2022-10-06 08:59:45,323 - __main__ - INFO - initialization complee
+2022-10-06 08:59:45,323 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-06 08:59:45,500 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-06 08:59:45,508 - __main__ - INFO - user exit initiated
+2022-10-06 08:59:52,431 - __main__ - INFO - Received connection request
+2022-10-06 08:59:52,431 - __main__ - INFO - Connection success
+2022-10-06 08:59:52,447 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-06 08:59:52,447 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-06 08:59:52,455 - __main__ - INFO - user exit initiated
+2022-10-06 09:00:02,535 - __main__ - INFO - Received connection request
+2022-10-06 09:00:02,543 - __main__ - INFO - Connection success
+2022-10-06 09:00:02,546 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-06 09:00:03,034 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-06 09:00:03,034 - __main__ - INFO - user exit initiated
+2022-10-06 09:00:07,686 - __main__ - INFO - Received connection request
+2022-10-06 09:00:07,686 - __main__ - INFO - Connection success
+2022-10-06 09:00:09,731 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 09:00:10,127 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-06 09:00:12,212 - __main__ - INFO - {'kwargs': {'command_group': 'help', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 09:00:12,212 - __main__ - INFO - {'whoami': 'get user information: whoami', 'apps': {'create_app': 'create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>', 'get_app_info': "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>", 'run_app': 'Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>', 'get_app_status': 'Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ', 'download_app_results': 'Downloads the app execution results to a local file\nFormat:jobs -c download_app_results -F <path to local output file>'}, 'pods': {'get_pods': 'get list of pods available to selected account\nFormat: pods -c get_pods', 'create_pod': 'create a pod\nFormat: pods -c create_pod -i <pod-id> -t <template> -d <short description of pod>', 'restart_pod': 'restart the pod\nFormat: pods -c restart_pod -i <pod_id>', 'delete_pod': 'delete the pod. Requires user confirmation\nFormat: pods -c delete_pod -i <pod_id>', 'set_pod_perms': 'sets the permissions on a pod\nFormat: pods -c set_pod_perms -i <pod_id> -u <username to give perms> -L <permission level>', 'delete_pod_perms': 'deletes the permissions for the selected user\nFormat: pods -c delete_pod_perms -i <pod_id> -u <user to take perms from>', 'get_perms': 'gets a list of permissions for a pod\nFormat: pods -c get_perms -i <pod_id>'}, 'systems': {'get_systems': 'gets a list of systems\nFormat: systems -c get_systems -i <system_id>', 'get_system_info': 'get information of a select system\nFormat: systems -c get_system_info', 'create_system': 'create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>', 'set_credentials': 'Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>', 'set_password': 'Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>'}, 'files': {'list_files': 'lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>', 'download': 'downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>', 'upload': 'uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>'}}
+2022-10-06 09:00:15,499 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 09:00:15,893 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-06 09:00:20,776 - __main__ - INFO - {'kwargs': {'command_group': 'exit', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': False}
+2022-10-06 09:00:20,776 - __main__ - INFO - exiting
+2022-10-06 09:00:20,776 - __main__ - INFO - user exit initiated
+2022-10-06 09:00:26,781 - __main__ - INFO - Received connection request
+2022-10-06 09:00:26,781 - __main__ - INFO - Connection success
+2022-10-06 09:00:26,797 - __main__ - INFO - {'kwargs': {'command_group': 'whoami', 'command': None, 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-06 09:00:27,461 - __main__ - INFO - 
+create_time: None
+dn: cn=mkyzubr,ou=People,dc=tacc,dc=utexas,dc=edu
+email: michael.ray@jserra.org
+given_name: Michael
+last_name: Ray
+mobile_phone: None
+phone: None
+uid: 882697
+username: mkyzubr
+2022-10-06 09:00:27,461 - __main__ - INFO - user exit initiated
+2022-10-06 09:00:35,490 - __main__ - INFO - Received connection request
+2022-10-06 09:00:35,492 - __main__ - INFO - Connection success
+2022-10-06 09:00:35,499 - __main__ - INFO - {'kwargs': {'command_group': 'pods', 'command': 'get_pods', 'id': None, 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': None}, 'exit': True}
+2022-10-06 09:00:35,941 - __main__ - INFO - 
+creation_ts: None
+data_attached: []
+data_requests: []
+description: testing pod function
+environment_variables: 
+
+pod_id: testrehs
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: COMPLETE
+status_container: 
+message: Pod phase in Succeeded, putting in COMPLETE status.
+phase: Succeeded
+start_time: 2022-07-29 20:34:15+00:00
+status_requested: ON
+update_ts: None
+url: testrehs.pods.icicle.tapis.io
+creation_ts: None
+data_attached: []
+data_requests: []
+description: e
+environment_variables: 
+
+pod_id: testingcli
+pod_template: neo4j
+roles_inherited: []
+roles_required: []
+status: RUNNING
+status_container: 
+message: Pod is running.
+phase: Running
+start_time: 2022-10-04 03:43:49+00:00
+status_requested: ON
+update_ts: None
+url: testingcli.pods.icicle.tapis.io
+2022-10-06 09:00:35,949 - __main__ - INFO - user exit initiated
+2022-10-06 09:00:50,226 - __main__ - INFO - Received connection request
+2022-10-06 09:00:50,226 - __main__ - INFO - Connection success
+2022-10-06 09:01:01,337 - __main__ - INFO - {'kwargs': {'command_group': 'neo4j', 'command': None, 'id': 'testingcli', 'template': None, 'username': None, 'level': None, 'version': None, 'file': None, 'name': None, 'uuid': None, 'description': None, 'password': None, 'expression': 'match (n) return n'}, 'exit': True}
+2022-10-06 09:01:02,413 - __main__ - INFO - [-][testingcli] KG is empty
+2022-10-06 09:01:02,414 - __main__ - INFO - user exit initiated
+2022-10-06 09:01:18,680 - __main__ - INFO - Received connection request
+2022-10-06 09:01:18,683 - __main__ - INFO - Connection success

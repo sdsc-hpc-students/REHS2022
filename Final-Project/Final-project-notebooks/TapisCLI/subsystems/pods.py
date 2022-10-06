@@ -8,27 +8,31 @@ from tapisobject import tapisObject
 
 
 class Neo4jCLI(tapisObject):
-    def __init__(self, tapis_object, uname, pword, **kwargs):
+    def __init__(self, tapis_object, uname, pword):
         super().__init__(tapis_object, uname, pword)
-        for x in range(5): # give the client 5 tries to connect to the KG. This often fails once or twice, users will not like entering stuff over and over
-            try:
-                uname, pword = self.t.pods.get_pod_credentials(pod_id=kwargs["id"]).user_username, self.t.pods.get_pod_credentials(pod_id=args[0]).user_password
-                self.graph = Graph(f"bolt+ssc://{kwargs['id']}.pods.icicle.develop.tapis.io:443", auth=(uname, pword), secure=True, verify=True)
-                break
-            except Exception as e:
-                if x >= 5:
-                    return 'ERROR: KG failed connection after 5 tries to connect'
+        self.t = tapis_object
    
-    def submit_queries(self, expression): # function to submit queries to a Neo4j knowledge graph
+    def submit_query(self, **kwargs): # function to submit queries to a Neo4j knowledge graph
+        id_ = kwargs['id']
+        uname, pword = self.t.pods.get_pod_credentials(pod_id=id_).user_username, self.t.pods.get_pod_credentials(pod_id=id_).user_password
+        graph = Graph(f"bolt+ssc://{id_}.pods.icicle.tapis.io:443", auth=(uname, pword), secure=True, verify=True)
+        if kwargs['file']:
+            with open(kwargs['file'], 'r') as f:
+                expression = f.read()
+        else:
+            expression = kwargs['expression']
+        
         try:
-            return_value = self.graph.run(expression)
+            return_value = graph.run(expression)
+            print(type(return_value))
+            if str(return_value) == '(No data)' and 'create' in expression.lower(): # if no data is returned (mostly if something is created) then just say 'success'
+                return f'[+][{id_}@pods.icicle.tapis.io:443] Success'
+            elif str(return_value) == '(No data)':
+                return f'[-][{id_}@pods.icicle.tapis.io:443] KG is empty'
 
-            if str(return_value) == '(No data)' and 'CREATE' in expression.upper(): # if no data is returned (mostly if something is created) then just say 'success'
-                return 'Success'
-
-            return return_value
+            return str(f'[+][{id_}] {return_value}')
         except Exception as e:
-            return e
+            return str(e)
 
 
 class Pods(tapisObject):
@@ -65,7 +69,7 @@ class Pods(tapisObject):
             return_information = self.t.pods.restart_pod(pod_id=kwargs["id"])
             return return_information
         except Exception as e:
-            return e
+            return str(e)
 
     def delete_pod(self, **kwargs): # deletes a pod
         decision = input(f'Please enter, "Delete pod {kwargs["id"]}"\nNote that all data WILL BE LOST') # user confirmation
@@ -76,7 +80,7 @@ class Pods(tapisObject):
             return_information = self.t.pods.delete_pod(pod_id=kwargs["id"])
             return return_information
         except Exception as e:
-            return e
+            return str(e)
 
     def set_pod_perms(self, **kwargs): # set pod permissions, given a pod id, user, and permission level
         try:
@@ -85,14 +89,14 @@ class Pods(tapisObject):
         except tapipy.errors.BaseTapyException:
             return 'Invalid level given'
         except Exception as e:
-            return e
+            return str(e)
     
     def delete_pod_perms(self, **kwargs): # take away someones perms if they are being malicious, or something
         try:
             return_information = self.t.pods.delete_pod_perms(pod_id=kwargs["id"], user=kwargs['username'])
             return return_information
         except Exception as e:
-            return e
+            return str(e)
 
     def get_perms(self, **kwargs): # return a list of permissions on a given pod
         try:
@@ -101,7 +105,7 @@ class Pods(tapisObject):
         except IndexError:
             return 'enter valid pod id, see help'
         except Exception as e:
-            return e
+            return str(e)
 
     def copy_pod_password(self, **kwargs): # copies the pod password to clipboard so that the user can access the pod via the neo4j desktop app. Maybe a security risk? not as bad as printing passwords out!
         try:
@@ -110,7 +114,7 @@ class Pods(tapisObject):
             password = None
             return 'copied to clipboard'
         except Exception as e:
-            return e
+            return str(e)
 
     def pods_cli(self, **kwargs):
         try:
