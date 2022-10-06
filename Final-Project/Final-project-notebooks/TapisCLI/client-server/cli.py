@@ -146,6 +146,8 @@ class CLI:
     def command_operator(self, kwargs, exit_=False):
         if isinstance(kwargs, list):
             kwargs = vars(self.parser.parse_args(kwargs))
+        if not kwargs['command_group']:
+            return False
         
         kwargs = self.check_command(**kwargs)
         if not kwargs:
@@ -176,6 +178,8 @@ class CLI:
             try:
                 kwargs = self.process_command(str(input(f"[{self.username}@{self.url}] ")))
                 result = self.command_operator(kwargs)
+                if not result:
+                    continue
                 if result == 'exiting' or result == 'shutting down':
                     os._exit(0)
                 if isinstance(result, dict):
@@ -186,8 +190,8 @@ class CLI:
                 pass
             except WindowsError:
                 raise ConnectionError("[-] Connection was dropped. Exiting")
-            # except Exception as e:
-            #     print(e)
+            except Exception as e:
+                 print(e)
 
 
 if __name__ == "__main__":

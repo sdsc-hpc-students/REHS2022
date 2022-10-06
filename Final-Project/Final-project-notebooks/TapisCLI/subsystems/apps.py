@@ -16,14 +16,14 @@ class Apps(tapisObject):
             url = self.t.apps.createAppVersion(**app_def)
             return f"App created successfully\nID: {app_def['id']}\nVersion: {app_def['version']}\nURL: {url}"
         except Exception as e:
-            return str(e)
+            raise e
 
     def get_app(self, **kwargs): # returns app information with an id and version as arguments
         try:
             app = self.t.apps.getApp(appId=kwargs['id'], appVersion=kwargs['version'])
             return app
         except Exception as e:
-            return str(e)
+            raise e
 
     def run_job(self, **kwargs): # run a job using an app. Takes a job descriptor json file path
         try:
@@ -40,14 +40,14 @@ class Apps(tapisObject):
             job = self.t.jobs.submitJob(**job)
             return job.uuid
         except Exception as e:
-            return str(e)
+            raise e
 
     def get_job_status(self, **kwargs): # return a job status with its Uuid
         try:
             job_status = self.t.jobs.getJobStatus(jobUuid=kwargs['uuid'])
             return job_status
         except Exception as e:
-            return str(e)
+            raise e
 
     def download_job_output(self, **kwargs): # download the output of a job with its Uuid
         try:
@@ -56,23 +56,24 @@ class Apps(tapisObject):
                 f.write(jobs_output)
             return f"Successfully downloaded job output to {kwargs['file']}"
         except Exception as e:
-            return str(e)
+            raise e
 
     def jobs_cli(self, **kwargs): # function to manage all jobs
+        command = kwargs['command']
         try:
-            if kwargs['command'] == 'create_app':
+            if command == 'create_app':
                 return self.create_app(**kwargs)
-            if kwargs['command'] == 'get_app_info':
+            if command == 'get_app_info':
                 return self.get_app(**kwargs)
-            if kwargs['command'] == 'run_app':
+            if command == 'run_app':
                 return self.run_job(**kwargs)
-            if kwargs['command'] == 'get_app_status':
+            if command == 'get_app_status':
                 return self.get_job_status(**kwargs)
-            if kwargs['command'] == 'download_app_results':
+            if command == 'download_app_results':
                 return self.download_job_output(**kwargs)
             else:
-                return 'Command not recognized'
+                raise Exception('Command not recognized')
         except IndexError:
-            return "must specify subcommand. See 'help'"
+            raise Exception("must specify subcommand. See 'help'")
         except Exception as e:
-            return str(e)
+            raise e

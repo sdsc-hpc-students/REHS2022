@@ -24,7 +24,7 @@ class Server:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
         stream_handler = logging.StreamHandler(stream=sys.stdout)
-        file_handler = logging.FileHandler(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\logs\logs.txt', mode='a')
+        file_handler = logging.FileHandler(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\logs\logs.log', mode='w')
         stream_handler.setLevel(logging.INFO)
         file_handler.setLevel(logging.INFO)
 
@@ -82,17 +82,13 @@ class Server:
 
     def json_send(self, data):
         json_data = json.dumps(data)
-        print("sending")
         self.connection.send(bytes((json_data), ('utf-8')))
-        print("sent")
 
     def json_receive(self):
         json_data = ""
         while True:
             try: #to handle long files, so that it continues to receive data and create a complete file
-                print("waiting to receive")
                 json_data = json_data + self.connection.recv(1024).decode('utf-8') #formulate a full file. Combine sequential data streams to unpack
-                print("received")
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
@@ -126,55 +122,61 @@ class Server:
             self.json_send({"username":self.username, "url":self.url})
             self.logger.info("Connection success")
 
+    def shutdown_handler(self, result, exit_status):
+        if result == 'shutting down':
+            self.logger.info("Shutdown initiated")
+            sys.exit(0)
+        elif result == 'exiting' or exit_status:
+            self.logger.info("user exit initiated")
+            self.connection.close()
+            self.accept()
+    
+    def timeout_handler(self):
+        if time.time() > self.end_time:
+            self.logger.error("timeout. Shutting down")
+            self.json_send("shutting down")
+            self.connection.close()
+            os._exit(0)
+
     def run_command(self, **kwargs):
+        command_group = kwargs['command_group']
         try:
-            if kwargs['command_group'] == 'pods':
+            if command_group == 'pods':
                 return self.pods.pods_cli(**kwargs)
-            elif kwargs['command_group'] == 'systems':
+            elif command_group == 'systems':
                 return self.systems.systems_cli(**kwargs)
-            elif kwargs['command_group'] == 'files':
+            elif command_group == 'files':
                 return self.files.files_cli(**kwargs)
-            elif kwargs['command_group'] == 'apps':
+            elif command_group == 'apps':
                 return self.apps.apps_cli(**kwargs)
-            elif kwargs['command_group'] == 'help':
+            elif command_group == 'help':
                 with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
                     return json.load(f)
-            elif kwargs['command_group'] == 'whoami':
+            elif command_group == 'whoami':
                 return self.pods.whoami()
-            elif kwargs['command_group'] == 'exit':
+            elif command_group == 'exit':
                 return "exiting"
-            elif kwargs['command_group'] == 'shutdown':
+            elif command_group == 'shutdown':
                 return "shutting down"
-            elif kwargs['command_group'] == 'neo4j':
+            elif command_group == 'neo4j':
                 result = self.neo4j.submit_query(**kwargs)
                 return result
             else:
-                return "Failed"
+                raise Exception("Execution failed")
         except Exception as e:
+            self.logger.error(str(e))
             return str(e)
 
     def main(self):
         while True: # checks if any command line arguments were provided
             try:
                 message = self.json_receive()
-                self.logger.info(message)
-                if time.time() > self.end_time:
-                    self.logger.error("timeout. Shutting down")
-                    self.json_send("shutting down")
-                    self.connection.close()
-                    os._exit(0)
+                self.timeout_handler()
                 kwargs, exit_status = message['kwargs'], message['exit']
                 result = self.run_command(**kwargs)
-                self.logger.info(result)
                 self.end_time = time.time() + 300
                 self.json_send(result)
-                if result == 'shutting down':
-                    self.logger.info("Shutdown initiated")
-                    sys.exit(0)
-                elif result == 'exiting' or exit_status:
-                    self.logger.info("user exit initiated")
-                    self.connection.close()
-                    self.accept()
+                self.shutdown_handler(result, exit_status)
             except (ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError, WindowsError, socket.error) as e:
                 self.logger.error(str(e))
                 os._exit(0)

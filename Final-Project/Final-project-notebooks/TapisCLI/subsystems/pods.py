@@ -58,7 +58,7 @@ class Pods(tapisObject):
             pod_information = self.t.pods.create_pod(pod_id=kwargs['id'], pod_template=kwargs['template'], description=pod_description)
             return str(pod_information)
         except Exception as e:
-            return str(e)
+            raise e
 
     def restart_pod(self, **kwargs): # restarts a pod if needed
         decision = input(f'Please enter, "Restart pod {kwargs["id"]}"\nNote that data may not be persistent on restart') # user confirmation
@@ -69,7 +69,7 @@ class Pods(tapisObject):
             return_information = self.t.pods.restart_pod(pod_id=kwargs["id"])
             return return_information
         except Exception as e:
-            return str(e)
+            raise e
 
     def delete_pod(self, **kwargs): # deletes a pod
         decision = input(f'Please enter, "Delete pod {kwargs["id"]}"\nNote that all data WILL BE LOST') # user confirmation
@@ -80,32 +80,32 @@ class Pods(tapisObject):
             return_information = self.t.pods.delete_pod(pod_id=kwargs["id"])
             return return_information
         except Exception as e:
-            return str(e)
+            raise e
 
     def set_pod_perms(self, **kwargs): # set pod permissions, given a pod id, user, and permission level
         try:
             return_information = self.t.pods.set_pod_permission(pod_id=kwargs["id"], user=kwargs['username'], level=kwargs['level'])
             return return_information
         except tapipy.errors.BaseTapyException:
-            return 'Invalid level given'
+            raise Exception('Invalid level given')
         except Exception as e:
-            return str(e)
+            raise e
     
     def delete_pod_perms(self, **kwargs): # take away someones perms if they are being malicious, or something
         try:
             return_information = self.t.pods.delete_pod_perms(pod_id=kwargs["id"], user=kwargs['username'])
             return return_information
         except Exception as e:
-            return str(e)
+            raise e
 
     def get_perms(self, **kwargs): # return a list of permissions on a given pod
         try:
             return_information = self.t.pods.get_pod_permissions(pod_id=kwargs["id"])
             return return_information
         except IndexError:
-            return 'enter valid pod id, see help'
+            raise Exception('enter valid pod id, see help')
         except Exception as e:
-            return str(e)
+            raise e
 
     def copy_pod_password(self, **kwargs): # copies the pod password to clipboard so that the user can access the pod via the neo4j desktop app. Maybe a security risk? not as bad as printing passwords out!
         try:
@@ -114,31 +114,30 @@ class Pods(tapisObject):
             password = None
             return 'copied to clipboard'
         except Exception as e:
-            return str(e)
+            raise e
 
     def pods_cli(self, **kwargs):
+        command = kwargs['command']
         try:
-            if kwargs['command'] == 'get_pods':
+            if command == 'get_pods':
                 return self.get_pods()
-            elif kwargs['command'] == 'create_pod':
+            elif command == 'create_pod':
                 return self.create_pod(**kwargs)
-            elif kwargs['command'] == 'restart_pod':
+            elif command == 'restart_pod':
                 return self.restart_pod(**kwargs)
-            elif kwargs['command'] == 'delete_pod':
+            elif command == 'delete_pod':
                 return self.delete_pod(**kwargs)
-            elif kwargs['command'] == "set_pod_perms":
+            elif command == "set_pod_perms":
                 return self.set_pod_perms(**kwargs)
-            elif kwargs['command'] == 'delete_pod_perms':
+            elif command == 'delete_pod_perms':
                 return self.delete_pod_perms(**kwargs)
-            elif kwargs['command'] == 'get_perms':
+            elif command == 'get_perms':
                 return self.get_perms(**kwargs)
-            elif kwargs['command'] == "copy_pod_password":
+            elif command == "copy_pod_password":
                 return self.copy_pod_password(**kwargs)
-            elif kwargs['command'] == 'query':
+            elif command == 'query':
                 return self.neo4j.kg_query_cli(**kwargs)
             else:
-                return 'Command not recognized'
+                raise Exception(f'Command {command} not recognized')
         except IndexError:
-            return "must specify subcommand. See 'help'"
-        except Exception as e:
-            return str(e)
+            raise Exception("must specify subcommand. See 'help'")

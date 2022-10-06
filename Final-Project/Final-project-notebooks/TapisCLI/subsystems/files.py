@@ -15,7 +15,7 @@ class Files(tapisObject):
             file_list = self.t.files.listFiles(systemId=kwargs['id'], path=kwargs['file'])
             return file_list
         except Exception as e:
-            return e
+            raise e
 
     def upload(self, **kwargs): # upload a file from local to remote using tapis. Takes source and destination paths
         try:
@@ -26,7 +26,7 @@ class Files(tapisObject):
                     dest_file_path=destination)
             return f'successfully uploaded {source} to {destination}'
         except:
-            return f'failed to upload {source} to {dstination}'
+            raise Exception(f'failed to upload {source} to {dstination}')
             
     def download(self, **kwargs): # download a remote file using tapis, operates basically the same as upload
         try:
@@ -40,7 +40,7 @@ class Files(tapisObject):
                 f.write(file_info)
             return f'successfully downloaded {source} to {destination}'
         except:
-            return f'failed to download {source} to {destination}'
+            raise Exception(f'failed to download {source} to {destination}')
 
     def files_cli(self, **kwargs): # function to manage all the file commands
         try:
@@ -51,8 +51,8 @@ class Files(tapisObject):
             elif kwargs['command'] == 'download':
                 return self.download(**kwargs)
             else:
-                return 'Command not recognized'
+                raise Exception('Command not recognized')
         except IndexError:
-            return "must specify subcommand. See 'help'"
+            raise Exception("must specify subcommand. See 'help'")
         except Exception as e:
-            return str(e)
+            raise e
