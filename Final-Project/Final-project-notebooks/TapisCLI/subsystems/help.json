@@ -31,5 +31,6 @@
     "list_files": "lists files on the system\nFormat: files -c list_files -i <system_id> -F <folder path in remote tapis system>",
     "download": "downloads a remote file to local machine\nFormat: files -c download -i <system_id> -F <path to remote file on tapis system to download from>,<path to local file to download into>",
     "upload": "uploads a local file to remote system\nFormat: files -c upload -i <system_id> -F <path of local file to upload>,<remote destination filename on tapis system>"
-    }
+    },
+    "neo4j":"Enter the interface for a neo4j kg pod.\nFormat: neo4j -i <pod_id>"
 }

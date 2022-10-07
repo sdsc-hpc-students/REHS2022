@@ -1,5 +1,6 @@
 import socket
 import argparse
+from argparse import SUPPRESS
 import sys
 import json
 import pyfiglet
@@ -16,7 +17,7 @@ class CLI:
         self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
         self.username, self.url = self.connect()
 
-        self.parser = argparse.ArgumentParser(description="Command Line Argument Parser")
+        self.parser = argparse.ArgumentParser(description="Command Line Argument Parser", exit_on_error=False, usage=SUPPRESS)
         self.parser.add_argument('command_group')
         self.parser.add_argument('-c', '--command')
         self.parser.add_argument('-i', '--id')
@@ -37,17 +38,13 @@ class CLI:
 
     def json_send(self, data):
         json_data = json.dumps(data)
-        print("sending")
         self.connection.send(bytes((json_data), ('utf-8')))
-        print("sent")
 
     def json_receive(self):
         json_data = ""
         while True:
             try: #to handle long files, so that it continues to receive data and create a complete file
-                print("waiting to receive")
                 json_data = json_data + self.connection.recv(1024).decode('utf-8') #formulate a full file. Combine sequential data streams to unpack
-                print("received")
                 return json.loads(json_data) #this is necessary whenever transporting any large amount of data over TCP streams
             except ValueError:
                 continue
@@ -60,26 +57,23 @@ class CLI:
 
     def connection_initialization(self):
         flag = False
-        print("[+] Establishing Connection")
         count = 1
-        timeout_time = time.time() + 60
+        timeout_time = time.time() + 30
         while True:
             if time.time() > timeout_time:
-                print("[-] Connection timeout")
+                sys.stdout.write("\r[-] Connection timeout")
                 os._exit(0)
             try:
                 self.connection.connect((self.ip, self.port))
-                print("[+] Initial connection success!")
                 break
             except Exception as e:
                 if not flag:
                     startup = threading.Thread(target=self.initialize_server)
                     startup.start()
-                    print("[+] Server startup initialized")
                     flag = True
                     continue
                 else:
-                    sys.stdout.write(f'[+] Starting Server{"."*count}')
+                    sys.stdout.write(f'\r[+] Starting Server{"."*count}')
                     sys.stdout.flush()
                     if count == 3:
                         count = 1
@@ -88,14 +82,12 @@ class CLI:
                     continue
 
     def connect(self):
-        #self.connection_initialization()
-        self.connection.connect((self.ip, self.port)) # enable me for debugging
-        print("[+] Connected")
-        connection_type = self.json_receive() # receive information about the connection type. Initial or continuing?
-        print(connection_type)
-        if connection_type == "initial": # if the server is receiving its first connection for the session\
+        self.connection_initialization()
+        #self.connection.connect((self.ip, self.port)) # enable me for debugging
+        connection_info = self.json_receive()
+        if connection_info['connection_type'] == "initial": # if the server is receiving its first connection for the session\
             while True:
-                username = str(input("Username: ")) # take the username
+                username = str(input("\nUsername: ")) # take the username
                 password = getpass("Password: ") # take the password
                 self.json_send({"username":username, "password":password}) # send the username and password to the server to be used
                 verification = self.json_receive()
@@ -104,7 +96,6 @@ class CLI:
                     break
                 else:
                     print("[-] verification failure")
-                    print(verification)
                     if verification[1] == 3:
                         sys.exit(0)
                     continue
@@ -112,8 +103,7 @@ class CLI:
             url = self.json_receive() # receive the url
             return username, url # return the username and url
 
-        elif connection_type == "continuing": # if it is not the first connection to the session
-            connection_info = self.json_receive() # receive connection info. No need to send password and username
+        elif connection_info['connection_type'] == 'continuing': # if it is not the first connection to the session
             username, url = connection_info['username'], connection_info['url'] # receive username and URL
             return username, url # return username and url
 
@@ -122,6 +112,7 @@ class CLI:
         return command
 
     def expression_input(self):
+        print("Enter 'exit' to submit")
         expression = ''
         while True:
             line = str(input("> "))
@@ -145,7 +136,10 @@ class CLI:
 
     def command_operator(self, kwargs, exit_=False):
         if isinstance(kwargs, list):
-            kwargs = vars(self.parser.parse_args(kwargs))
+            try:
+                kwargs = vars(self.parser.parse_args(kwargs))
+            except:
+                raise Exception("[-] Invalid Arguments")
         if not kwargs['command_group']:
             return False
         
@@ -180,7 +174,8 @@ class CLI:
                 result = self.command_operator(kwargs)
                 if not result:
                     continue
-                if result == 'exiting' or result == 'shutting down':
+                if result == '[+] Exiting' or result == '[+] Shutting down':
+                    print(result)
                     os._exit(0)
                 if isinstance(result, dict):
                     pprint(result)

@@ -97,7 +97,7 @@ class Server:
         self.connection, ip_port = self.sock.accept()
         self.logger.info("Received connection request")
         if initial:
-            self.json_send("initial")
+            self.json_send({'connection_type':"initial"})
             for attempt in range(1,4):
                 credentials = self.json_receive()
                 self.logger.info("Received credentials")
@@ -118,15 +118,14 @@ class Server:
             self.logger.info("Connection success")
             return username, password, t, url, access_token
         else:
-            self.json_send("continuing")
-            self.json_send({"username":self.username, "url":self.url})
+            self.json_send({'connection_type':'continuing', "username":self.username, "url":self.url})
             self.logger.info("Connection success")
 
     def shutdown_handler(self, result, exit_status):
-        if result == 'shutting down':
+        if result == '[+] Shutting down':
             self.logger.info("Shutdown initiated")
             sys.exit(0)
-        elif result == 'exiting' or exit_status:
+        elif result == '[+] Exiting' or exit_status:
             self.logger.info("user exit initiated")
             self.connection.close()
             self.accept()
@@ -155,14 +154,14 @@ class Server:
             elif command_group == 'whoami':
                 return self.pods.whoami()
             elif command_group == 'exit':
-                return "exiting"
+                return "[+] Exiting"
             elif command_group == 'shutdown':
-                return "shutting down"
+                return "[+] Shutting down"
             elif command_group == 'neo4j':
                 result = self.neo4j.submit_query(**kwargs)
                 return result
             else:
-                raise Exception("Execution failed")
+                raise Exception(f"Command {command_group} not found. See help")
         except Exception as e:
             self.logger.error(str(e))
             return str(e)
