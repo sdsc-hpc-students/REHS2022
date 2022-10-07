@@ -15,14 +15,14 @@ class Systems(tapisObject):
                 return systems
             return "[-] No systems registered"
         except Exception as e:
-            return e
+            raise e
 
     def get_system_info(self, **kwargs): # get information about a system given its ID
         try:
             system_info = self.t.systems.getSystem(systemId=kwargs["id"])
             return system_info
         except Exception as e:
-            return e
+            raise e
         
     def create_system(self, **kwargs): # create a tapius system. Takes a path to a json file with all system information, as well as an ID
         try:
@@ -32,7 +32,7 @@ class Systems(tapisObject):
             self.t.systems.createSystem(**system)
             return system_id
         except Exception as e:
-            return e
+            raise e
 
 
     def system_credential_upload(self, **kwargs): # upload key credentials for the system
@@ -50,7 +50,7 @@ class Systems(tapisObject):
 
             return cred_return_value
         except Exception as e:
-            return str(e)
+            raise e
 
     def system_password_set(self, **kwargs): # set the password for a system
         try:
@@ -59,23 +59,22 @@ class Systems(tapisObject):
                                 password=kwargs['password'])
             return password_return_value
         except Exception as e:
-            return e
+            raise e
 
     def systems_cli(self, **kwargs): # function for managing all of the system commands, makes life easier later
+        command = kwargs['command']
         try:
-            if kwargs['command'] == 'get_systems':
+            if command == 'get_systems':
                 return self.get_system_list()
-            elif kwargs['command'] == 'get_system_info':
+            elif command == 'get_system_info':
                 return self.get_system_info(**kwargs)
-            elif kwargs['command'] == 'create_system':
+            elif command == 'create_system':
                 return self.create_system(**kwargs)
-            elif kwargs['command'] == "set_credentials":
+            elif command == "set_credentials":
                 return self.system_credential_upload(**kwargs)
-            elif kwargs['command'] == "set_password":
+            elif command == "set_password":
                 return self.system_password_set(**kwargs)
             else:
-                return 'Command not recognized'
+                raise Exception('Command not recognized')
         except IndexError:
-            return "must specify subcommand. See 'help'"
-        except Exception as e:
-            return str(e)
+            raise Exception("must specify subcommand. See 'help'")
