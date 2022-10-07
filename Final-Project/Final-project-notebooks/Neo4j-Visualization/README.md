@@ -1,0 +1,2 @@
+# Neo4j Visualization
+One of the key features of neo4j is visualization. This has traditionally been done through the neo4j browser or neo4jupyter. We have yet to replicate this functionality directly on a CLI application. Our goal here will be to create an effective, lightweight visualization tool to be used via CLI using matplotlib.
