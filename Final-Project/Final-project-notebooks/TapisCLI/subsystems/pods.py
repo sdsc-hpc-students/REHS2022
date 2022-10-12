@@ -38,54 +38,55 @@ class Neo4jCLI(tapisObject):
 class Pods(tapisObject):
     def __init__(self, tapis_object, username, password):
         super().__init__(tapis_object, username, password)
-        self.neo4j = Neo4jCLI(tapis_object, username, password)
 
-    def get_pods(self): # returns a list of pods
+    def return_formatter(self, info):
+        return f"pod_id: {info.pod_id}\npod_template: {info.pod_template}\nurl: {info.url}\nstatus_requested: {info.status_requested}"
+
+    def get_pods(self, **kwargs): # returns a list of pods
         pods_list = self.t.pods.get_pods()
-        pods_list = ''.join([repr(pod) for pod in pods_list])
-        print(type(pods_list))
-        print(type(pods_list[0]))
-        print(pods_list)
+        if kwargs['verbose']:
+            return str(pods_list)
+        pods_list = [self.return_formatter(pod) for pod in pods_list]
         return pods_list
-    
-    def whoami(self): # returns user information
+        
+    def whoami(self, **kwargs): # returns user information
         user_info = self.t.authenticator.get_userinfo()
-        return str(user_info)
+        if kwargs['verbose']:
+            return str(user_info)
+        return user_info.username
 
     def create_pod(self, **kwargs): # creates a pod with a pod id, template, and description
         try:
             pod_description = kwargs['description']#str(input("Enter your pod description below:\n")) 
             pod_information = self.t.pods.create_pod(pod_id=kwargs['id'], pod_template=kwargs['template'], description=pod_description)
-            return str(pod_information)
+            if kwargs['verbose']:
+                return str(pod_information)
+            return self.return_formatter(pod_information)
         except Exception as e:
             raise e
 
     def restart_pod(self, **kwargs): # restarts a pod if needed
-        decision = input(f'Please enter, "Restart pod {kwargs["id"]}"\nNote that data may not be persistent on restart') # user confirmation
-        if decision == f'Restart pod {kwargs["id"]}':
-            return 'Restart Aborted'
-
         try:
             return_information = self.t.pods.restart_pod(pod_id=kwargs["id"])
-            return return_information
+            if kwargs['verbose']:
+                return str(return_information)
+            return self.return_formatter(return_information)
         except Exception as e:
             raise e
 
     def delete_pod(self, **kwargs): # deletes a pod
-        decision = input(f'Please enter, "Delete pod {kwargs["id"]}"\nNote that all data WILL BE LOST') # user confirmation
-        if decision == f'Delete pod {kwargs["id"]}':
-            return 'Deletion Aborted'
-
         try:
             return_information = self.t.pods.delete_pod(pod_id=kwargs["id"])
-            return return_information
+            if kwargs['verbose']:
+                return str(return_information)
+            return self.return_formatter(return_information)
         except Exception as e:
             raise e
 
     def set_pod_perms(self, **kwargs): # set pod permissions, given a pod id, user, and permission level
         try:
             return_information = self.t.pods.set_pod_permission(pod_id=kwargs["id"], user=kwargs['username'], level=kwargs['level'])
-            return return_information
+            return str(return_information)
         except tapipy.errors.BaseTapyException:
             raise Exception('Invalid level given')
         except Exception as e:
@@ -94,14 +95,14 @@ class Pods(tapisObject):
     def delete_pod_perms(self, **kwargs): # take away someones perms if they are being malicious, or something
         try:
             return_information = self.t.pods.delete_pod_perms(pod_id=kwargs["id"], user=kwargs['username'])
-            return return_information
+            return str(return_information)
         except Exception as e:
             raise e
 
     def get_perms(self, **kwargs): # return a list of permissions on a given pod
         try:
             return_information = self.t.pods.get_pod_permissions(pod_id=kwargs["id"])
-            return return_information
+            return str(return_information)
         except IndexError:
             raise Exception('enter valid pod id, see help')
         except Exception as e:
@@ -120,7 +121,7 @@ class Pods(tapisObject):
         command = kwargs['command']
         try:
             if command == 'get_pods':
-                return self.get_pods()
+                return self.get_pods(**kwargs)
             elif command == 'create_pod':
                 return self.create_pod(**kwargs)
             elif command == 'restart_pod':
@@ -135,8 +136,8 @@ class Pods(tapisObject):
                 return self.get_perms(**kwargs)
             elif command == "copy_pod_password":
                 return self.copy_pod_password(**kwargs)
-            elif command == 'query':
-                return self.neo4j.kg_query_cli(**kwargs)
+            elif command == "help":
+                return self.help['pods']
             else:
                 raise Exception(f'Command {command} not recognized')
         except IndexError:

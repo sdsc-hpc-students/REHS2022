@@ -18,10 +18,26 @@ class Apps(tapisObject):
         except Exception as e:
             raise e
 
+    def get_apps(self, **kwargs):
+        try:
+            apps = self.t.apps.getApps()
+            return str(apps)
+        except Exception as e:
+            raise e
+
+    def delete_app(self, **kwargs):
+        try:
+            return_value = self.t.apps.deleteApp(appId=kwargs['id'], appVersion=kwargs['version'])
+            return str(return_value)
+        except Exception as e:
+            raise e
+
     def get_app(self, **kwargs): # returns app information with an id and version as arguments
         try:
             app = self.t.apps.getApp(appId=kwargs['id'], appVersion=kwargs['version'])
-            return app
+            if kwargs['verbose']:
+                return str(app)
+            return 
         except Exception as e:
             raise e
 
@@ -38,14 +54,14 @@ class Apps(tapisObject):
                                 }
             }
             job = self.t.jobs.submitJob(**job)
-            return job.uuid
+            return str(job.uuid)
         except Exception as e:
             raise e
 
     def get_job_status(self, **kwargs): # return a job status with its Uuid
         try:
             job_status = self.t.jobs.getJobStatus(jobUuid=kwargs['uuid'])
-            return job_status
+            return str(job_status)
         except Exception as e:
             raise e
 
@@ -63,14 +79,20 @@ class Apps(tapisObject):
         try:
             if command == 'create_app':
                 return self.create_app(**kwargs)
-            if command == 'get_app_info':
+            elif command == 'get_apps':
+                return self.get_apps(**kwargs)
+            elif command == 'delete_app':
+                return self.delete_app(**kwargs)
+            elif command == 'get_app_info':
                 return self.get_app(**kwargs)
-            if command == 'run_app':
+            elif command == 'run_app':
                 return self.run_job(**kwargs)
-            if command == 'get_app_status':
+            elif command == 'get_app_status':
                 return self.get_job_status(**kwargs)
-            if command == 'download_app_results':
+            elif command == 'download_app_results':
                 return self.download_job_output(**kwargs)
+            elif command == "help":
+                return self.help['apps']
             else:
                 raise Exception('Command not recognized')
         except IndexError:

@@ -136,7 +136,7 @@ class Server:
     def timeout_handler(self): # handle timeouts 
         if time.time() > self.end_time: # if the time exceeds the timeout time
             self.logger.error("timeout. Shutting down")
-            self.json_send("shutting down")
+            self.json_send("[+] Shutting down, Timeout")
             self.connection.close() # close connection and shutdown server
             os._exit(0)
 
@@ -155,7 +155,7 @@ class Server:
                 with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
                     return json.load(f)
             elif command_group == 'whoami':
-                return self.pods.whoami()
+                return self.pods.whoami(**kwargs)
             elif command_group == 'exit':
                 return "[+] Exiting"
             elif command_group == 'shutdown':
@@ -166,8 +166,7 @@ class Server:
             else:
                 raise Exception(f"Command {command_group} not found. See help")
         except Exception as e:
-            self.logger.error(str(e))
-            return str(e)
+            raise Exception(e)
 
     def main(self):
         while True: # checks if any command line arguments were provided
@@ -184,7 +183,7 @@ class Server:
                 os._exit(0)
             except Exception as e:
                 self.logger.error(str(e))
-                os._exit(0)
+                self.json_send(str(e))
 
 
 if __name__ == '__main__':

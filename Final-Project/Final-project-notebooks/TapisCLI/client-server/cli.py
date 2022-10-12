@@ -34,10 +34,11 @@ class CLI:
         self.parser.add_argument('-d', '--description')
         self.parser.add_argument('-p', '--password')
         self.parser.add_argument('-e', '--expression')
+        self.parser.add_argument('-V', '--verbose', action='store_true')
 
         # special case commands. These require special inputs or operations to complete properly
-        self.password_commands = ['system_password_set'] # need password input
-        self.confirmation_commands = ['restart_pod', 'delete_pod'] # need confirmation
+        self.password_commands = ['set_password'] # need password input
+        self.confirmation_commands = ['restart_pod', 'delete_pod', 'delete_app', 'delete_system'] # need confirmation
         self.subclients = ['neo4j'] # need separate CLI
 
     def json_send(self, data): # package data in json and send
@@ -87,8 +88,8 @@ class CLI:
                     continue
 
     def connect(self):
-        self.connection_initialization() # connect to the server
-        #self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
+        #self.connection_initialization() # connect to the server
+        self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
         connection_info = self.json_receive() # receive info from the server whether it is a first time connection
         if connection_info['connection_type'] == "initial": # if the server is receiving its first connection for the session\
             while True:
@@ -179,7 +180,7 @@ class CLI:
                 result = self.command_operator(kwargs) # run operations
                 if not result: # if any problem like bad confirmation or nonexistance happened, try again
                     continue
-                if result == '[+] Exiting' or result == '[+] Shutting down': # if the command was a shutdown or exit, close the program
+                if result == '[+] Exiting' or '[+] Shutting down' in result: # if the command was a shutdown or exit, close the program
                     print(result)
                     os._exit(0)
                 if isinstance(result, dict): # if the result comes as a dict, pretty print it

@@ -3,6 +3,8 @@
     "apps":
     {
     "create_app": "create an app to run via tapis\nFormat: jobs -c create_app -F <path to app json config file>",
+    "get_apps": "get a list of apps related to an account\nFormat: jobs -c get_apps",
+    "delete_app": "delete selected app\nFormat: jobs -c delete_app -i <app_id> -v <app_version>",
     "get_app_info": "get a job's information\nFormat: jobs -c get_app_info -i <app_id> -v <app_version>",
     "run_app": "Runs an app\nFormat: jobs -c run_app -i <app_id> -F <path to json job config file> -n <name to assign job> -v <app_version>",
     "get_app_status": "Gets the status of the app\nFormat:jobs -c get_app_status --uuid <job_uuid> ",
@@ -20,11 +22,12 @@
     },
     "systems":
     {
-    "get_systems": "gets a list of systems\nFormat: systems -c get_systems -i <system_id>",
-    "get_system_info": "get information of a select system\nFormat: systems -c get_system_info",
+    "get_systems": "gets a list of systems\nFormat: systems -c get_systems",
+    "get_system_info": "get information of a select system\nFormat: systems -c get_system_info -i <system_id>",
     "create_system": "create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>",
-    "set_credentials": "Set the system credentials\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>",
-    "set_password": "Sets the system password\nFormat: systems -c set_password -i <system_id> -p <password>"
+    "set_credentials": "Set the system credentials. Must generate keys first using 'ssh-keygen -m PEM -f id_rsa', and format with, 'ssh-keygen -m PEM -f id_rsa'\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>",
+    "set_password": "Sets the system password\nFormat: systems -c set_password -i <system_id>",
+    "delete_system": "deletes the selected system\nFormat: systems -c delete_system -i <system_id>"
     },
     "files":
     {

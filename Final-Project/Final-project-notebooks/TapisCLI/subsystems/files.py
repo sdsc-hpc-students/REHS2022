@@ -10,10 +10,15 @@ class Files(tapisObject):
     def __init__(self, tapis_object, username, password):
         super().__init__(tapis_object, username, password)
 
+    def return_formatter(self, info):
+        return f"name: {info.name}\ngroup: {info.group}\npath: {info.path}"
+
     def list_files(self, **kwargs): # lists files available on a tapis account
         try:
             file_list = self.t.files.listFiles(systemId=kwargs['id'], path=kwargs['file'])
-            return file_list
+            if kwargs['verbose']:
+                return str(file_list)
+            file_list = [self.return_formatter(f) for f in file_list]
         except Exception as e:
             raise e
 
@@ -50,6 +55,8 @@ class Files(tapisObject):
                 return self.upload(**kwargs)
             elif kwargs['command'] == 'download':
                 return self.download(**kwargs)
+            elif command == "help":
+                return self.help['files']
             else:
                 raise Exception('Command not recognized')
         except IndexError:
