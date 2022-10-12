@@ -78,12 +78,12 @@ class CLI:
                     startup_flag = True # set the flag to true so the thread runs only once
                     continue
                 else: # prints out dots, purely visual
-                    sys.stdout.write(f'\r[+] Starting Server{"."*count}')
+                    sys.stdout.write(f'\r[+] Starting Server{"."*dot_count}')
                     sys.stdout.flush()
-                    if count == 3:
-                        count = 1
+                    if dot_count == 3:
+                        dot_count = 1
                     else:
-                        count += 1
+                        dot_count += 1
                     continue
 
     def connect(self):
