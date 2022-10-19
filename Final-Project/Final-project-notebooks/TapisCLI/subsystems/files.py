@@ -11,7 +11,7 @@ class Files(tapisObject):
         super().__init__(tapis_object, username, password)
 
     def return_formatter(self, info):
-        return f"name: {info.name}\ngroup: {info.group}\npath: {info.path}"
+        return f"name: {info.name}\ngroup: {info.group}\npath: {info.path}\n"
 
     def list_files(self, **kwargs): # lists files available on a tapis account
         try:
@@ -48,17 +48,19 @@ class Files(tapisObject):
             raise Exception(f'failed to download {source} to {destination}')
 
     def files_cli(self, **kwargs): # function to manage all the file commands
+        command = kwargs['command']
         try:
-            if kwargs['command'] == 'list_files':
-                return self.list_files(**kwargs)
-            elif kwargs['command'] == 'upload':
-                return self.upload(**kwargs)
-            elif kwargs['command'] == 'download':
-                return self.download(**kwargs)
-            elif command == "help":
-                return self.help['files']
-            else:
-                raise Exception('Command not recognized')
+            match command:
+                case'list_files':
+                    return self.list_files(**kwargs)
+                case 'upload':
+                    return self.upload(**kwargs)
+                case 'download':
+                    return self.download(**kwargs)
+                case "help":
+                    return self.help['files']
+                case _:
+                    raise Exception('Command not recognized')
         except IndexError:
             raise Exception("must specify subcommand. See 'help'")
         except Exception as e:

@@ -10,7 +10,7 @@ class Systems(tapisObject):
         super().__init__(tapis_object, username, password)
 
     def return_formatter(self, info):
-        return f"id: {info.id}\nhost: {info.host}"
+        return f"id: {info.id}\nhost: {info.host}\n"
 
     def get_system_list(self, **kwargs): # return a list of systems active on the account
         try:
@@ -19,6 +19,11 @@ class Systems(tapisObject):
                 return str(systems)
             elif systems and not kwargs['verbose']:
                 systems = [self.return_formatter(system) for system in systems]
+                systems_string = ''
+                for system in systems:
+                    systems_string += system
+                return systems_string
+
             return "[-] No systems registered"
         except Exception as e:
             raise e
@@ -78,21 +83,22 @@ class Systems(tapisObject):
     def systems_cli(self, **kwargs): # function for managing all of the system commands, makes life easier later
         command = kwargs['command']
         try:
-            if command == 'get_systems':
-                return self.get_system_list(**kwargs)
-            elif command == 'get_system_info':
-                return self.get_system_info(**kwargs)
-            elif command == 'create_system':
-                return self.create_system(**kwargs)
-            elif command == "set_credentials":
-                return self.system_credential_upload(**kwargs)
-            elif command == "set_password":
-                return self.system_password_set(**kwargs)
-            elif command == "delete_system":
-                return self.delete_system(**kwargs)
-            elif command == "help":
-                return self.help['systems']
-            else:
-                raise Exception('Command not recognized')
+            match command:
+                case 'get_systems':
+                    return self.get_system_list(**kwargs)
+                case 'get_system_info':
+                    return self.get_system_info(**kwargs)
+                case 'create_system':
+                    return self.create_system(**kwargs)
+                case "set_credentials":
+                    return self.system_credential_upload(**kwargs)
+                case "set_password":
+                    return self.system_password_set(**kwargs)
+                case "delete_system":
+                    return self.delete_system(**kwargs)
+                case "help":
+                    return self.help['systems']
+                case _:
+                    raise Exception('Command not recognized')
         except IndexError:
             raise Exception("must specify subcommand. See 'help'")

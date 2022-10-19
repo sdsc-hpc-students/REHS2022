@@ -40,14 +40,17 @@ class Pods(tapisObject):
         super().__init__(tapis_object, username, password)
 
     def return_formatter(self, info):
-        return f"pod_id: {info.pod_id}\npod_template: {info.pod_template}\nurl: {info.url}\nstatus_requested: {info.status_requested}"
+        return f"pod_id: {info.pod_id}\npod_template: {info.pod_template}\nurl: {info.url}\nstatus_requested: {info.status_requested}\n\n"
 
     def get_pods(self, **kwargs): # returns a list of pods
         pods_list = self.t.pods.get_pods()
         if kwargs['verbose']:
             return str(pods_list)
         pods_list = [self.return_formatter(pod) for pod in pods_list]
-        return pods_list
+        pods_string = ""
+        for pod in pods_list:
+            pods_string += str(pod)
+        return pods_string
         
     def whoami(self, **kwargs): # returns user information
         user_info = self.t.authenticator.get_userinfo()
@@ -120,25 +123,26 @@ class Pods(tapisObject):
     def pods_cli(self, **kwargs):
         command = kwargs['command']
         try:
-            if command == 'get_pods':
-                return self.get_pods(**kwargs)
-            elif command == 'create_pod':
-                return self.create_pod(**kwargs)
-            elif command == 'restart_pod':
-                return self.restart_pod(**kwargs)
-            elif command == 'delete_pod':
-                return self.delete_pod(**kwargs)
-            elif command == "set_pod_perms":
-                return self.set_pod_perms(**kwargs)
-            elif command == 'delete_pod_perms':
-                return self.delete_pod_perms(**kwargs)
-            elif command == 'get_perms':
-                return self.get_perms(**kwargs)
-            elif command == "copy_pod_password":
-                return self.copy_pod_password(**kwargs)
-            elif command == "help":
-                return self.help['pods']
-            else:
-                raise Exception(f'Command {command} not recognized')
+            match command:
+                case 'get_pods':
+                    return self.get_pods(**kwargs)
+                case 'create_pod':
+                    return self.create_pod(**kwargs)
+                case 'restart_pod':
+                    return self.restart_pod(**kwargs)
+                case 'delete_pod':
+                    return self.delete_pod(**kwargs)
+                case "set_pod_perms":
+                    return self.set_pod_perms(**kwargs)
+                case 'delete_pod_perms':
+                    return self.delete_pod_perms(**kwargs)
+                case 'get_perms':
+                    return self.get_perms(**kwargs)
+                case "copy_pod_password":
+                    return self.copy_pod_password(**kwargs)
+                case "help":
+                    return self.help['pods']
+                case _:
+                    raise Exception(f'Command {command} not recognized')
         except IndexError:
             raise Exception("must specify subcommand. See 'help'")

@@ -25,7 +25,7 @@
     "get_systems": "gets a list of systems\nFormat: systems -c get_systems",
     "get_system_info": "get information of a select system\nFormat: systems -c get_system_info -i <system_id>",
     "create_system": "create a new system from a local descriptor file\nFormat: systems -c create_system -F <path to system json config file>",
-    "set_credentials": "Set the system credentials. Must generate keys first using 'ssh-keygen -m PEM -f id_rsa', and format with, 'ssh-keygen -m PEM -f id_rsa'\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>",
+    "set_credentials": "Set the system credentials. Must generate keys first using 'ssh-keygen -m PEM -f id_rsa', and format with, 'awk -v ORS='\\n' '1' <private_key_name>'\nFormat: systems -c set_credentials -i <system_id> -F <path to private key>,<path to public key>",
     "set_password": "Sets the system password\nFormat: systems -c set_password -i <system_id>",
     "delete_system": "deletes the selected system\nFormat: systems -c delete_system -i <system_id>"
     },

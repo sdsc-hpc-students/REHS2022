@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import socket
 import argparse
 from argparse import SUPPRESS
@@ -65,6 +67,7 @@ class CLI:
         dot_count = 1 # for pretty initialization visual
         timeout_time = time.time() + 30 # server setup timeout. If expires, there is a problem!
         print("[+] Now connecting. This might take a while...\n")
+        animation = ['.  ','.. ', '...']
         while True:
             if time.time() > timeout_time: # connection timeout condition
                 sys.stdout.write("\r[-] Connection timeout")
@@ -79,17 +82,17 @@ class CLI:
                     startup_flag = True # set the flag to true so the thread runs only once
                     continue
                 else: # prints out dots, purely visual
-                    sys.stdout.write(f'\r[+] Starting Server{"."*dot_count}')
+                    sys.stdout.write(f'\r[+] Starting Server{animation[dot_count]}')
                     sys.stdout.flush()
-                    if dot_count == 3:
-                        dot_count = 1
+                    if dot_count == 2:
+                        dot_count = 0
                     else:
                         dot_count += 1
                     continue
 
     def connect(self):
-        #self.connection_initialization() # connect to the server
-        self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
+        self.connection_initialization() # connect to the server
+        #self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
         connection_info = self.json_receive() # receive info from the server whether it is a first time connection
         if connection_info['connection_type'] == "initial": # if the server is receiving its first connection for the session\
             while True:

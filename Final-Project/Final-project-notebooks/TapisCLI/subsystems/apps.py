@@ -14,7 +14,7 @@ class Apps(tapisObject):
             with open(kwargs['file'], 'r') as f:
                 app_def = json.loads(f.read())
             url = self.t.apps.createAppVersion(**app_def)
-            return f"App created successfully\nID: {app_def['id']}\nVersion: {app_def['version']}\nURL: {url}"
+            return f"App created successfully\nID: {app_def['id']}\nVersion: {app_def['version']}\nURL: {url}\n"
         except Exception as e:
             raise e
 
@@ -74,27 +74,28 @@ class Apps(tapisObject):
         except Exception as e:
             raise e
 
-    def jobs_cli(self, **kwargs): # function to manage all jobs
+    def apps_cli(self, **kwargs): # function to manage all jobs
         command = kwargs['command']
         try:
-            if command == 'create_app':
-                return self.create_app(**kwargs)
-            elif command == 'get_apps':
-                return self.get_apps(**kwargs)
-            elif command == 'delete_app':
-                return self.delete_app(**kwargs)
-            elif command == 'get_app_info':
-                return self.get_app(**kwargs)
-            elif command == 'run_app':
-                return self.run_job(**kwargs)
-            elif command == 'get_app_status':
-                return self.get_job_status(**kwargs)
-            elif command == 'download_app_results':
-                return self.download_job_output(**kwargs)
-            elif command == "help":
-                return self.help['apps']
-            else:
-                raise Exception('Command not recognized')
+            match command:
+                case 'create_app':
+                    return self.create_app(**kwargs)
+                case 'get_apps':
+                    return self.get_apps(**kwargs)
+                case 'delete_app':
+                    return self.delete_app(**kwargs)
+                case 'get_app_info':
+                    return self.get_app(**kwargs)
+                case 'run_app':
+                    return self.run_job(**kwargs)
+                case 'get_app_status':
+                    return self.get_job_status(**kwargs)
+                case 'download_app_results':
+                    return self.download_job_output(**kwargs)
+                case "help":
+                    return self.help['apps']
+                case _:
+                    raise Exception('Command not recognized')
         except IndexError:
             raise Exception("must specify subcommand. See 'help'")
         except Exception as e:
