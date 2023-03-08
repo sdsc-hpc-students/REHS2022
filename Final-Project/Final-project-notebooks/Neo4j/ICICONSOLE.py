@@ -21,7 +21,7 @@ start = time.time()
 
  
 # Base URL for Tapis
-base_url = "https://icicle.develop.tapis.io"
+base_url = "https://icicle.tapis.io"
 # Global variable to store pod id
 pod_id = ""
 # Global variable to store username, set upon initial input from login to TAPIS
@@ -114,7 +114,7 @@ def choosePod():
             print("Invalid Pod ID. Make sure you have access to this Pod.")
 
     # This is the standard format for the link that connects to the Neo4j Pod
-    graph_link = f"bolt+ssc://{pod_id}.pods.icicle.develop.tapis.io:443"
+    graph_link = f"bolt+ssc://{pod_id}.pods.icicle.tapis.io:443"
 
     while(True):
         try:
