@@ -91,8 +91,8 @@ class CLI:
                     continue
 
     def connect(self):
-        self.connection_initialization() # connect to the server
-        #self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
+        #self.connection_initialization() # connect to the server
+        self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
         connection_info = self.json_receive() # receive info from the server whether it is a first time connection
         if connection_info['connection_type'] == "initial": # if the server is receiving its first connection for the session\
             while True:

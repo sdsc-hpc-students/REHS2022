@@ -11,13 +11,7 @@ import threading
 import multiprocessing
 import os
 import logging
-
-sys.path.insert(
-    1, r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems')
-from apps import Apps
-from files import Files
-from systems import Systems
-from pods import Pods, Neo4jCLI
+from tapisObjectWrappers import Files, Apps, 
 
 
 class Server:
@@ -26,8 +20,12 @@ class Server:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
         stream_handler = logging.StreamHandler(stream=sys.stdout)
+
+        log_path = r"\logs"
+        sys.path.insert(
+            1, f'{root_path}{rel_path}')
         file_handler = logging.FileHandler(
-            r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\logs\logs.log', mode='w')
+            r'logs.log', mode='w')
         stream_handler.setLevel(logging.INFO)
         file_handler.setLevel(logging.INFO)
 
@@ -66,6 +64,9 @@ class Server:
         self.apps = Apps(self.t, self.username, self.password)
         self.neo4j = Neo4jCLI(self.t, self.username, self.password)
         self.logger.info('initialization complee')
+
+        # get help file location
+        self.help_path = r'\subsystems'
 
     def tapis_init(self, username, password):  # initialize the tapis opject
         start = time.time()
@@ -174,6 +175,8 @@ class Server:
                 case 'apps':
                     return self.apps.apps_cli(**kwargs)
                 case 'help':
+                    sys.path.insert(
+                        1, f'{root_path}{self.help_path}')
                     with open(r'C:\Users\ahuma\Desktop\Programming\python_programs\REHS2022\Final-Project\Final-project-notebooks\TapisCLI\subsystems\help.json', 'r') as f:
                         return json.load(f)
                 case 'whoami':

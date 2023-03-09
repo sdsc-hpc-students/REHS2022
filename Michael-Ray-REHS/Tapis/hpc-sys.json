@@ -1,5 +1,5 @@
 {
-    "id": "stampede2.mkyzubr",
+    "id": "example3.mkyzubr",
     "description": "System for running jobs on the Stampede2 cluster",
     "systemType": "LINUX",
     "host": "stampede2.tacc.utexas.edu",
