@@ -1,3 +1,7 @@
+In this directory, our Jupyter Notebook clients are shown.
+
+In the ExampleApplications directory, we show specific ways that our code can be used. This includes Machine Learning applications as well as an authentication to PPOD. 
+
 ## tapis_pods_auth
 
 * Authenticates a user to Tacc
