@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import socket
 import argparse
 from argparse import SUPPRESS
@@ -36,11 +34,10 @@ class CLI:
         self.parser.add_argument('-d', '--description')
         self.parser.add_argument('-p', '--password')
         self.parser.add_argument('-e', '--expression')
-        self.parser.add_argument('-V', '--verbose', action='store_true')
 
         # special case commands. These require special inputs or operations to complete properly
-        self.password_commands = ['set_password'] # need password input
-        self.confirmation_commands = ['restart_pod', 'delete_pod', 'delete_app', 'delete_system'] # need confirmation
+        self.password_commands = ['system_password_set'] # need password input
+        self.confirmation_commands = ['restart_pod', 'delete_pod'] # need confirmation
         self.subclients = ['neo4j'] # need separate CLI
 
     def json_send(self, data): # package data in json and send
@@ -67,7 +64,6 @@ class CLI:
         dot_count = 1 # for pretty initialization visual
         timeout_time = time.time() + 30 # server setup timeout. If expires, there is a problem!
         print("[+] Now connecting. This might take a while...\n")
-        animation = ['.  ','.. ', '...']
         while True:
             if time.time() > timeout_time: # connection timeout condition
                 sys.stdout.write("\r[-] Connection timeout")
@@ -82,17 +78,17 @@ class CLI:
                     startup_flag = True # set the flag to true so the thread runs only once
                     continue
                 else: # prints out dots, purely visual
-                    sys.stdout.write(f'\r[+] Starting Server{animation[dot_count]}')
+                    sys.stdout.write(f'\r[+] Starting Server{"."*dot_count}')
                     sys.stdout.flush()
-                    if dot_count == 2:
-                        dot_count = 0
+                    if dot_count == 3:
+                        dot_count = 1
                     else:
                         dot_count += 1
                     continue
 
     def connect(self):
-        #self.connection_initialization() # connect to the server
-        self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
+        self.connection_initialization() # connect to the server
+        #self.connection.connect((self.ip, self.port)) # enable me for debugging. Requires manual server start
         connection_info = self.json_receive() # receive info from the server whether it is a first time connection
         if connection_info['connection_type'] == "initial": # if the server is receiving its first connection for the session\
             while True:
@@ -183,7 +179,7 @@ class CLI:
                 result = self.command_operator(kwargs) # run operations
                 if not result: # if any problem like bad confirmation or nonexistance happened, try again
                     continue
-                if result == '[+] Exiting' or '[+] Shutting down' in result: # if the command was a shutdown or exit, close the program
+                if result == '[+] Exiting' or result == '[+] Shutting down': # if the command was a shutdown or exit, close the program
                     print(result)
                     os._exit(0)
                 if isinstance(result, dict): # if the result comes as a dict, pretty print it

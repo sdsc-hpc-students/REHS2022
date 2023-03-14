@@ -1,7 +1,0 @@
-2022-10-19 09:26:05,243 - __main__ - INFO - Awaiting connection
-2022-10-19 09:26:05,388 - __main__ - INFO - Received connection request
-2022-10-19 09:26:10,982 - __main__ - INFO - Received credentials
-2022-10-19 09:26:12,370 - __main__ - INFO - Verification success
-2022-10-19 09:26:12,370 - __main__ - INFO - Connection success
-2022-10-19 09:26:12,372 - __main__ - INFO - initialization complee
-2022-10-19 09:33:13,089 - __main__ - ERROR - timeout. Shutting down
