@@ -1,10 +1,11 @@
 # 2022 Research Experience for High School Students Project 
 ## Title: Developing Interactive Jupyter Notebooks to run on the SDSC HPC Expanse System and the “AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment” (ICICLE) project.
 
-## Part of the 2022 Research Experience for High School Students Program: 
-* https://education.sdsc.edu/studenttech/rehs/
+**Part of the 2022 Research Experience for High School Students Program:**  https://education.sdsc.edu/studenttech/rehs/
 
-## Project Lead:  Mary Thomas (SDSC)
+**Project Lead:  Mary Thomas, Ph.D.** 
+SDSC HPC Training lead, and Computational Data Scientist in the Data-Enabled Scientific Computing Division.
+
 <hr>
 
 ## Project Description: 
@@ -18,11 +19,6 @@ The goals of this research project will be to:
 The students will learn the basics of parallel computing, learn about Jupyter notebooks, and the basics of AI. The research components will include:
 * contribute to the body of knowledge needed for hosting live, dynamic, interactive services that interface to HPC systems
 * to develop interactive notebooks that will run on the ICICLE system.
-
-Number of students to be supported: 2-4
-
-## Name of lead person overseeing the student's research:  
-Mary Thomas, Ph.D., Expanse and TSCC Training lead, and Computational Data Scientist in the Data-Enabled Scientific Computing Division.
 
 ### Names, organizations, and roles of others who may provide additional mentoring for the student:  
 * Andreas Goetz, Ph.D, Director, Computational Chemistry Laboratory
