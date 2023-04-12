@@ -1,10 +1,11 @@
-# Research Experience for High School Students: Team REHS2022
+# 2022 Research Experience for High School Students Project 
+## Title: Developing Interactive Jupyter Notebooks to run on the SDSC HPC Expanse System and the “AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment” (ICICLE) project.
+
+## Part of the 2022 Research Experience for High School Students Program: 
 * https://education.sdsc.edu/studenttech/rehs/
 
-## 2022 Project Title: Developing Interactive Jupyter Notebooks to run on the SDSC HPC Expanse System and the “AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment” (ICICLE) project.
-
-* Project Lead:  Mary Thomas (SDSC)
-* REHS Team
+## Project Lead:  Mary Thomas (SDSC)
+<hr>
 
 ## Project Description: 
 This project involves running Jupyter Notebooks on the NSF funded Expanse high-performance (HPC) system [1] and testing software to be used on the NSF funded ICICLE AI project [3]. Expanse is SDSC's newest supercomputer. The result of a $10M National Science Foundation (NSF) award, Expanse delivers over 5,2 peak petaFlOps of computing power to scientists, engineers, and researchers all around the world [2]. Expanse provides three kinds of HPC/CI resources: General Computing Nodes, NVIDIA GPU Nodes, and the petascale Luster filesystem. Thousands of users have accessed these high-performance computing (HPC) resources via traditional runs from the command line and using batch queuing systems.
