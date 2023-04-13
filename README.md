@@ -3,7 +3,17 @@
 
 **Part of the 2022 Research Experience for High School Students Program:**  https://education.sdsc.edu/studenttech/rehs/
 
-## Participants
+<hr>
+
+<a name="top">Contents:
+* [Participants](#parts)
+* [Project Description](#proj-desc)
+* [Publications and Presentations](#pubs)
+* [References](#refs)
+
+
+
+## Participants  <a name="parts"></a>
 * Project Lead:  Mary Thomas, Ph.D., SDSC HPC Training lead, and Computational Data Scientist in the Data-Enabled Scientific Computing Division.
 * Names, organizations, and roles of others who may provide additional mentoring for the student:  
    * Andreas Goetz, Ph.D, Director, Computational Chemistry Laboratory
@@ -18,7 +28,10 @@
    * Archita Sarin, Mission San Jose High School, Fremont, CA, archita.sarin@gmail.com
 <hr>
 
-## Project Description
+  [Back to Top](#top)
+<hr>
+
+## Project Description  <a name="proj-desc"></a>
 ### Overview
 This project involves running Jupyter Notebooks on the NSF funded Expanse high-performance (HPC) system [1] and testing software to be used on the NSF funded ICICLE AI project [3]. Expanse is SDSC's newest supercomputer. The result of a $10M National Science Foundation (NSF) award, Expanse delivers over 5,2 peak petaFlOps of computing power to scientists, engineers, and researchers all around the world [2]. Expanse provides three kinds of HPC/CI resources: General Computing Nodes, NVIDIA GPU Nodes, and the petascale Luster filesystem. Thousands of users have accessed these high-performance computing (HPC) resources via traditional runs from the command line and using batch queuing systems.
 The National Science Foundation funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) [3] will build the next generation of Cyberinfrastructure to render Artificial Intelligence (AI) more accessible to everyone and drive its further democratization in the larger society. ICICLE will develop intelligent cyberinfrastructure with transparent and high-performance execution on diverse and heterogeneous environments. It will advance plug-and-play AI that is easy to use by scientists across a wide range of domains, promoting the democratization of AI.
@@ -42,12 +55,15 @@ Prior to beginning the REHS program, the selected student team members will be p
 * Exposure to the Linux/Unix operating system. 
 
 
-## Publications and Presentations:
+## Publications and Presentations  <a name="pubs"></a>
 * REHS 2022 Report
 * August, 2022 Presentations
 * Poster, October 2022
 
-### References: 
+[Back to Top](#top)
+<hr>
+
+## References:   <a name="refs"></a>
 1.	https://www.sdsc.edu/News%20Items/PR20190716_Expanse.html
 2.	https://www.sdsc.edu/services/hpc/expanse/
 3.	The  Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) Project:  https://icicle.osu.edu/ 
@@ -56,3 +72,5 @@ Prior to beginning the REHS program, the selected student team members will be p
 6.	The Jupyter Notebook Project Website, https://jupyter.org/
 7.	Zonca, A. and R.S. Sinkovits, Deploying Jupyter Notebooks at scale on XSEDE for Science Gateways and workshops. Available at: https://zonca.github.io/docs/pearc18_slides_zonca_sinkovits.pdf
 
+[Back to Top](#top)
+<hr>
