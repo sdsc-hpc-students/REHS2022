@@ -14,8 +14,8 @@
 
 
 ## Participants  <a name="parts"></a>
-* Project Lead:  Mary Thomas, Ph.D., SDSC HPC Training lead, and Computational Data Scientist in the Data-Enabled Scientific Computing Division.
-* Names, organizations, and roles of others who may provide additional mentoring for the student:  
+* _Project Lead:_  Mary Thomas, Ph.D., SDSC HPC Training lead, and Computational Data Scientist in the Data-Enabled Scientific Computing Division.
+* Collaborators:
    * Andreas Goetz, Ph.D, Director, Computational Chemistry Laboratory
    * Robert Sinkovitz, Ph.D., Director of Education (SDSC);  
    * Matthew Lange, Ph.D., CEO, International Center for Food Ontology Operability Data and Semantics (IC-FOODS [4]); 
@@ -26,7 +26,6 @@
    * Jack Karpinski, San Diego High School, San Diego, CA, USA, jackadoo4@gmail.com
    * Michael Ray, JSerra Catholic High School, San Juan Capistrano, CA, michael.ray@jserra.org
    * Archita Sarin, Mission San Jose High School, Fremont, CA, archita.sarin@gmail.com
-<hr>
 
   [Back to Top](#top)
 <hr>
