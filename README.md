@@ -15,17 +15,17 @@
 
 ## Participants  <a name="parts"></a>
 * _Project Lead:_  Mary Thomas, Ph.D., SDSC HPC Training lead, and Computational Data Scientist in the Data-Enabled Scientific Computing Division.
-* REHS Students:
+* _REHS Students:_
    * Sahil Samar, Del Norte High School, San Diego, CA, sahilsamar031@gmail.com
    * Mia Chen, Westview High School, San Diego, CA, mialunachen@gmail.com
    * Jack Karpinski, San Diego High School, San Diego, CA, USA, jackadoo4@gmail.com
    * Michael Ray, JSerra Catholic High School, San Juan Capistrano, CA, michael.ray@jserra.org
    * Archita Sarin, Mission San Jose High School, Fremont, CA, archita.sarin@gmail.com
-* Collaborators:
-   * Andreas Goetz, Ph.D, Director, Computational Chemistry Laboratory
-   * Robert Sinkovitz, Ph.D., Director of Education (SDSC);  
+* _Collaborators/Mentors:_
+   * Christian Garcia, Engineering Scientist Associate (Texas Advanced Computing Center [5]).
    * Matthew Lange, Ph.D., CEO, International Center for Food Ontology Operability Data and Semantics (IC-FOODS [4]); 
    * Joe Stubbs, Ph.D., Manager, Cloud & Interactive Computing (Texas Advanced Computing Center [5]).
+
   [Back to Top](#top)
 <hr>
 
