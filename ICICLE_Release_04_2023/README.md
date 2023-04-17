@@ -1,3 +1,4 @@
+## Note the final release for this project has been moved [here](https://github.com/sdsc-hpc-training-org/hello_icicle_auth_clients)
 ## ICICLE_Release_04_2023
 
 In this project we developed authenticated connections to kubernetes pods hosted on a TACC server. These clients include:
